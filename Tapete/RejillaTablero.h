@@ -12,14 +12,14 @@ namespace tapete {
     class RejillaTablero {
     public:
 
-        static constexpr int   ladoHexagono  = 20;
+        static constexpr int   ladoHexagono  = 55; //20
         static constexpr float seno60        = 0.85f;
         static constexpr float seno60_exacto = 0.866f;
 
         static constexpr float distanciaCeldas = ladoHexagono * seno60 * 2;
 
-        static constexpr int filas    = 51;
-        static constexpr int columnas = 49;
+        static constexpr int filas    = 17; //51;
+        static constexpr int columnas = 17; //49; 24 *2 + 1
 
 
         static Vector centroHexagono (Coord centro);

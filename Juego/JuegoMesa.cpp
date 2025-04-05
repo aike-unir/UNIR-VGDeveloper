@@ -1,4 +1,4 @@
-﻿// proyecto: Grupal/Juego
+// proyecto: Grupal/Juego
 // arhivo:   JuegoMesa.cpp
 // versión:  1.1  (9-Ene-2023)
 
@@ -150,8 +150,8 @@ namespace juego {
             · ModoJuegoLibreDoble  SucesosJuegoLibreDoble
 
         *******************************************************************************************/
-        ModoJuegoPares    * modo    = new ModoJuegoPares {this};
-        SucesosJuegoPares * sucesos = new SucesosJuegoPares {this, modo};
+        ModoJuegoEquipo* modo = new ModoJuegoEquipo { this };
+        SucesosJuegoEquipo* sucesos = new SucesosJuegoEquipo{ this, modo };
         /*******************************************************************************************
         /******************************************************************************************/
         //
@@ -209,178 +209,27 @@ namespace juego {
     Véase la tercera parte de esta sección.
         
     *******************************************************************************************/
-    static ActorTablero::GraficoMuros grafico_muros_vacio { 
-//                                      1  1  1  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  2  3  3  3  3  3  3  3  3  3  3  4  4  4  4  4  4  4  4  4  4
-//           1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9
-//                                                                                                                11111111111111111111111111111111111111111111
-//                     111111111122222222223333333333444444444455555555556666666666777777777788888888889999999999000000000011111111112222222222333333333344444  
-//           0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",  
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -"};
 
 
-    static ActorTablero::GraficoMuros grafico_muros_area_central { 
-//                                      1  1  1  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  2  3  3  3  3  3  3  3  3  3  3  4  4  4  4  4  4  4  4  4  4
-//           1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9
-//                                                                                                                11111111111111111111111111111111111111111111
-//                     111111111122222222223333333333444444444455555555556666666666777777777788888888889999999999000000000011111111112222222222333333333344444  
-//           0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234
-            "-     -     -     -     -     -     -     -     O     O     O     O     -     O     O     O     O     -     -     -     -     -     -     -     -",  
-            "   -     -     -     -     -     -     -     O     O     O     O     -     -     O     O     O     O     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     O     O     O     O     -     -     -     O     O     O     O     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     O     O     O     O     -     -     -     -     O     O     O     O     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     O     O     O     O     -     -     -     -     -     O     O     O     O     -     -     -     -     -     -",
-            "   -     -     -     -     -     O     O     O     O     -     -     -     -     -     -     O     O     O     O     -     -     -     -     -   ",
-            "-     -     -     -     -     O     O     O     O     -     -     -     -     -     -     -     O     O     O     O     -     -     -     -     -",
-            "   -     -     -     -     O     O     O     O     -     -     -     -     -     -     -     -     O     O     O     O     -     -     -     -   ",
-            "-     -     -     -     O     O     O     O     -     -     -     -     -     -     -     -     -     O     O     O     O     -     -     -     -",
-            "   -     -     -     O     O     O     O     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -     -     -   ",
-            "-     -     -     O     O     O     O     -     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -     -     -",
-            "   -     -     O     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -     -   ",
-            "-     -     O     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -     -",
-            "   -     O     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -   ",
-            "-     O     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -",
-            "   -     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     -   ",
-            "-     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     -",
-            "   -     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     -   ",
-            "-     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     -",
-            "   -     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     -   ",
-            "-     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     -     -",
-            "   -     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     -     -   ",
-            "-     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     -     -     -",
-            "   -     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     -",
-            "   -     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     -   ",
-            "-     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     -",
-            "   -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     -   ",
-            "-     -     -     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     -",
-            "   -     -     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     -   ",
-            "-     -     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     -",
-            "   -     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     -   ",
-            "-     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     -",
-            "   -     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     -   ",
-            "-     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     -",
-            "   -     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     -   ",
-            "-     O     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -",
-            "   -     O     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -   ",
-            "-     -     O     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -     -",
-            "   -     -     O     O     O     O     -     -     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -     -   ",
-            "-     -     -     O     O     O     O     -     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -     -     -",
-            "   -     -     -     O     O     O     O     -     -     -     -     -     -     -     -     -     -     O     O     O     O     -     -     -   ",
-            "-     -     -     -     O     O     O     O     -     -     -     -     -     -     -     -     -     O     O     O     O     -     -     -     -",
-            "   -     -     -     -     O     O     O     O     -     -     -     -     -     -     -     -     O     O     O     O     -     -     -     -   ",
-            "-     -     -     -     -     O     O     O     O     -     -     -     -     -     -     -     O     O     O     O     -     -     -     -     -",
-            "   -     -     -     -     -     O     O     O     O     -     -     -     -     -     -     O     O     O     O     -     -     -     -     -   ",
-            "-     -     -     -     -     -     O     O     O     O     -     -     -     -     -     O     O     O     O     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     O     O     O     O     -     -     -     -     O     O     O     O     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     O     O     O     O     -     -     -     O     O     O     O     -     -     -     -     -     -     -",
-            "   -     -     -     -     -     -     -     O     O     O     O     -     -     O     O     O     O     -     -     -     -     -     -     -   ",
-            "-     -     -     -     -     -     -     -     O     O     O     O     -     O     O     O     O     -     -     -     -     -     -     -     -"};
+    static ActorTablero::GraficoMuros grafico_muros_vacio{
+        "-     O     -     -     -     -     -     -     -",
+        "   O     O     -     -     -     -     -     -   ",
+        "-     O     -     -     -     -     -     -     -",
+        "   -     -     -     -     -     -     -     -   ",
+        "-     -     -     -     -     -     -     -     -",
+        "   -     -     -     -     -     -     -     -   ",
+        "-     -     -     -     -     -     -     -     -",
+        "   -     -     -     -     -     -     -     -   ",
+        "-     -     -     -     -     -     -     -     -",
+        "   -     -     -     -     -     -     -     -   ",
+        "-     -     -     -     -     -     -     -     -",
+        "   -     -     -     -     -     -     -     -   ",
+        "-     F     -     -     -     -     -     -     -",
+        "   F     F     -     -     -     -     -     -   ",
+        "-     F     -     -     -     -     -     -     -",
+        "   -     -     -     -     -     -     -     -   ",
+        "-     -     -     -     -     -     -     -     -" };
 
-
-    static ActorTablero::GraficoMuros grafico_muros_pasillos { 
-            "-     O     -     -     -     -     -     O     -     -     -     -     -     -     -     -     O     -     -     -     O     -     -     -     -",
-            "   O     O     -     -     -     -     O     O     -     -     -     -     -     -     -     O     O     -     -     O     O     -     -     -   ",
-            "O     -     O     -     -     -     O     -     O     -     -     -     -     -     -     O     -     O     -     O     -     O     -     -     -",
-            "   -     -     O     -     -     O     -     -     O     -     -     -     -     -     O     -     -     O     -     O     -     O     -     -   ",
-            "O     -     -     O     -     O     -     O     -     O     -     -     -     -     O     -     O     -     O     -     O     -     O     -     -",
-            "   -     -     -     O     O     -     O     O     -     O     -     -     -     O     -     O     O     -     O     -     O     -     O     -   ",
-            "O     -     -     -     O     -     O     -     O     -     O     -     -     O     -     O     -     O     -     O     -     O     -     O     -",
-            "   -     -     -     -     O     O     O     -     O     -     O     -     O     -     O     -     -     O     -     O     -     O     -     O   ",
-            "O     -     -     -     -     -     -     O     -     O     -     O     O     -     O     -     -     -     O     -     O     -     O     -     O",
-            "   -     -     -     -     O     O     -     O     -     O     -     O     -     O     -     -     O     -     O     -     O     -     O     O   ",
-            "O     -     -     -     -     -     -     O     O     -     O     -     -     O     -     -     O     O     -     O     -     O     -     O     -",
-            "   -     -     -     -     O     O     O     -     O     -     O     -     O     -     -     O     -     O     -     O     -     O     -     -   ",
-            "O     -     -     -     -     -     O     -     -     O     -     O     -     O     -     O     -     -     O     -     O     -     O     -     -",
-            "   -     -     -     -     -     O     -     O     -     O     -     O     -     O     O     -     -     -     O     -     O     -     O     -   ",
-            "O     -     -     -     -     -     -     O     O     -     O     -     O     -     O     -     -     -     -     O     -     O     -     O     -",
-            "   -     -     -     -     O     O     -     -     O     -     O     -     O     -     -     -     -     -     -     O     -     O     -     -   ",
-            "O     -     -     -     -     -     -     O     -     O     -     O     -     O     -     -     -     -     -     -     O     -     O     -     -",
-            "   -     -     -     -     O     O     -     O     -     O     -     O     -     O     -     -     -     -     -     -     O     -     O     -   ",
-            "O     -     -     -     O     -     O     -     O     -     O     -     O     -     O     -     -     -     -     -     O     O     -     O     -",
-            "   O     -     -     O     -     O     O     -     O     -     O     -     O     -     -     -     -     -     -     -     -     O     -     -   ",
-            "-     O     -     O     -     O     -     O     -     O     -     O     -     O     -     -     -     -     -     -     O     -     O     O     -",
-            "   -     -     O     -     O     -     -     O     -     O     -     O     -     O     -     -     -     -     -     -     O     -     -     -   ",
-            "-     O     O     -     O     -     -     -     O     -     O     -     O     -     O     -     -     -     -     -     -     O     O     O     -",
-            "   -     O     -     O     -     -     -     -     O     -     O     -     O     -     -     -     -     -     -     -     -     O     -     -   ",
-            "-     -     -     O     -     -     -     -     -     -     -     O     -     O     -     -     -     -     -     -     O     -     O     -     -",
-            "   -     -     O     -     -     -     -     -     -     -     O     O     O     O     -     -     -     -     -     -     O     -     O     -   ",
-            "-     O     O     O     -     -     -     -     -     -     -     -     -     -     O     -     -     -     -     -     -     O     -     O     -",
-            "   -     -     -     -     -     -     -     -     -     -     O     O     O     -     -     -     -     -     -     -     -     O     -     -   ",
-            "-     O     O     O     -     -     -     -     -     -     -     -     -     -     O     -     -     -     -     -     O     O     O     -     -",
-            "   -     -     -     -     -     -     -     -     -     -     O     O     O     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     O     O     O     -     -     -     -     -     -     -     -     -     -     O     -     -     -     -     -     O     O     O     O     -",
-            "   -     -     -     -     -     -     -     -     -     -     O     O     O     -     -     -     -     -     -     -     -     -     -     O   ",
-            "-     O     O     O     -     -     -     -     -     -     -     -     -     -     O     -     -     -     -     -     O     O     O     O     O",
-            "   -     -     O     -     -     -     -     -     -     -     O     O     O     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     O     -     -     -     -     -     -     -     -     -     -     -     -     O     -     -     -     -     -     O     O     O     O     O",
-            "   -     O     -     -     -     -     -     -     -     -     O     O     O     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     O     -     -     -     -     -     -     -     -     -     -     -     O     -     -     -     -     -     O     O     O     O     O",
-            "   -     -     O     -     -     -     -     -     -     -     O     O     O     -     -     -     -     -     -     -     -     -     -     -   ",
-            "-     O     -     O     -     -     -     -     -     -     -     O     -     O     O     -     -     -     -     -     O     O     O     O     O",
-            "   -     O     -     O     -     -     -     -     -     -     O     -     -     O     -     -     -     -     -     -     -     -     -     -   ",
-            "-     -     O     -     O     -     -     -     -     -     O     -     O     -     O     -     -     -     -     -     O     O     O     O     O",
-            "   -     -     O     -     O     -     -     -     -     O     -     O     O     -     O     -     -     -     -     -     -     -     -     -   ",
-            "-     -     -     O     -     O     -     -     -     O     -     O     -     O     -     O     -     -     -     -     O     O     O     O     O",
-            "   -     -     -     O     -     O     -     -     O     -     O     -     -     O     -     O     -     O     -     O     -     O     -     -   ",
-            "-     -     -     -     O     -     O     -     O     -     O     -     O     -     O     -     O     O     O     O     -     -     O     O     O",
-            "   -     -     -     -     O     -     O     O     -     O     -     O     O     -     O     -     O     -     O     -     O     -     -     -   ",
-            "-     -     -     -     -     O     -     O     -     O     -     O     -     O     -     O     -     -     -     -     O     O     -     O     O",
-            "   -     -     -     -     -     O     -     -     -     -     O     -     -     O     -     O     -     O     -     O     -     O     O     -   ",
-            "-     -     -     -     -     -     O     -     O     -     O     -     -     -     O     -     O     O     O     O     -     -     O     O     O",
-            "   -     -     -     -     -     -     O     O     O     O     -     -     -     -     O     O     O     -     O     -     -     -     -     O   ",
-            "-     -     -     -     -     -     -     O     -     O     -     -     -     -     -     O     -     -     -     -     -     -     -     -     -"};
-    /*******************************************************************************************
-    /******************************************************************************************/
 
 
     void JuegoMesa::preparaTablero () {
@@ -467,7 +316,7 @@ namespace juego {
         aparece a continuación.
         
         *******************************************************************************************/
-        tablero ()->situaMuros (grafico_muros_area_central);
+        tablero ()->situaMuros (grafico_muros_vacio);
         /*******************************************************************************************
         /******************************************************************************************/
     }
@@ -536,49 +385,30 @@ namespace juego {
         *******************************************************************************************/
         //
         Miner  = new ActorPersonaje {this, LadoTablero::Izquierda, 0, L"Miner"};
-        Male   = new ActorPersonaje {this, LadoTablero::Izquierda, 1, L"Male"};
-        Patrek = new ActorPersonaje {this, LadoTablero::Izquierda, 2, L"Patrek"};
-        Pirate = new ActorPersonaje {this, LadoTablero::Izquierda, 3, L"Pirate"};
+        Male = new ActorPersonaje{ this, LadoTablero::Izquierda, 1, L"Male" };
         Aristo = new ActorPersonaje {this, LadoTablero::Derecha,   0, L"Aristo"};
-        Harja  = new ActorPersonaje {this, LadoTablero::Derecha,   1, L"Harja"};
-        Hunter = new ActorPersonaje {this, LadoTablero::Derecha,   2, L"Hunter"};
-        Thief  = new ActorPersonaje {this, LadoTablero::Derecha,   3, L"Thief"};
+
+
         //
         Miner ->ponArchivoRetrato (carpeta_retratos_juego + "miner1_75.png");
-        Male  ->ponArchivoRetrato (carpeta_retratos_juego + "male1_75.png");
-        Patrek->ponArchivoRetrato (carpeta_retratos_juego + "patrek_75.png");
-        Pirate->ponArchivoRetrato (carpeta_retratos_juego + "pirate1_75.png");
+        Male->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Aristo->ponArchivoRetrato (carpeta_retratos_juego + "aristocrat_75.png");
-        Harja ->ponArchivoRetrato (carpeta_retratos_juego + "harja_75.png");
-        Hunter->ponArchivoRetrato (carpeta_retratos_juego + "Hunter_75.png");
-        Thief ->ponArchivoRetrato (carpeta_retratos_juego + "thief2_75.png");
+
         //
         Miner ->ponArchivoFicha (carpeta_retratos_juego + "ficha_roja.png");
-        Male  ->ponArchivoFicha (carpeta_retratos_juego + "ficha_roja.png");
-        Patrek->ponArchivoFicha (carpeta_retratos_juego + "ficha_roja.png");
-        Pirate->ponArchivoFicha (carpeta_retratos_juego + "ficha_roja.png");
+        Male->ponArchivoFicha(carpeta_retratos_juego + "ficha_roja.png");
         Aristo->ponArchivoFicha (carpeta_retratos_juego + "ficha_azul.png");
-        Harja ->ponArchivoFicha (carpeta_retratos_juego + "ficha_azul.png");
-        Hunter->ponArchivoFicha (carpeta_retratos_juego + "ficha_azul.png");
-        Thief ->ponArchivoFicha (carpeta_retratos_juego + "ficha_azul.png");
+
         //
         Miner ->ponIniciativa (20);
-        Male  ->ponIniciativa (19);
-        Patrek->ponIniciativa (18);
-        Pirate->ponIniciativa (17);
-        Aristo->ponIniciativa (20);
-        Harja ->ponIniciativa (19);
-        Hunter->ponIniciativa (18);
-        Thief ->ponIniciativa (17);
+        Male ->ponIniciativa(18);
+        Aristo->ponIniciativa (19);
+
         //
         agregaPersonaje (Miner);
-        agregaPersonaje (Male);
-        agregaPersonaje (Patrek);
-        agregaPersonaje (Pirate);
+        agregaPersonaje(Male);
         agregaPersonaje (Aristo);
-        agregaPersonaje (Harja);
-        agregaPersonaje (Hunter);
-        agregaPersonaje (Thief);
+
         //
         /*******************************************************************************************
         /******************************************************************************************/
@@ -827,37 +657,19 @@ namespace juego {
         Miner ->agregaHabilidad (ataqueArco);
         Miner ->agregaHabilidad (ataqueEspadaPoderoso);
         Miner ->agregaHabilidad (defensaFerrea);
-        //
-        Male  ->agregaHabilidad (ataqueEspadaNormal);
-        Male  ->agregaHabilidad (curacionSimple);
-        Male  ->agregaHabilidad (curacionGrupo);
-        Male  ->agregaHabilidad (proyectilMagico);
-        //
-        Patrek->agregaHabilidad (ataqueEspadaNormal);
-        Patrek->agregaHabilidad (proyectilMagico);
-        Patrek->agregaHabilidad (bolaFuego);
-        //
-        Pirate->agregaHabilidad (ataqueEspadaNormal);
-        Pirate->agregaHabilidad (ataqueArco);
-        Pirate->agregaHabilidad (ataqueEspadaPoderoso);
+
+        
+        Male->agregaHabilidad(ataqueEspadaNormal);
+        Male->agregaHabilidad(ataqueArco);
+        Male->agregaHabilidad(ataqueEspadaPoderoso);
+        Male->agregaHabilidad(defensaFerrea);
+        
         //
         Aristo->agregaHabilidad (ataqueEspadaNormal);
         Aristo->agregaHabilidad (ataqueArco);
         Aristo->agregaHabilidad (ataqueEspadaPoderoso);
         Aristo->agregaHabilidad (defensaFerrea);
-        //
-        Harja ->agregaHabilidad (ataqueEspadaNormal);
-        Harja ->agregaHabilidad (curacionSimple);
-        Harja ->agregaHabilidad (curacionGrupo);
-        Harja ->agregaHabilidad (proyectilMagico);
-        //
-        Hunter->agregaHabilidad (ataqueEspadaNormal);
-        Hunter->agregaHabilidad (proyectilMagico);
-        Hunter->agregaHabilidad (bolaFuego);
-        //
-        Thief ->agregaHabilidad (ataqueEspadaNormal);
-        Thief ->agregaHabilidad (ataqueArco);
-        Thief ->agregaHabilidad (ataqueEspadaPoderoso);
+
         //
         /*******************************************************************************************
         /******************************************************************************************/
@@ -1048,32 +860,17 @@ namespace juego {
         Miner ->agregaDefensa    (defensaMagica,        20);
         Miner ->agregaReduceDano (danoFisico,           10);
         Miner ->agregaReduceDano (danoMagico,            5);
+        
+        Male->agregaAtaque(ataqueCuerpoACuerpo, 70);
+        Male->agregaAtaque(ataqueADistancia, 50);
+        Male->agregaDefensa(defensaCuerpoACuerpo, 70);
+        Male->agregaDefensa(defensaADistancia, 70);
+        Male->agregaDefensa(defensaMagica, 20);
+        Male->agregaReduceDano(danoFisico, 10);
+        Male->agregaReduceDano(danoMagico, 5);
+        
         //
-        Male  ->agregaAtaque     (ataqueCuerpoACuerpo,  50);
-      //Male  ->agregaAtaque     (ataqueADistancia,     50);  No se usa
-        Male  ->agregaAtaque     (ataqueMagico,         50);
-        Male  ->agregaDefensa    (defensaCuerpoACuerpo, 50);
-        Male  ->agregaDefensa    (defensaADistancia,    50);
-        Male  ->agregaDefensa    (defensaMagica,        50);
-        Male  ->agregaReduceDano (danoFisico,            5);
-        Male  ->agregaReduceDano (danoMagico,           10);
-        //                       
-        Patrek->agregaAtaque     (ataqueCuerpoACuerpo,  50);
-      //Patrek->agregaAtaque     (ataqueADistancia,     50);  No se usa
-        Patrek->agregaAtaque     (ataqueMagico,         70);        
-        Patrek->agregaDefensa    (defensaCuerpoACuerpo, 40);
-        Patrek->agregaDefensa    (defensaADistancia,    40);
-        Patrek->agregaDefensa    (defensaMagica,        30);
-        Patrek->agregaReduceDano (danoFisico,            0);
-        Patrek->agregaReduceDano (danoMagico,           15);
-        //                       
-        Pirate->agregaAtaque     (ataqueCuerpoACuerpo,  60);
-        Pirate->agregaAtaque     (ataqueADistancia,     70);        
-        Pirate->agregaDefensa    (defensaCuerpoACuerpo, 50);
-        Pirate->agregaDefensa    (defensaADistancia,    50);
-        Pirate->agregaDefensa    (defensaMagica,        50);
-        Pirate->agregaReduceDano (danoFisico,            7);
-        Pirate->agregaReduceDano (danoMagico,            7);
+
         //                       
         Aristo->agregaAtaque     (ataqueCuerpoACuerpo,  70);
         Aristo->agregaAtaque     (ataqueADistancia,     50);        
@@ -1083,31 +880,7 @@ namespace juego {
         Aristo->agregaReduceDano (danoFisico,           10);
         Aristo->agregaReduceDano (danoMagico,            5);
         //                       
-        Harja ->agregaAtaque     (ataqueCuerpoACuerpo,  50);
-      //Harja ->agregaAtaque     (ataqueADistancia,     50);  No se usa
-        Harja ->agregaAtaque     (ataqueMagico,         50);        
-        Harja ->agregaDefensa    (defensaCuerpoACuerpo, 50);
-        Harja ->agregaDefensa    (defensaADistancia,    50);
-        Harja ->agregaDefensa    (defensaMagica,        50);
-        Harja ->agregaReduceDano (danoFisico,            5);
-        Harja ->agregaReduceDano (danoMagico,           10);
-        //                       
-        Hunter->agregaAtaque     (ataqueCuerpoACuerpo,  50);
-      //Hunter->agregaAtaque     (ataqueADistancia,     50);  No se usa
-        Hunter->agregaAtaque     (ataqueMagico,         70);        
-        Hunter->agregaDefensa    (defensaCuerpoACuerpo, 40);
-        Hunter->agregaDefensa    (defensaADistancia,    40);
-        Hunter->agregaDefensa    (defensaMagica,        30);
-        Hunter->agregaReduceDano (danoFisico,            0);
-        Hunter->agregaReduceDano (danoMagico,           15);
-        //                       
-        Thief ->agregaAtaque     (ataqueCuerpoACuerpo,  60);
-        Thief ->agregaAtaque     (ataqueADistancia,     70);        
-        Thief ->agregaDefensa    (defensaCuerpoACuerpo, 50);
-        Thief ->agregaDefensa    (defensaADistancia,    50);
-        Thief ->agregaDefensa    (defensaMagica,        50);
-        Thief ->agregaReduceDano (danoFisico,            7);
-        Thief ->agregaReduceDano (danoMagico,            7);
+
         //
         /*******************************************************************************************
         /******************************************************************************************/
@@ -1247,14 +1020,10 @@ namespace juego {
         //
         modo ()->configuraDesplaza (RejillaTablero::distanciaCeldas);
         //
-        Miner ->ponSitioFicha (Coord {23, 15});
-        Male  ->ponSitioFicha (Coord {17, 15});
-        Patrek->ponSitioFicha (Coord {29, 15});
-        Pirate->ponSitioFicha (Coord {35, 15});
-        Aristo->ponSitioFicha (Coord {23, 35});
-        Harja ->ponSitioFicha (Coord {17, 35});
-        Hunter->ponSitioFicha (Coord {29, 35});
-        Thief ->ponSitioFicha (Coord {35, 35});
+        Miner ->ponSitioFicha (Coord {6, 4});
+        Male  ->ponSitioFicha (Coord {6, 6});
+        Aristo->ponSitioFicha(Coord {6,8});
+
         //
         tablero ()->asignaSonidoEstablece (carpeta_sonidos_juego + "Metal Click.wav", 100);
         tablero ()->asignaSonidoDesplaza  (carpeta_sonidos_juego + "SnowWalk.ogg",    100);
@@ -1275,13 +1044,8 @@ namespace juego {
         JuegoMesaBase::termina ();
         //
         Aristo   = nullptr;
-        Harja    = nullptr;
-        Hunter   = nullptr;
-        Thief    = nullptr;
         Miner    = nullptr;
         Male     = nullptr;
-        Patrek   = nullptr;
-        Pirate   = nullptr;
         //
         ataqueEspadaNormal   = nullptr;
         ataqueArco           = nullptr;

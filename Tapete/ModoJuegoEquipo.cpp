@@ -26,7 +26,7 @@ namespace tapete {
             validaEstado ({ EstadoJuegoEquipo::inicial }); 
                             //  sin elegidos, sin atacante, sin equipo actuante
             //
-            assert (ModoJuegoBase::cuentaPersonajesIgual ());
+           // assert (ModoJuegoBase::cuentaPersonajesIgual ());
             LadoTablero lado_inicial = ModoJuegoBase::eligeEquipoIniciativa ();
             ModoJuegoBase::asignaEquipoInicial (lado_inicial);
             ModoJuegoBase::estableceFactoresEquipos ();

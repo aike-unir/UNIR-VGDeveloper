@@ -32,6 +32,7 @@ namespace tapete {
 
     void PresenciaTablero::reprepara () {
         actor_tablero->agregaDibujo (malla_muros);
+        actor_tablero->agregaDibujo(malla_fuego);
         //
         actor_tablero->agregaDibujo (imagen_panel_vertcl_izqrd);
         actor_tablero->agregaDibujo (imagen_panel_vertcl_derch);
@@ -108,22 +109,50 @@ namespace tapete {
         malla_muros->ponPosicion (PresenciaTablero::regionRejilla.posicion ());
         //----------------------------------------
         IndicesEstampas indcs_estmp;
+       
         calculaEstampasMuros (actor_tablero->sitios_muros, indcs_estmp);
+
+        
         //
         PuntosHexagonos puntos_textr {};
         punteaTexturaMuros (puntos_textr);
         PuntosHexagonos puntos_rejll {};
         punteaRejillaMuros (actor_tablero->sitios_muros, puntos_rejll);
         estableceMallaMuros (puntos_rejll, indcs_estmp, puntos_textr);
+
+        //// Fuego
+        
+        textura_fuego = new unir2d::Textura{};
+        textura_fuego->carga(JuegoMesaBase::carpetaActivos() + "muro_fuego.png");
+        
+        malla_fuego = new unir2d::Malla{};
+        malla_fuego->asigna(textura_fuego);
+        malla_fuego->ponPosicion(PresenciaTablero::regionRejilla.posicion());
+        
+        IndicesEstampas indcs_fuego;
+        calculaEstampasElemento(actor_tablero->sitios_fuego, indcs_fuego);
+        
+        PuntosHexagonos puntos_textr_fuego{};
+        punteaTexturaMuros(puntos_textr_fuego);
+        PuntosHexagonos puntos_rejll_fuego{};
+        
+        punteaRejillaMuros(actor_tablero->sitios_fuego, puntos_rejll_fuego);
+        estableceMallaFuego(puntos_rejll_fuego, indcs_fuego, puntos_textr_fuego);
+        
+        
     }
 
 
     void PresenciaTablero::liberaMuros () {
         delete malla_muros;
         delete textura_muros;
+        delete malla_fuego;
+        delete textura_fuego;
         //
         malla_muros   = nullptr;
         textura_muros = nullptr;
+        malla_fuego = nullptr;
+        textura_fuego = nullptr;
     }
 
 
@@ -180,6 +209,59 @@ namespace tapete {
         }
     }
 
+    void PresenciaTablero::calculaEstampasElemento(
+        const std::vector <Coord>& posiciones_rejilla,
+        IndicesEstampas& indices_estampas) {
+        constexpr int colns_rejilla = RejillaTablero::columnas + 1;  // 50
+        constexpr int filas_rejilla = RejillaTablero::filas + 1;  // 52  
+        // tabla_rejilla se indexa:
+        //      entre 1 y RejillaTablero::filas y 
+        //      entre 1 y RejillaTablero::columnas
+        // los índices 0 se ignoran
+        std::array <std::array <bool, colns_rejilla>, filas_rejilla> tabla_rejilla{ false };
+        for (const Coord& coord : posiciones_rejilla) {
+            tabla_rejilla[coord.fila()][coord.coln()] = true;
+        }
+        for (const Coord& coord : posiciones_rejilla) {
+            bool las_12 = false;
+            bool las__2 = false;
+            bool las__4 = false;
+            bool las__6 = false;
+            bool las__8 = false;
+            bool las_10 = false;
+            if (coord.fila() - 2 >= 1) {
+                las_12 = tabla_rejilla[coord.fila() - 2][coord.coln()];
+            }
+            if (coord.fila() - 1 >= 1 &&
+                coord.coln() + 1 <= RejillaTablero::columnas) {
+                las__2 = tabla_rejilla[coord.fila() - 1][coord.coln() + 1];
+            }
+            if (coord.fila() + 1 <= RejillaTablero::filas &&
+                coord.coln() + 1 <= RejillaTablero::columnas) {
+                las__4 = tabla_rejilla[coord.fila() + 1][coord.coln() + 1];
+            }
+            if (coord.fila() + 2 <= RejillaTablero::filas) {
+                las__6 = tabla_rejilla[coord.fila() + 2][coord.coln()];
+            }
+            if (coord.fila() + 1 <= RejillaTablero::filas &&
+                coord.coln() - 1 >= 1) {
+                las__8 = tabla_rejilla[coord.fila() + 1][coord.coln() - 1];
+            }
+            if (coord.fila() - 1 >= 1 &&
+                coord.coln() - 1 >= 1) {
+                las_10 = tabla_rejilla[coord.fila() - 1][coord.coln() - 1];
+            }
+            std::array <int, 6> entrd{};
+            entrd[0] = estampaElemento(las_10, las_12, las__2);
+            entrd[1] = estampaElemento(las_12, las__2, las__4);
+            entrd[2] = estampaElemento(las__2, las__4, las__6);
+            entrd[3] = estampaElemento(las__4, las__6, las__8);
+            entrd[4] = estampaElemento(las__6, las__8, las_10);
+            entrd[5] = estampaElemento(las__8, las_10, las_12);
+            indices_estampas.push_back(entrd);
+        }
+    }
+
 
     int PresenciaTablero::estampaMuros (bool previo, bool adjunto, bool postrer) {
         if (adjunto) {
@@ -198,6 +280,10 @@ namespace tapete {
             return 0;
         }
         return -1;
+    }
+
+    int PresenciaTablero::estampaElemento(bool previo, bool adjunto, bool postrer) {
+        return 4;
     }
 
 
@@ -309,6 +395,24 @@ namespace tapete {
                     trngl_malla.ponTexel (indc_vertc, puntos_textura [indc_estmp] [indc_trngl] [indc_vertc]);
                 }
                 this->malla_muros->asigna (indc_celda * 6 + indc_trngl, trngl_malla);
+            }
+        }
+    }
+
+    void PresenciaTablero::estableceMallaFuego(
+        const PuntosHexagonos& puntos_rejilla,
+        const IndicesEstampas& indices_estampas,
+        const PuntosHexagonos& puntos_textura) {
+        this->malla_fuego->define((int)puntos_rejilla.size() * 6);
+        for (int indc_celda = 0; indc_celda < puntos_rejilla.size(); ++indc_celda) {
+            for (int indc_trngl = 0; indc_trngl < 6; ++indc_trngl) {
+                unir2d::TrianguloMalla trngl_malla{};
+                for (int indc_vertc = 0; indc_vertc < 3; ++indc_vertc) {
+                    trngl_malla.ponPunto(indc_vertc, puntos_rejilla[indc_celda][indc_trngl][indc_vertc]);
+                    int indc_estmp = indices_estampas[indc_celda][indc_trngl];
+                    trngl_malla.ponTexel(indc_vertc, puntos_textura[indc_estmp][indc_trngl][indc_vertc]);
+                }
+                this->malla_fuego->asigna(indc_celda * 6 + indc_trngl, trngl_malla);
             }
         }
     }

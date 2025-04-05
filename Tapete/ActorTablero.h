@@ -30,6 +30,8 @@ namespace tapete {
         void equipa (LadoTablero lado_tablero, const wstring & nombre, const string & archivo_escudo);
 
         const std::vector <Coord> & sitiosMuros () const;
+        const std::vector <Coord>& sitiosFuego() const;
+
         void situaMuros (const GraficoMuros & grafico_muros);
         void validaGraficoMuros ();
 
@@ -84,6 +86,7 @@ namespace tapete {
 
         const GraficoMuros * grafico_muros;
         std::vector <Coord>  sitios_muros {};
+        std::vector <Coord>  sitios_fuego{};
 
         PresenciaTablero     presencia_tablero        {this};
         RejillaTablero       rejilla_tablero          {this};

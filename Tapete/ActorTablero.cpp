@@ -62,6 +62,10 @@ namespace tapete {
         return sitios_muros;
     }
 
+    const std::vector <Coord>& ActorTablero::sitiosFuego() const {
+        return sitios_fuego;
+    }
+
 
     void ActorTablero::situaMuros (const GraficoMuros & grafico_muros) {
         this->grafico_muros = & grafico_muros;
@@ -96,9 +100,9 @@ namespace tapete {
                                     "el carácter en la fila {}, columna {} debe ser un espacio en blanco", fl, cl));
                         }
                     } else {
-                        if (ch != 'O' && ch != '-') {
+                        if (ch != 'O' && ch != '-' && ch != 'F') {
                             throw std::logic_error (std::format (
-                                    "el carácter en la fila {}, columna {} debe ser: 'O' o '-'", fl, cl));
+                                    "el carácter en la fila {}, columna {} debe ser: 'O' o '-' o 'F'", fl, cl));
                         }
                     }
                 }
@@ -120,6 +124,9 @@ namespace tapete {
                         char ch = (* this->grafico_muros) [fl] [cl];
                         if (ch == 'O') {
                             sitios_muros.push_back (Coord {fila, coln});
+                        }
+                        else if (ch == 'F') {
+                            sitios_fuego.push_back(Coord{ fila, coln });
                         }
                     }
                 }

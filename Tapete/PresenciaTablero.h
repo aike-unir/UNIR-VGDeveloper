@@ -60,6 +60,9 @@ namespace tapete {
         unir2d::Textura  * textura_muros {};
         unir2d::Malla    * malla_muros {};
 
+        unir2d::Textura* textura_fuego{};
+        unir2d::Malla* malla_fuego{};
+
         unir2d::Textura * textura_panel_vertcl {};
         unir2d::Imagen  * imagen_panel_vertcl_izqrd {};
         unir2d::Imagen  * imagen_panel_vertcl_derch {};
@@ -130,7 +133,11 @@ namespace tapete {
         void calculaEstampasMuros (
                 const std::vector <Coord> & posiciones_rejilla,
                 IndicesEstampas           & indices_estampas   );
+        void calculaEstampasElemento(
+            const std::vector <Coord>& posiciones_rejilla,
+            IndicesEstampas& indices_estampas);
         int  estampaMuros (bool previo, bool adjunto, bool postrer);
+        int  estampaElemento(bool previo, bool adjunto, bool postrer);
         void punteaTexturaMuros (PuntosHexagonos & puntos_textura);
         void punteaRejillaMuros (
                 const std::vector <Coord> & posiciones_rejilla, 
@@ -139,6 +146,10 @@ namespace tapete {
                 const PuntosHexagonos & puntos_rejilla,
                 const IndicesEstampas & indices_estampas,
                 const PuntosHexagonos & puntos_textura   );
+        void estableceMallaFuego(
+            const PuntosHexagonos& puntos_rejilla,
+            const IndicesEstampas& indices_estampas,
+            const PuntosHexagonos& puntos_textura);
 
 
         friend class ActorTablero;

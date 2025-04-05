@@ -91,6 +91,7 @@ namespace tapete {
                     std::format (L"La iniciativa del personaje '{}' es inválida.", persj->nombre ()),
                     LocalizaConfigura::Seccion_4_Personajes_parte_3);
         }
+        
         aserta (0 < cuenta_izqrd,
                 L"No hay personajes en el equipo izquierdo.",
                 LocalizaConfigura::Seccion_4_Personajes_parte_3);
@@ -103,9 +104,11 @@ namespace tapete {
         aserta (cuenta_derch <= 6,
                 L"Hay demasiados personajes en el equipo derecho.",
                 LocalizaConfigura::Seccion_4_Personajes_parte_3);
+        /*
         aserta (cuenta_izqrd == cuenta_derch,
                 L"Debe haber el mismo número de personajes en cada equipo.",
                 LocalizaConfigura::Seccion_4_Personajes_parte_3);
+                */
     }
 
 
