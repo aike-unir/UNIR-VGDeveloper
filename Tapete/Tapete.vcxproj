@@ -156,6 +156,8 @@
     <ClInclude Include="ActorPersonaje.h" />
     <ClInclude Include="CalculoCaminos.h" />
     <ClInclude Include="CuadroIndica.h" />
+    <ClInclude Include="CuadroNiveles.h" />
+    <ClInclude Include="Elemento.h" />
     <ClInclude Include="EscritorAyuda.h" />
     <ClInclude Include="EstadoJuegoEquipo.h" />
     <ClInclude Include="EstadoJuegoLibreDoble.h" />
@@ -190,6 +192,7 @@
   <ItemGroup>
     <ClCompile Include="ActorMusica.cpp" />
     <ClCompile Include="CuadroIndica.cpp" />
+    <ClCompile Include="CuadroNiveles.cpp" />
     <ClCompile Include="EscritorAyuda.cpp" />
     <ClCompile Include="EstadoJuegoEquipo.cpp" />
     <ClCompile Include="EstadoJuegoLibreDoble.cpp" />

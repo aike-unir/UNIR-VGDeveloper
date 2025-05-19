@@ -26,11 +26,13 @@ namespace tapete {
                 JuegoMesaBase * juego, 
                 LadoTablero     lado_tablero, 
                 int             indice_en_equipo,
-                const wstring & nombre           );
+                const wstring & nombre           ,
+                Elemento elemento);
         ~ActorPersonaje ();
 
         JuegoMesaBase * juego (); 
         LadoTablero ladoTablero () const;
+        Elemento elemento() const;
         int indiceEnEquipo () const;
         const wstring & nombre () const;
 
@@ -112,6 +114,7 @@ namespace tapete {
         LadoTablero lado_tablero {};
         int         indice_en_equipo {};
         wstring     nombre_;
+        Elemento elemento_ {};
 
         string archivo_retrato {};
         string archivo_ficha {};

@@ -276,21 +276,32 @@ namespace tapete {
     void ModoJuegoBase::estableceFactoresEquipos () {
         aserta (lado_equipo_inicial != LadoTablero::nulo, 
                                       "estableceFactoresEquipos", "lado del equipo inicial nulo");
+/*
         aserta (juego_->personajes (         lado_equipo_inicial) .size () == 
                 juego_->personajes (opuesto (lado_equipo_inicial)).size ()   ,
                                       "estableceFactoresEquipos", "distinto número de personajes en los dos lados");
+                                      */
         aserta (atacante_ == nullptr, "estableceFactoresEquipos", "atacante asignado");
         aserta (factores_equipos.size () == 0, "", "");
         //
         int indice = 0;
         while (true) {
-            factores_equipos.push_back (juego_->personajes (         lado_equipo_inicial ).at (indice));
-            factores_equipos.push_back (juego_->personajes (opuesto (lado_equipo_inicial)).at (indice));
+            factores_equipos.push_back (juego_->personajes (lado_equipo_inicial ).at (indice));
             indice ++;
             if (indice >= juego_->personajes (lado_equipo_inicial).size ()) {
                 break;
             }
         }
+        indice = 0;
+        while (true) {
+            factores_equipos.push_back(juego_->personajes(opuesto(lado_equipo_inicial)).at(indice));
+            indice++;
+            if (indice >= juego_->personajes(opuesto(lado_equipo_inicial)).size()) {
+                break;
+            }
+        }
+
+
     }
 
 

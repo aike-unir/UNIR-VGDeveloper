@@ -4,6 +4,9 @@
 
 
 #include "tapete.h"
+#include <future>
+#include <chrono>
+#include <thread>
 
 
 namespace tapete {
@@ -229,13 +232,49 @@ namespace tapete {
     }
 
 
+    void animaFicha(unir2d::Imagen* img) {
+        
+        int f = 1;
+        while (true) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(200)); //sleep for 1 seconds
+            //do something here after every 1 seconds...
+            img->seleccionaEstampa(1, f);
+            f++;
+            if (f > 4) {
+                f = 1;
+            }
+        }
+        
+    }
+
+
     void PresenciaPersonaje::preparaFicha () {
-        textura_ficha = new unir2d::Textura {};
-        textura_ficha->carga (actor_personaje->archivoFicha ());
-        imagen_ficha = new unir2d::Imagen {};
-        imagen_ficha->asigna (textura_ficha);
+
+        if (textura_ficha == nullptr) {
+            textura_ficha = new unir2d::Textura{};
+           // textura_ficha->carga(JuegoMesaBase::carpetaActivos() + "Sprite-0001.png");
+            textura_ficha->carga(actor_personaje->archivoFicha ());
+        }
+        
+
+        imagen_ficha = new unir2d::Imagen{};
+        imagen_ficha->asigna(textura_ficha);
+        imagen_ficha->defineEstampas(1, 4);
+        imagen_ficha->seleccionaEstampa(1, 1);
         //
-        actor_personaje->agregaDibujo (imagen_ficha);
+        actor_personaje->agregaDibujo(imagen_ficha);
+
+
+
+        // Make a lazy function that evaluates x + y
+        
+
+        std::thread your_thread(animaFicha, imagen_ficha); // Animacion de la ficha
+        your_thread.detach();
+
+
+        
+        
 ////////////////////////////////////////////////////////////////////////////////////////////////////
         //aserta (lado_tablero != LadoTablero::nulo, "parámatro 'lado_tablero' inválido");
         //if (textura_ficha_roja == nullptr) {
