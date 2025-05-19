@@ -13,12 +13,14 @@ namespace tapete {
                 JuegoMesaBase * juego, 
                 LadoTablero     lado_tablero, 
                 int             indice_en_equipo,
-                const wstring & nombre           ) {
+                const wstring & nombre           ,
+                Elemento elemento) {
         this->juego_           = juego;
         this->lado_tablero     = lado_tablero;
         this->indice_en_equipo = indice_en_equipo;
         this->nombre_          = nombre;
         this->archivo_retrato  = archivo_retrato;
+        this->elemento_ = elemento;
     }
 
 
@@ -34,6 +36,10 @@ namespace tapete {
 
     LadoTablero ActorPersonaje::ladoTablero () const {
         return lado_tablero;
+    }
+
+    Elemento ActorPersonaje::elemento() const {
+        return elemento_;
     }
 
 
@@ -290,7 +296,7 @@ namespace tapete {
 
 
     void ActorPersonaje::refrescaFicha () {
-        Vector poscn = RejillaTablero::centroHexagono (sitio_ficha);
+        Vector poscn = RejillaTablero::centroHexagono(sitio_ficha) - Vector{30,30};
         poscn += PresenciaTablero::regionRejilla.posicion ();
         poscn -= PresenciaPersonaje::deslizaFicha;
         presencia_personaje.imagen_ficha->ponPosicion (poscn);

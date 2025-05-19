@@ -13,11 +13,13 @@ namespace tapete {
             const wstring & nombre, 
             EnfoqueHabilidad  tipo_accion, 
             AccesoHabilidad  tipo_acceso, 
-            Antagonista antagonista) {
+            Antagonista antagonista,
+        Elemento elemento) {
         this->nombre_      = nombre;
         this->tipo_accion  = tipo_accion;
         this->tipo_acceso  = tipo_acceso;
         this->antagonista_ = antagonista;
+        this->elemento_ = elemento;
     }
 
 
@@ -46,7 +48,6 @@ namespace tapete {
     Antagonista Habilidad::antagonista () const {
         return antagonista_;
     }
-
 
     const wstring & Habilidad::descripcion () const {
         return descripcion_;
@@ -91,6 +92,10 @@ namespace tapete {
 
     void Habilidad::ponCoste (int valor) {
         coste_ = valor;
+    }
+
+    Elemento Habilidad::elemento() const {
+        return elemento_;
     }
 
 

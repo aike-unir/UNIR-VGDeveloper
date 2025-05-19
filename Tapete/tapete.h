@@ -15,10 +15,12 @@ using Color  = unir2d::Color;
 
 #include <sstream>
 
+#include "Elemento.h"
 #include "LadoTablero.h"
 #include "TipoEstadistica.h"
 #include "Habilidad.h"
 #include "CuadroIndica.h"
+#include "CuadroNiveles.h"
 
 #include "Excepciones.h"
 

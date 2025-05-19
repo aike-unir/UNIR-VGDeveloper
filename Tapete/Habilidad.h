@@ -35,7 +35,8 @@ namespace tapete {
                 const wstring  & nombre, 
                 EnfoqueHabilidad tipo_accion, 
                 AccesoHabilidad  tipo_acceso, 
-                Antagonista      antagonista);
+                Antagonista      antagonista,
+                Elemento         elemento);
         ~Habilidad ();
 
         const wstring &  nombre () const;
@@ -52,6 +53,8 @@ namespace tapete {
 
         const string & archivoSonido () const;
         void ponArchivoSonido (const string & archivo);
+
+        Elemento elemento () const;
 
         int  coste () const;
         void ponCoste (int valor);
@@ -90,6 +93,7 @@ namespace tapete {
         EnfoqueHabilidad tipo_accion {};
         AccesoHabilidad  tipo_acceso {};
         Antagonista      antagonista_ {};
+        
 
         int coste_ {};
         int alcance_ {};
@@ -99,6 +103,7 @@ namespace tapete {
         string archivo_imagen {};
         string archivo_fondo_imagen {};
         string archivo_sonido {};
+        Elemento elemento_ {};
 
         TipoAtaque *   tipo_ataque {}; 
         TipoDefensa *  tipo_defensa {};

@@ -25,6 +25,9 @@ namespace tapete {
         const string & archivoBaldosas ();
         void ponArchivoBaldosas (const string & archivo);
 
+        const string& archivoFondo();
+        void ponArchivoFondo(const string& archivo);
+
         const wstring & nombreEquipo  (LadoTablero lado_tablero);
         const string  & ArchivoEscudo (LadoTablero lado_tablero);
         void equipa (LadoTablero lado_tablero, const wstring & nombre, const string & archivo_escudo);
@@ -34,6 +37,7 @@ namespace tapete {
 
         void situaMuros (const GraficoMuros & grafico_muros);
         void validaGraficoMuros ();
+        void selectorNiveles();
 
         RejillaTablero    & rejilla ();
         PresenciaActuante & presencia (LadoTablero lado);
@@ -78,11 +82,14 @@ namespace tapete {
         JuegoMesaBase * juego {}; 
 
         string archivo_baldosas;
+        string archivo_fondo;
 
         wstring nombre_equipo_izqrd {}; 
         string  archivo_escudo_izqrd {};
         wstring nombre_equipo_derch {}; 
         string  archivo_escudo_derch {};
+
+        bool es_selector_niveles{ false };
 
         const GraficoMuros * grafico_muros;
         std::vector <Coord>  sitios_muros {};
@@ -96,6 +103,7 @@ namespace tapete {
         CuadroIndica         cuadro_indica            {this};
         VistaCaminoCeldas    vista_camino_celdas      {this};
         ListadoAyuda         listado_ayuda            {this};
+        CuadroNiveles        cuadro_niveles           {this};
 
         string archivo_sonido_establece {};
         int    volumen_sonido_establece {};
@@ -119,6 +127,12 @@ namespace tapete {
         };
         SobreCelda sobre_celda {};
 
+        struct SobreNivel {
+            bool  esta{ false };
+            Coord celda{};
+        };
+        SobreNivel sobre_nivel{};
+
         void calculaSitiosMuros ();
 
         void controlSobreRetrato ();
@@ -128,6 +142,7 @@ namespace tapete {
         void controlSobreCelda ();
         void controlCeldaPulsacion ();
         void controlAyudaPulsacion ();
+        void controlSobreNiveles();
 
         static void aserta (bool expresion, const string & mensaje);
 

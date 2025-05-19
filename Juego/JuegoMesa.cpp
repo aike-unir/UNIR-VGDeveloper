@@ -220,10 +220,6 @@ namespace juego {
         "   -     -     -     -     -     -     -     -   ",
         "-     -     -     -     -     -     -     -     -",
         "   -     -     -     -     -     -     -     -   ",
-        "-     -     -     -     -     -     -     -     -",
-        "   -     -     -     -     -     -     -     -   ",
-        "-     -     -     -     -     -     -     -     -",
-        "   -     -     -     -     -     -     -     -   ",
         "-     F     -     -     -     -     -     -     -",
         "   F     F     -     -     -     -     -     -   ",
         "-     F     -     -     -     -     -     -     -",
@@ -384,9 +380,9 @@ namespace juego {
 
         *******************************************************************************************/
         //
-        Miner  = new ActorPersonaje {this, LadoTablero::Izquierda, 0, L"Miner"};
-        Male = new ActorPersonaje{ this, LadoTablero::Izquierda, 1, L"Male" };
-        Aristo = new ActorPersonaje {this, LadoTablero::Derecha,   0, L"Aristo"};
+        Miner  = new ActorPersonaje {this, LadoTablero::Izquierda, 0, L"Miner" , Elemento::Fuego };
+        Male = new ActorPersonaje{ this, LadoTablero::Izquierda, 1, L"Male", Elemento::nulo };
+        Aristo = new ActorPersonaje {this, LadoTablero::Derecha,   0, L"Aristo", Elemento::nulo };
 
 
         //
@@ -395,9 +391,9 @@ namespace juego {
         Aristo->ponArchivoRetrato (carpeta_retratos_juego + "aristocrat_75.png");
 
         //
-        Miner ->ponArchivoFicha (carpeta_retratos_juego + "ficha_roja.png");
-        Male->ponArchivoFicha(carpeta_retratos_juego + "ficha_roja.png");
-        Aristo->ponArchivoFicha (carpeta_retratos_juego + "ficha_azul.png");
+        Miner ->ponArchivoFicha (carpeta_retratos_juego + "sprite1.png");
+        Male->ponArchivoFicha(carpeta_retratos_juego + "sprite3.png");
+        Aristo->ponArchivoFicha (carpeta_retratos_juego + "sprite2.png");
 
         //
         Miner ->ponIniciativa (20);
@@ -491,28 +487,28 @@ namespace juego {
         //
         ataqueEspadaNormal   = new Habilidad {
                 L"Ataque cuerpo a cuerpo normal", 
-                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente};
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo};
         ataqueArco           = new Habilidad {
                 L"Ataque a distancia normal",     
-                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente};
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
         ataqueEspadaPoderoso = new Habilidad {
                 L"Ataque poderoso",               
-                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente};
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
         defensaFerrea        = new Habilidad {
                 L"Defensa férrea",                
-                EnfoqueHabilidad::si_mismo,  AccesoHabilidad::ninguno,   Antagonista::si_mismo};
+                EnfoqueHabilidad::si_mismo,  AccesoHabilidad::ninguno,   Antagonista::si_mismo, Elemento::nulo };
         curacionSimple       = new Habilidad {
                 L"Curación",                      
-                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::aliado};
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::aliado, Elemento::nulo };
         curacionGrupo        = new Habilidad {
                 L"Curación en grupo",             
-                EnfoqueHabilidad::area,      AccesoHabilidad::directo,   Antagonista::aliado};
+                EnfoqueHabilidad::area,      AccesoHabilidad::directo,   Antagonista::aliado, Elemento::nulo };
         proyectilMagico      = new Habilidad {
                 L"Proyectil mágico",              
-                EnfoqueHabilidad::personaje, AccesoHabilidad::indirecto, Antagonista::oponente};
+                EnfoqueHabilidad::personaje, AccesoHabilidad::indirecto, Antagonista::oponente, Elemento::nulo };
         bolaFuego            = new Habilidad {
                 L"Bola de fuego",                 
-                EnfoqueHabilidad::area,      AccesoHabilidad::directo,   Antagonista::oponente};
+                EnfoqueHabilidad::area,      AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
         //
         ataqueEspadaNormal  ->ponDescripcion (
                 L"El personaje usa su espada para atacar a un enemigo que se encuentra en una casilla próxima.");

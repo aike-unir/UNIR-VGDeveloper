@@ -28,6 +28,15 @@ namespace tapete {
         archivo_baldosas = archivo;
     }
 
+    const string& ActorTablero::archivoFondo() {
+        return archivo_fondo;
+    }
+
+
+    void ActorTablero::ponArchivoFondo(const string& archivo) {
+        archivo_fondo = archivo;
+    }
+
 
     const wstring & ActorTablero::nombreEquipo (LadoTablero lado_tablero) {
         if (lado_tablero == LadoTablero::Izquierda) {
@@ -133,6 +142,14 @@ namespace tapete {
             }
         }
     }
+
+    void ActorTablero::selectorNiveles() {
+
+        this->es_selector_niveles = true;
+        cuadro_niveles.prepara();
+        controlSobreNiveles();
+    }
+
 
 
     RejillaTablero & ActorTablero::rejilla () {
@@ -270,6 +287,7 @@ namespace tapete {
         cuadro_indica           .prepara ();
         vista_camino_celdas     .prepara ();
         listado_ayuda           .prepara ();
+        
     }
 
 
@@ -283,18 +301,25 @@ namespace tapete {
         presencia_habilidades   .libera ();
         rejilla_tablero         .libera ();
         presencia_tablero       .libera ();
+        cuadro_niveles.libera();
     }
 
 
     void ActorTablero::actualiza (double tiempo_seg) {
-        controlSobreRetrato ();
-        controlSobreHabilidad ();
-        controlRetratoPulsacion ();
-        controlHabilidadPulsacion ();
-        controlSobreCelda ();
-        controlCeldaPulsacion ();
-        controlAyudaPulsacion ();
-        rejilla_tablero.refrescaMarcaje ();
+
+        if (!es_selector_niveles) {
+            controlSobreRetrato();
+            controlSobreHabilidad();
+            controlRetratoPulsacion();
+            controlHabilidadPulsacion();
+            controlSobreCelda();
+            controlCeldaPulsacion();
+            controlAyudaPulsacion();
+            rejilla_tablero.refrescaMarcaje();
+        } else{
+            controlSobreNiveles();
+        }
+
     }
        
 
@@ -340,8 +365,56 @@ namespace tapete {
     }
 
 
-    void ActorTablero::controlSobreHabilidad () {
+    void ActorTablero::controlSobreNiveles() {
         //
+       // this->termina();
+
+        SobreNivel sobre_ahora;
+        sobre_ahora.esta = false;
+        //
+        bool dclic = unir2d::Raton::dobleClic();
+        bool sclic = unir2d::Raton::pulsando(unir2d::BotonRaton::izquierda);
+
+        unir2d::Region* nivel1 = new Region(Vector{ 142, 100 }, Vector{ 285, 285 });
+        unir2d::Region* nivel2 = new Region(Vector{ 712, 100 }, Vector{ 285, 285 });
+        unir2d::Region* nivel3 = new Region(Vector{ 1282, 100 }, Vector{ 285, 285 });
+        unir2d::Region* nivel4 = new Region(Vector{ 427, 470 }, Vector{ 285, 285 });
+        unir2d::Region* nivel5 = new Region(Vector{ 997, 470 }, Vector{ 285, 285 });
+       // unir2d::Region* nivelBoos = new Region(Vector{ 142, 100 }, Vector{ 285, 285 });
+
+
+
+        if (sclic) {
+            /*
+            printf("CLICK");
+           // juego->sucesos()->nivelElegido(1);
+            juego->ponEjecucion(unir2d::EjecucionJuego::nivel1);
+            throw std::logic_error("auch");
+            printf("DETECTADO");
+            */
+            
+            if (nivel1->contiene(unir2d::Raton::posicion())) {
+                throw std::logic_error("LEVEL1");
+            } else if (nivel2->contiene(unir2d::Raton::posicion())) {
+                throw std::logic_error("LEVEL2");
+            } else if (nivel3->contiene(unir2d::Raton::posicion())) {
+                throw std::logic_error("LEVEL3");
+            } else if (nivel4->contiene(unir2d::Raton::posicion())) {
+                throw std::logic_error("LEVEL4");
+            } else if (nivel5->contiene(unir2d::Raton::posicion())) {
+                throw std::logic_error("LEVEL5");
+            }
+            
+        }
+
+
+        
+
+    }
+
+
+    void ActorTablero::controlSobreHabilidad () {
+        
         SobreHabilidad sobre_ahora;
         sobre_ahora.esta = false;
         //

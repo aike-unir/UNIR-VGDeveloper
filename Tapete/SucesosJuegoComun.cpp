@@ -277,6 +277,8 @@ namespace tapete {
     }
 
 
+
+
     void SucesosJuegoComun::ayudaSeleccionada () {
         if (modo ()->estado () != EstadoJuegoComun::inicial        &&
             modo ()->estado () != EstadoJuegoComun::terminal       &&

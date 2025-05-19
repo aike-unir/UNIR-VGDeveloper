@@ -18,18 +18,22 @@ namespace tapete {
         static constexpr Vector tamanoTablero           {1710, 1010};
 
         static constexpr Vector tamanoPanelVertcl       { 110, 880};
-        static constexpr Vector tamanoRejilla           {1480, 885};
+        static constexpr Vector tamanoRejilla           {1455, 655};
+        //static constexpr Vector tamanoRejilla           {1480, 885};
         static constexpr Vector tamanoPanelAbajo        { 619, 120};
 
         static constexpr float  margenPanelVertcl       {5};
+        static constexpr float  margenRegillaHorizontal {25};
+        static constexpr float  margenRegillaSuperior   { 230 };
+
         static constexpr Region regionPanelVertclIzqrd  {Vector {margenPanelVertcl, margenPanelVertcl}, tamanoPanelVertcl};
-        static constexpr float  columnaRejilla          {regionPanelVertclIzqrd.x () + regionPanelVertclIzqrd.ancho ()};
-        static constexpr Region regionRejilla           {Vector {columnaRejilla, 0}, tamanoRejilla};
+        static constexpr float  columnaRejilla          {regionPanelVertclIzqrd.x () + regionPanelVertclIzqrd.ancho () + margenRegillaHorizontal };
+        static constexpr Region regionRejilla           {Vector {columnaRejilla, margenRegillaSuperior}, tamanoRejilla};
         static constexpr float  columnaPanelVertclDerch {regionRejilla.x () + regionRejilla.ancho ()};
         static constexpr Region regionPanelVertclDerch  {Vector {columnaPanelVertclDerch, margenPanelVertcl}, tamanoPanelVertcl};
 
         static constexpr float  margenBandaAbajo        {1};
-        static constexpr float  filaBandaAbajo          {regionRejilla.y () + regionRejilla.alto () + margenBandaAbajo};
+        static constexpr float  filaBandaAbajo          { regionPanelVertclIzqrd.y () + regionPanelVertclIzqrd.alto () + margenBandaAbajo};
         static constexpr Vector tamanoBandaAbajo        {tamanoPanelVertcl.x () * 2 + tamanoRejilla.x (), tamanoPanelAbajo.y ()}; 
 
         static constexpr Vector tamanoDisplay           { 90, tamanoBandaAbajo.y ()};
@@ -56,12 +60,15 @@ namespace tapete {
         ActorTablero * actor_tablero;
 
         unir2d::Textura  * textura_fondo {};
+        unir2d::Textura  * textura_background{};
         unir2d::Baldosas * baldosas_fondo {};
+        unir2d::Imagen   * background_fondo{};
         unir2d::Textura  * textura_muros {};
         unir2d::Malla    * malla_muros {};
 
         unir2d::Textura* textura_fuego{};
         unir2d::Malla* malla_fuego{};
+        unir2d::Imagen* imagen_fuego{};
 
         unir2d::Textura * textura_panel_vertcl {};
         unir2d::Imagen  * imagen_panel_vertcl_izqrd {};
@@ -115,6 +122,7 @@ namespace tapete {
         void libera ();
 
         void preparaBaldosas ();
+        void preparaFondos   ();
         void preparaMuros    ();
         void preparaPaneles  ();
         void preparaMonitor  ();
@@ -150,7 +158,6 @@ namespace tapete {
             const PuntosHexagonos& puntos_rejilla,
             const IndicesEstampas& indices_estampas,
             const PuntosHexagonos& puntos_textura);
-
 
         friend class ActorTablero;
 

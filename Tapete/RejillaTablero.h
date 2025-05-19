@@ -18,7 +18,7 @@ namespace tapete {
 
         static constexpr float distanciaCeldas = ladoHexagono * seno60 * 2;
 
-        static constexpr int filas    = 17; //51;
+        static constexpr int filas    = 13; //51;
         static constexpr int columnas = 17; //49; 24 *2 + 1
 
 
