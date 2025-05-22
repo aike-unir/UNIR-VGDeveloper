@@ -15,6 +15,10 @@ namespace tapete {
     class ActorTablero : public unir2d::ActorBase {
     public:
 
+        const std::vector <Coord>& sitiosMuros() const;
+        const std::vector<Coord>& sitiosFuego() const;
+        const std::vector<Coord>& sitiosHielo() const; // Nuevo elemento Hielo
+
         static constexpr int columnasGraficoMuros = RejillaTablero::columnas * 3 - 2;
         using GraficoMuros = std::array <const char [columnasGraficoMuros + 1], RejillaTablero::filas>;
 
@@ -32,9 +36,7 @@ namespace tapete {
         const string  & ArchivoEscudo (LadoTablero lado_tablero);
         void equipa (LadoTablero lado_tablero, const wstring & nombre, const string & archivo_escudo);
 
-        const std::vector <Coord> & sitiosMuros () const;
-        const std::vector <Coord>& sitiosFuego() const;
-
+       
         void situaMuros (const GraficoMuros & grafico_muros);
         void validaGraficoMuros ();
         void selectorNiveles();
@@ -77,6 +79,7 @@ namespace tapete {
 
         void actualiza (double tiempo_seg) override;
 
+
     private:
 
         JuegoMesaBase * juego {}; 
@@ -94,6 +97,7 @@ namespace tapete {
         const GraficoMuros * grafico_muros;
         std::vector <Coord>  sitios_muros {};
         std::vector <Coord>  sitios_fuego{};
+        std::vector<Coord> sitios_hielo{}; // Nuevo elemento Hielo
 
         PresenciaTablero     presencia_tablero        {this};
         RejillaTablero       rejilla_tablero          {this};

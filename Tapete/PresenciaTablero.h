@@ -70,6 +70,10 @@ namespace tapete {
         unir2d::Malla* malla_fuego{};
         unir2d::Imagen* imagen_fuego{};
 
+        unir2d::Textura* textura_hielo{};
+        unir2d::Malla* malla_hielo{};
+        unir2d::Imagen* imagen_hielo{};
+
         unir2d::Textura * textura_panel_vertcl {};
         unir2d::Imagen  * imagen_panel_vertcl_izqrd {};
         unir2d::Imagen  * imagen_panel_vertcl_derch {};
@@ -155,6 +159,10 @@ namespace tapete {
                 const IndicesEstampas & indices_estampas,
                 const PuntosHexagonos & puntos_textura   );
         void estableceMallaFuego(
+            const PuntosHexagonos& puntos_rejilla,
+            const IndicesEstampas& indices_estampas,
+            const PuntosHexagonos& puntos_textura);
+        void estableceMallaHielo(
             const PuntosHexagonos& puntos_rejilla,
             const IndicesEstampas& indices_estampas,
             const PuntosHexagonos& puntos_textura);

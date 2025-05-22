@@ -36,6 +36,7 @@ namespace tapete {
     void PresenciaTablero::reprepara () {
         actor_tablero->agregaDibujo (malla_muros);
         actor_tablero->agregaDibujo(malla_fuego);
+        actor_tablero->agregaDibujo(malla_hielo);
         //
         actor_tablero->agregaDibujo (imagen_panel_vertcl_izqrd);
         actor_tablero->agregaDibujo (imagen_panel_vertcl_derch);
@@ -196,6 +197,29 @@ namespace tapete {
         
         std::thread your_threadFire(animaElemento, malla_fuego, indcs_fuego, puntos_rejll_fuego, puntos_textr_fuego); // Animacion de la ficha
         your_threadFire.detach();
+
+
+
+        //// Nuevo elemento (Hielo)
+        textura_hielo = new unir2d::Textura{};
+        textura_hielo->carga(JuegoMesaBase::carpetaActivos() + "casilla_hielo.png");
+
+        malla_hielo = new unir2d::Malla{};
+        malla_hielo->asigna(textura_hielo);
+        malla_hielo->ponPosicion(PresenciaTablero::regionRejilla.posicion());
+
+        IndicesEstampas indcs_hielo;
+        calculaEstampasElemento(actor_tablero->sitios_hielo, indcs_hielo);
+
+        PuntosHexagonos puntos_textr_hielo{};
+        punteaTexturaMuros(puntos_textr_hielo);
+        PuntosHexagonos puntos_rejll_hielo{};
+
+        punteaRejillaMuros(actor_tablero->sitios_hielo, puntos_rejll_hielo);
+        estableceMallaFuego(puntos_rejll_hielo, indcs_hielo, puntos_textr_hielo);
+
+        std::thread ejecutaXxxx(animaElemento, malla_hielo, indcs_hielo, puntos_rejll_hielo, puntos_textr_hielo); // Animación del nuevo elemento
+        ejecutaXxxx.detach();
        
         
     }
@@ -208,11 +232,15 @@ namespace tapete {
         delete textura_muros;
         delete malla_fuego;
         delete textura_fuego;
+        delete malla_hielo;
+        delete textura_hielo;
         //
         malla_muros   = nullptr;
         textura_muros = nullptr;
         malla_fuego = nullptr;
         textura_fuego = nullptr;
+        malla_hielo = nullptr;
+        textura_hielo = nullptr;
     }
 
 
@@ -448,6 +476,41 @@ namespace tapete {
                 this->malla_fuego->asigna(indc_celda * 6 + indc_trngl, trngl_malla);
             }
 
+        }
+    }
+
+    void PresenciaTablero::estableceMallaHielo(
+        const PuntosHexagonos& puntos_rejilla,
+        const IndicesEstampas& indices_estampas,
+        const PuntosHexagonos& puntos_textura) {
+
+        // Definir correctamente la cantidad de vértices
+        this->malla_hielo->define((int)puntos_rejilla.size() * 3);  // Ajuste clave
+
+        // Depuración para verificar tamaño de datos
+        std::cerr << "Tamaño de puntos_rejilla: " << puntos_rejilla.size() << std::endl;
+        std::cerr << "Total vértices esperados: " << this->malla_hielo->obtenerTotalVertices() << std::endl;
+
+        for (int indc_celda = 0; indc_celda < puntos_rejilla.size(); ++indc_celda) {
+            for (int indc_trngl = 0; indc_trngl < 6; ++indc_trngl) {
+                unir2d::TrianguloMalla trngl_malla{};
+                for (int indc_vertc = 0; indc_vertc < 3; ++indc_vertc) {
+                    trngl_malla.ponPunto(indc_vertc, puntos_rejilla[indc_celda][indc_trngl][indc_vertc]);
+                    int indc_estmp = indices_estampas[indc_celda][indc_trngl];
+                    trngl_malla.ponTexel(indc_vertc, puntos_textura[indc_estmp][indc_trngl][indc_vertc]);
+                }
+
+                int indice = indc_celda * 6 + indc_trngl;
+
+                // Validación antes de llamar a `asigna()`
+                if (indice >= 0 && indice * 3 < this->malla_hielo->obtenerTotalVertices()) {
+                    this->malla_hielo->asigna(indice, trngl_malla);
+                }
+                else {
+                    std::cerr << "Error: Índice fuera de rango -> " << indice
+                        << " / " << this->malla_hielo->obtenerTotalVertices() << std::endl;
+                }
+            }
         }
     }
 

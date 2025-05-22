@@ -7,6 +7,14 @@
 
 
 namespace juego2 {
+    void JuegoMesa2::setTituloVentana(int nivel, const std::wstring& epoca) {
+        tituloActual = L"Nivel " + std::to_wstring(nivel) + L" - " + epoca;
+    }
+
+    const std::wstring JuegoMesa2::tituloVentana() const {
+        return tituloActual;
+    }
+
 
     string JuegoMesa2::carpeta_activos_juego  {"./activos/"};
     string JuegoMesa2::carpeta_retratos_juego {"./retratos/"};
@@ -14,12 +22,8 @@ namespace juego2 {
     string JuegoMesa2::carpeta_sonidos_juego  {"./sonidos/"};
 
 
-    const std::wstring JuegoMesa2::tituloVentana () const {
-        return L"Nivel 2 - Edad de Hielo";
-    }
-
-
     JuegoMesa2::JuegoMesa2 () {
+        setTituloVentana(2, L"Edad de Hielo"); //Ajusta el titulo inicial
         ModoJuegoEquipo* modo = new ModoJuegoEquipo { this };
         SucesosJuegoEquipo* sucesos = new SucesosJuegoEquipo{ this, modo };
 
@@ -33,15 +37,16 @@ namespace juego2 {
         "   -     -     -     -     O     -     -     -   ",
         "-     -     -     -     -     O     -     -     -",
         "   -     -     -     -     -     O     -     -   ",
-        "-     -     -     F     -     -     O     -     -",
+        "-     -     -     I     -     -     O     -     -",
         "   -     -     -     -     -     -     O     -   ",
-        "-     -     -     -     F     -     O     -     -",
+        "-     -     -     -     I     -     O     -     -",
         "   -     -     -     -     -     O     -     -   ",
         "-     -     -     -     -     O     O     -     -",
         "   -     -     -     -     -     O     -     -   ",
         "-     -     -     -     -     -     -     -     -",
-        "   -     -     -     -     F     -     -     -   ",
+        "   -     -     -     -     I     -     -     -   ",
         "-     -     -     -     -     -     -     -     -" };
+
 
 
 
