@@ -105,7 +105,28 @@ namespace tapete {
        // background_fondo->ponVisible(false);
 
         actor_tablero->agregaDibujo(background_fondo);
+        
 
+        textura_logo = new unir2d::Textura{};
+        textura_logo->carga(JuegoMesaBase::carpetaActivos() + "logo.png");
+
+        background_logo = new unir2d::Imagen{};
+        background_logo->asigna(textura_logo);
+        background_logo->ponPosicion(Vector{ 100, 15 });
+        // background_fondo->ponVisible(false);
+
+        actor_tablero->agregaDibujo(background_logo);
+        
+        textura_jerarquia = new unir2d::Textura{};
+        textura_jerarquia->carga(JuegoMesaBase::carpetaActivos() + "jerarquia.png");
+
+        background_jerarquia = new unir2d::Imagen{};
+        background_jerarquia->asigna(textura_jerarquia);
+        background_jerarquia->ponPosicion(Vector{ 1400, 15 });
+        // background_fondo->ponVisible(false);
+
+        actor_tablero->agregaDibujo(background_jerarquia);
+        
     }
 
 
@@ -114,11 +135,20 @@ namespace tapete {
         delete textura_fondo;
         delete background_fondo;
         delete textura_background;
+        delete textura_logo;
+        delete textura_jerarquia;
+        delete background_logo;
+        delete background_jerarquia;
         //
         baldosas_fondo = nullptr;
         textura_fondo  = nullptr;
         background_fondo = nullptr;
         textura_background = nullptr;
+        textura_logo = nullptr;
+        textura_jerarquia = nullptr;
+        background_logo = nullptr;
+        background_jerarquia = nullptr;
+
     }
 
     using IndicesEstampas = std::vector <std::array <int, 6>>;

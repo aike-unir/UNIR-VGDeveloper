@@ -42,6 +42,34 @@ namespace tapete {
         return elemento_;
     }
 
+    string ActorPersonaje::archivoElemento() {
+        
+        switch(elemento_){
+        case Elemento::Fuego:
+            return "marco_fuego.png";
+            break;
+        case Elemento::Hielo:
+            return "marco_hielo.png";
+            break;
+        case Elemento::Piedra:
+            return "marco_piedra.png";
+            break;
+        case Elemento::Rayo:
+            return "marco_rayo.png";
+            break;
+        case Elemento::Veneno:
+            return "marco_veneno.png";
+            break;
+        case Elemento::nulo:
+            return "marco_none.png";
+            break;
+        default:
+            return "marco_none.png";
+            break;
+        }
+        
+    }
+
 
     int ActorPersonaje::indiceEnEquipo () const {
         return indice_en_equipo;

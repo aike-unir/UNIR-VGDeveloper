@@ -26,6 +26,15 @@ namespace tapete {
         //
         textura_retrato = new unir2d::Textura ();
         textura_retrato->carga (actor_personaje->archivo_retrato);
+
+        
+        //string archivoElemento = "marco_none.png";// actor_personaje->archivoElemento();
+        string archivoElemento = actor_personaje->archivoElemento();
+        
+        textura_elemento = new unir2d::Textura();
+        textura_elemento->carga(JuegoMesaBase::carpetaActivos() + archivoElemento);
+        
+        
         //
         preparaPanel   (actor_personaje->lado_tablero, actor_personaje->indice_en_equipo);
         preparaTitulo  (actor_personaje->juego_->personajes (), actor_personaje);
@@ -82,6 +91,9 @@ namespace tapete {
         imagen_retrato_lateral = nullptr;
         delete fondo_retrato;
         fondo_retrato = nullptr;
+
+        delete imagen_retrato_elemento;
+        imagen_retrato_elemento = nullptr;
         //
 //        delete texto_nombre;
 //        texto_nombre = nullptr;
@@ -94,6 +106,8 @@ namespace tapete {
         //
         delete textura_retrato;
         textura_retrato = nullptr;
+        delete textura_elemento;
+        textura_elemento = nullptr;
     }
 
 
@@ -106,8 +120,8 @@ namespace tapete {
             x = PresenciaTablero::regionPanelVertclDerch.posicion ().x () + 8;
         }
         float y = PresenciaTablero::regionPanelVertclIzqrd.posicion ().y () + 
-                  indice_grupo * 135.0f + 68;
-        panel_lateral = Region {x, y, 92, 128};
+                  indice_grupo * 155.0f + 100;
+        panel_lateral = Region {x, y, 92, 150};
     }
 
 
@@ -119,7 +133,7 @@ namespace tapete {
         constexpr float anchr_plnch = 89;
         constexpr float altra_plnch = 20;
         //
-        if (textura_titulos == nullptr) {
+    //    if (textura_titulos == nullptr) {
             textura_titulos = new unir2d::Textura {};
             textura_titulos->crea (Vector {anchr_plnch * colns_plnch, altra_plnch * filas_plnch});
             //
@@ -140,7 +154,7 @@ namespace tapete {
             //
             unir2d::Texto * texto_nombr = new unir2d::Texto ("timesbi");
             texto_nombr->ponTamano (18);
-            texto_nombr->ponColor (Color::GrisOscuro);
+            texto_nombr->ponColor (Color::Blanco);
             for (const ActorPersonaje * actor_persj : lista_personajes) {
                 int coln;
                 if (actor_persj->lado_tablero == LadoTablero::Izquierda) {
@@ -157,7 +171,7 @@ namespace tapete {
             }
             delete texto_nombr;
             texto_nombr = nullptr;
-        }
+       // }
         //
         imagen_titulo = new unir2d::Imagen {};
         imagen_titulo->asigna (textura_titulos);
@@ -178,11 +192,11 @@ namespace tapete {
 
     void PresenciaPersonaje::preparaRetratoLateral () {
         fondo_retrato = new unir2d::Rectangulo {80, 80};
-        fondo_retrato->ponPosicion (panel_lateral.posicion () + Vector {6, 26});
+        fondo_retrato->ponPosicion (panel_lateral.posicion () + Vector {6, 30});
         fondo_retrato->ponColor (Color {0x50, 0x50, 0x50});
         //
         imagen_retrato_lateral = new unir2d::Imagen ();
-        imagen_retrato_lateral->ponPosicion (panel_lateral.posicion () + Vector {10, 30});
+        imagen_retrato_lateral->ponPosicion (panel_lateral.posicion () + Vector {10, 34});
         imagen_retrato_lateral->asigna (textura_retrato);
         //
         if (textura_marco_retrato == nullptr) {
@@ -190,12 +204,21 @@ namespace tapete {
             textura_marco_retrato->carga (JuegoMesaBase::carpetaActivos () + "marco_75.png");
         }
         imagen_marco_retrato = new unir2d::Imagen ();
-        imagen_marco_retrato->ponPosicion (panel_lateral.posicion () + Vector {0, 20});
+        imagen_marco_retrato->ponPosicion (panel_lateral.posicion () + Vector {0, 24});
         imagen_marco_retrato->asigna (textura_marco_retrato);
         //
         actor_personaje->agregaDibujo (fondo_retrato);
         actor_personaje->agregaDibujo (imagen_retrato_lateral);
         actor_personaje->agregaDibujo (imagen_marco_retrato);
+
+        //---
+        
+        imagen_retrato_elemento = new unir2d::Imagen();
+        imagen_retrato_elemento->ponPosicion(panel_lateral.posicion() + Vector{ 64, 85 });
+        imagen_retrato_elemento->asigna(textura_elemento);
+
+        actor_personaje->agregaDibujo(imagen_retrato_elemento);
+
     }
 
 
@@ -216,7 +239,7 @@ namespace tapete {
         imagen_barra_vida->asigna (textura_barras_vida);
         imagen_barra_vida->defineEstampas (cuentaBarrasVida, 1);
         imagen_barra_vida->seleccionaEstampa (indiceBarraVida (), 1);
-        imagen_barra_vida->ponPosicion (panel_lateral.posicion () + Vector {1, 112});
+        imagen_barra_vida->ponPosicion (panel_lateral.posicion () + Vector {1, 122});
         //
         actor_personaje->agregaDibujo (imagen_barra_vida);
     }

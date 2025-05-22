@@ -61,8 +61,12 @@ namespace tapete {
 
         unir2d::Textura  * textura_fondo {};
         unir2d::Textura  * textura_background{};
+        unir2d::Textura  * textura_logo{};
+        unir2d::Textura  * textura_jerarquia{};
         unir2d::Baldosas * baldosas_fondo {};
-        unir2d::Imagen   * background_fondo{};
+        unir2d::Imagen   * background_fondo {};
+        unir2d::Imagen   * background_logo {};
+        unir2d::Imagen   * background_jerarquia{};
         unir2d::Textura  * textura_muros {};
         unir2d::Malla    * malla_muros {};
 

@@ -37,12 +37,14 @@ namespace tapete {
         Region panel_lateral {};
 
         unir2d::Textura * textura_retrato {};
+        unir2d::Textura* textura_elemento{};
 
         inline static unir2d::Textura * textura_titulos {};
         unir2d::Imagen *                imagen_titulo {};
 
         unir2d::Rectangulo *            fondo_retrato {};
         unir2d::Imagen *                imagen_retrato_lateral {};
+        unir2d::Imagen*                 imagen_retrato_elemento {};
         inline static unir2d::Textura * textura_marco_retrato {};
         unir2d::Imagen *                imagen_marco_retrato {};
 
