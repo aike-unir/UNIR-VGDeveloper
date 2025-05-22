@@ -1,4 +1,4 @@
-﻿// proyecto: Grupal/Tapete
+// proyecto: Grupal/Tapete
 // arhivo:   PresenciaTablero.cpp
 // versión:  1.1  (9-Ene-2023)
 
@@ -201,6 +201,7 @@ namespace tapete {
 
 
         //// Nuevo elemento (Hielo)
+
         textura_hielo = new unir2d::Textura{};
         textura_hielo->carga(JuegoMesaBase::carpetaActivos() + "casilla_hielo.png");
 
@@ -216,7 +217,7 @@ namespace tapete {
         PuntosHexagonos puntos_rejll_hielo{};
 
         punteaRejillaMuros(actor_tablero->sitios_hielo, puntos_rejll_hielo);
-        estableceMallaFuego(puntos_rejll_hielo, indcs_hielo, puntos_textr_hielo);
+        estableceMallaHielo(puntos_rejll_hielo, indcs_hielo, puntos_textr_hielo);
 
         std::thread ejecutaXxxx(animaElemento, malla_hielo, indcs_hielo, puntos_rejll_hielo, puntos_textr_hielo); // Animación del nuevo elemento
         ejecutaXxxx.detach();
@@ -483,15 +484,9 @@ namespace tapete {
         const PuntosHexagonos& puntos_rejilla,
         const IndicesEstampas& indices_estampas,
         const PuntosHexagonos& puntos_textura) {
-
-        // Definir correctamente la cantidad de vértices
-        this->malla_hielo->define((int)puntos_rejilla.size() * 3);  // Ajuste clave
-
-        // Depuración para verificar tamaño de datos
-        std::cerr << "Tamaño de puntos_rejilla: " << puntos_rejilla.size() << std::endl;
-        std::cerr << "Total vértices esperados: " << this->malla_hielo->obtenerTotalVertices() << std::endl;
-
+        this->malla_hielo->define((int)puntos_rejilla.size() * 6);
         for (int indc_celda = 0; indc_celda < puntos_rejilla.size(); ++indc_celda) {
+
             for (int indc_trngl = 0; indc_trngl < 6; ++indc_trngl) {
                 unir2d::TrianguloMalla trngl_malla{};
                 for (int indc_vertc = 0; indc_vertc < 3; ++indc_vertc) {
@@ -499,18 +494,9 @@ namespace tapete {
                     int indc_estmp = indices_estampas[indc_celda][indc_trngl];
                     trngl_malla.ponTexel(indc_vertc, puntos_textura[indc_estmp][indc_trngl][indc_vertc]);
                 }
-
-                int indice = indc_celda * 6 + indc_trngl;
-
-                // Validación antes de llamar a `asigna()`
-                if (indice >= 0 && indice * 3 < this->malla_hielo->obtenerTotalVertices()) {
-                    this->malla_hielo->asigna(indice, trngl_malla);
-                }
-                else {
-                    std::cerr << "Error: Índice fuera de rango -> " << indice
-                        << " / " << this->malla_hielo->obtenerTotalVertices() << std::endl;
-                }
+                this->malla_hielo->asigna(indc_celda * 6 + indc_trngl, trngl_malla);
             }
+
         }
     }
 
