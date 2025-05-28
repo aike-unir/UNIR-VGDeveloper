@@ -178,9 +178,15 @@
     <ClInclude Include="JuegoNivel.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="activos\Baldosa2_0001.png" />
+    <Image Include="activos\casilla_fuego.png" />
+    <Image Include="activos\Dunas.png" />
     <Image Include="activos\escudo_devils.png" />
     <Image Include="activos\escudo_tusk.png" />
     <Image Include="activos\estampas_fondo.png" />
+    <Image Include="activos\FondoDesierto.png" />
+    <Image Include="activos\Grande.png" />
+    <Image Include="activos\Pequeño.png" />
     <Image Include="habilidades\arco_flecha.png" />
     <Image Include="habilidades\bola_fuego.png" />
     <Image Include="habilidades\cristales.png" />
@@ -191,6 +197,7 @@
     <Image Include="habilidades\vela.png" />
     <Image Include="habilidades\vela_triple.png" />
     <Image Include="retratos\aristocrat_75.png" />
+    <Image Include="retratos\Clint.png" />
     <Image Include="retratos\ficha_azul.png" />
     <Image Include="retratos\ficha_roja.png" />
     <Image Include="retratos\harja_75.png" />
@@ -199,6 +206,9 @@
     <Image Include="retratos\miner1_75.png" />
     <Image Include="retratos\patrek_75.png" />
     <Image Include="retratos\pirate1_75.png" />
+    <Image Include="retratos\sprite1.png" />
+    <Image Include="retratos\sprite2.png" />
+    <Image Include="retratos\sprite3.png" />
     <Image Include="retratos\thief2_75.png" />
   </ItemGroup>
   <ItemGroup>

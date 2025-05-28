@@ -36,6 +36,7 @@ namespace tapete {
     void PresenciaTablero::reprepara () {
         actor_tablero->agregaDibujo (malla_muros);
         actor_tablero->agregaDibujo(malla_fuego);
+		actor_tablero->agregaDibujo(malla_tierra);
         //
         actor_tablero->agregaDibujo (imagen_panel_vertcl_izqrd);
         actor_tablero->agregaDibujo (imagen_panel_vertcl_derch);
@@ -181,6 +182,7 @@ namespace tapete {
         malla_fuego = new unir2d::Malla{};
         malla_fuego->asigna(textura_fuego);
         malla_fuego->ponPosicion(PresenciaTablero::regionRejilla.posicion());
+
         
         
         IndicesEstampas indcs_fuego;
@@ -197,7 +199,26 @@ namespace tapete {
         std::thread your_threadFire(animaElemento, malla_fuego, indcs_fuego, puntos_rejll_fuego, puntos_textr_fuego); // Animacion de la ficha
         your_threadFire.detach();
        
-        
+        //// Tierra
+
+        textura_tierra = new unir2d::Textura{};
+        textura_tierra->carga(JuegoMesaBase::carpetaActivos() + "casilla_tierra.png");
+
+        malla_tierra = new unir2d::Malla{};
+        malla_tierra->asigna(textura_tierra);
+        malla_tierra->ponPosicion(PresenciaTablero::regionRejilla.posicion());
+
+		IndicesEstampas indcs_tierra;
+		calculaEstampasElemento(actor_tablero->sitios_tierra, indcs_tierra);
+
+		PuntosHexagonos puntos_textr_tierra{};
+		punteaTexturaMuros(puntos_textr_tierra);
+		PuntosHexagonos puntos_rejll_tierra{};
+
+		punteaRejillaMuros(actor_tablero->sitios_tierra, puntos_rejll_tierra);
+		estableceMallaTierra(puntos_rejll_tierra, indcs_tierra, puntos_textr_tierra);
+		std::thread your_threadTierra(animaElemento, malla_tierra, indcs_tierra, puntos_rejll_tierra, puntos_textr_tierra); // Animacion de la ficha
+		your_threadTierra.detach();
     }
     
  
@@ -208,11 +229,15 @@ namespace tapete {
         delete textura_muros;
         delete malla_fuego;
         delete textura_fuego;
+		delete malla_tierra;
+		delete textura_tierra;
         //
         malla_muros   = nullptr;
         textura_muros = nullptr;
         malla_fuego = nullptr;
         textura_fuego = nullptr;
+		malla_tierra = nullptr;
+		textura_tierra = nullptr;
     }
 
 
@@ -446,6 +471,26 @@ namespace tapete {
                     trngl_malla.ponTexel(indc_vertc, puntos_textura[indc_estmp][indc_trngl][indc_vertc]);
                 }
                 this->malla_fuego->asigna(indc_celda * 6 + indc_trngl, trngl_malla);
+            }
+
+        }
+    }
+
+    void PresenciaTablero::estableceMallaTierra(
+        const PuntosHexagonos& puntos_rejilla,
+        const IndicesEstampas& indices_estampas,
+        const PuntosHexagonos& puntos_textura) {
+        this->malla_tierra->define((int)puntos_rejilla.size() * 6);
+        for (int indc_celda = 0; indc_celda < puntos_rejilla.size(); ++indc_celda) {
+
+            for (int indc_trngl = 0; indc_trngl < 6; ++indc_trngl) {
+                unir2d::TrianguloMalla trngl_malla{};
+                for (int indc_vertc = 0; indc_vertc < 3; ++indc_vertc) {
+                    trngl_malla.ponPunto(indc_vertc, puntos_rejilla[indc_celda][indc_trngl][indc_vertc]);
+                    int indc_estmp = indices_estampas[indc_celda][indc_trngl];
+                    trngl_malla.ponTexel(indc_vertc, puntos_textura[indc_estmp][indc_trngl][indc_vertc]);
+                }
+                this->malla_tierra->asigna(indc_celda * 6 + indc_trngl, trngl_malla);
             }
 
         }

@@ -35,10 +35,10 @@ namespace juego4 {
         "   -     -     -     -     -     O     -     -   ",
         "-     -     -     F     -     -     O     -     -",
         "   -     -     -     -     -     -     O     -   ",
-        "-     -     -     -     F     -     O     -     -",
+        "-     -     T     -     F     -     O     -     -",
         "   -     -     -     -     -     O     -     -   ",
         "-     -     -     -     -     O     O     -     -",
-        "   -     -     -     -     -     O     -     -   ",
+        "   -     -     T     -     -     O     -     -   ",
         "-     -     -     -     -     -     -     -     -",
         "   -     -     -     -     F     -     -     -   ",
         "-     -     -     -     -     -     -     -     -" };
@@ -48,8 +48,8 @@ namespace juego4 {
     void JuegoMesa4::preparaTablero() {
         agregaTablero(new ActorTablero(this));
 
-        tablero()->ponArchivoBaldosas(carpeta_activos_juego + "estampas_fondo.png");
-        tablero()->ponArchivoFondo(carpeta_activos_juego + "fondo_volcanes.png");
+        tablero()->ponArchivoBaldosas(carpeta_activos_juego + "Dunas.png");
+        tablero()->ponArchivoFondo(carpeta_activos_juego + "FondoDesierto.png");
 
         tablero()->equipa(LadoTablero::Izquierda, L"Devils", carpeta_activos_juego + "escudo_devils.png");
         tablero()->equipa(LadoTablero::Derecha, L"Tusk", carpeta_activos_juego + "escudo_tusk.png");
@@ -85,7 +85,7 @@ namespace juego4 {
         Guillermo->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Wuuf->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Rosa->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
-        Clint->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
+        Clint->ponArchivoFicha(carpeta_retratos_juego + "Clint.png");
         Panoramix->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
 
         Enemigo1->ponArchivoFicha(carpeta_retratos_juego + "sprite2.png");
