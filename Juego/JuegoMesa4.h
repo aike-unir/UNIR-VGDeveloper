@@ -22,8 +22,8 @@ namespace juego4 {
         ActorPersonaje* Clint{};
         ActorPersonaje* Panoramix{};
 
-        ActorPersonaje* Enemigo1{};
-        ActorPersonaje* Enemigo2{};
+        ActorPersonaje* CoyoteTormenta{};
+        ActorPersonaje* CoyoteTormenta2{};
 
 
 
@@ -33,6 +33,8 @@ namespace juego4 {
         Habilidad* defensaFerrea{};
         Habilidad* curacionSimple{};
         Habilidad* curacionGrupo{};
+		Habilidad* revolverVeloz{};
+
 
 
         TipoAtaque* ataqueCuerpoACuerpo{};
