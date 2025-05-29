@@ -195,16 +195,16 @@ namespace juego5 {
             carpeta_habilids_juego + "flecha_congelada.png", carpeta_habilids_juego + "fondo_hielo.png");
 
         //
-        ataqueEspadaNormal->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
-        ataqueArco->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
-        ataqueEspadaPoderoso->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+        ataqueEspadaNormal->ponArchivoSonido(carpeta_sonidos_juego + "sword.wav");
+        ataqueArco->ponArchivoSonido(carpeta_sonidos_juego + "arrow.wav");
+        ataqueEspadaPoderoso->ponArchivoSonido(carpeta_sonidos_juego + "arrowFire.wav");
         defensaFerrea->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionSimple->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionGrupo->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
 
-        bastonazo->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
-        flechaEnvenenada->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
-        flechaCongelada->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+        bastonazo->ponArchivoSonido(carpeta_sonidos_juego + "melee.wav");
+        flechaEnvenenada->ponArchivoSonido(carpeta_sonidos_juego + "arrow.wav");
+        flechaCongelada->ponArchivoSonido(carpeta_sonidos_juego + "arrowIce.wav");
 
         //
         agregaHabilidad(ataqueEspadaNormal);
@@ -424,7 +424,7 @@ namespace juego5 {
         //
         tablero()->asignaSonidoEstablece(carpeta_sonidos_juego + "Metal Click.wav", 100);
         tablero()->asignaSonidoDesplaza(carpeta_sonidos_juego + "SnowWalk.ogg", 100);
-        musica()->asignaMusica(carpeta_sonidos_juego + "Track_1.ogg", 100);
+        musica()->asignaMusica(carpeta_sonidos_juego + "forest.ogg", 100);
         //
         agregaNombreAlumno(L"Maksym Chernykh");
         agregaNombreAlumno(L"Aike Fernández Roza");
