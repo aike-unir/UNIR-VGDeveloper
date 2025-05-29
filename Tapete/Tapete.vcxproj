@@ -239,6 +239,8 @@
     <Image Include="barras_larga_vida.png" />
     <Image Include="barras_vida.png" />
     <Image Include="boton_ayuda.png" />
+    <Image Include="casilla_fuego.png" />
+    <Image Include="casilla_tierra.png" />
     <Image Include="digitos_display.png" />
     <Image Include="ficha_azul.png" />
     <Image Include="ficha_roja.png" />
