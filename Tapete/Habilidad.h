@@ -49,6 +49,7 @@ namespace tapete {
 
         const string & archivoImagen () const;
         const string & archivoFondoImagen () const;
+        string archivoElemento();
         void ponArchivosImagenes (const string & archivo_imagen, const string & archivo_fondo);
 
         const string & archivoSonido () const;

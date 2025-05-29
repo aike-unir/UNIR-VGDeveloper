@@ -11,5 +11,4 @@ namespace tapete {
         Veneno,
         nulo
     };
-
 }

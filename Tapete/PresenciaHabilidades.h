@@ -14,6 +14,7 @@ namespace tapete {
 
         std::vector <unir2d::Imagen *> imagenesHabilidades     (ActorPersonaje * personaje);
         std::vector <unir2d::Imagen *> imagenesFondosHabilidad (ActorPersonaje * personaje);
+        std::vector <unir2d::Imagen *> imagenesElementosHabilidad (ActorPersonaje* personaje);
 
     private:
 
@@ -21,9 +22,12 @@ namespace tapete {
 
         std::vector <unir2d::Textura *>              texturas_habilidades {}; 
         std::vector <unir2d::Textura *>              texturas_fondos {}; 
+        std::vector <unir2d::Textura*>              texturas_elementos{};
         std::vector <std::vector <unir2d::Imagen *>> imagenes_habilidades {};
         std::vector <std::vector <unir2d::Imagen *>> imagenes_fondos {};
-//        std::vector <unir2d::BuzonSonido *>          buzones_sonidos_habilds {};
+        std::vector <std::vector <unir2d::Imagen*>> imagenes_elementos{};
+
+        //        std::vector <unir2d::BuzonSonido *>          buzones_sonidos_habilds {};
         std::vector <unir2d::Sonido *>               sonidos_habilidades {};
 
 

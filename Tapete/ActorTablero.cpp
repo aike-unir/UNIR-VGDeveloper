@@ -5,7 +5,6 @@
 
 #include "tapete.h"
 
-
 namespace tapete {
     
 
@@ -75,6 +74,26 @@ namespace tapete {
         return sitios_fuego;
     }
 
+    const std::vector <Coord>& ActorTablero::sitiosVeneno() const {
+        return sitios_veneno;
+    }
+
+    const Elemento ActorTablero::elementoCoordenada(Coord coordenada) const {
+
+        int cntFuego = count(sitios_fuego.begin(), sitios_fuego.end(), coordenada);
+        int cntVeneno = count(sitios_veneno.begin(), sitios_veneno.end(), coordenada);
+
+        if (cntFuego > 0) {
+            return Elemento::Fuego;
+        }
+        else if (cntVeneno > 0) {
+            return Elemento::Veneno;
+        }
+        else {
+            return Elemento::nulo;
+        }
+
+    }
 
     void ActorTablero::situaMuros (const GraficoMuros & grafico_muros) {
         this->grafico_muros = & grafico_muros;
@@ -109,9 +128,9 @@ namespace tapete {
                                     "el carácter en la fila {}, columna {} debe ser un espacio en blanco", fl, cl));
                         }
                     } else {
-                        if (ch != 'O' && ch != '-' && ch != 'F') {
+                        if (ch != 'O' && ch != '-' && ch != 'F' && ch != 'P') {
                             throw std::logic_error (std::format (
-                                    "el carácter en la fila {}, columna {} debe ser: 'O' o '-' o 'F'", fl, cl));
+                                    "el carácter en la fila {}, columna {} debe ser: 'O' o '-' o 'F' o 'P'", fl, cl));
                         }
                     }
                 }
@@ -136,6 +155,9 @@ namespace tapete {
                         }
                         else if (ch == 'F') {
                             sitios_fuego.push_back(Coord{ fila, coln });
+                        }
+                        else if (ch == 'P') {
+                            sitios_veneno.push_back(Coord{ fila, coln });
                         }
                     }
                 }

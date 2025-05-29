@@ -284,6 +284,9 @@ namespace tapete {
         listado.escribe (std::format (L"    · Valor final del daño:  {}  (valor ajustado - valor reducción)", 
                             registro.valor_final_dano));
         listado.saltaLinea ();
+        listado.escribe(std::format(L"    · Aplicado un BONUS elemental de  {}%",
+            registro.dano_elemental));
+        listado.saltaLinea();
         listado.escribe (std::format (L"    · Vitalidad original de '{}':  {} puntos", 
                             registro.oponente->nombre (), 
                             registro.vitalidad_origen));

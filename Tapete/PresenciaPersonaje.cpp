@@ -201,7 +201,7 @@ namespace tapete {
         //
         if (textura_marco_retrato == nullptr) {
             textura_marco_retrato = new unir2d::Textura {};
-            textura_marco_retrato->carga (JuegoMesaBase::carpetaActivos () + "marco_75.png");
+            textura_marco_retrato->carga (JuegoMesaBase::carpetaActivos () + "marco_75_2.png");
         }
         imagen_marco_retrato = new unir2d::Imagen ();
         imagen_marco_retrato->ponPosicion (panel_lateral.posicion () + Vector {0, 24});
@@ -233,7 +233,7 @@ namespace tapete {
     void PresenciaPersonaje::preparaBarraVida () {
         if (textura_barras_vida == nullptr) {
             textura_barras_vida = new unir2d::Textura {};
-            textura_barras_vida->carga (JuegoMesaBase::carpetaActivos () + "barras_vida.png");
+            textura_barras_vida->carga (JuegoMesaBase::carpetaActivos () + "barras_vida_verde.png");
         }
         imagen_barra_vida = new unir2d::Imagen {};
         imagen_barra_vida->asigna (textura_barras_vida);

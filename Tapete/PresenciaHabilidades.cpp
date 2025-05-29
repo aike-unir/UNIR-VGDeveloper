@@ -28,23 +28,32 @@ namespace tapete {
         return imagenes_fondos [personaje->indice ()];
     }
 
+    std::vector <unir2d::Imagen*> PresenciaHabilidades::imagenesElementosHabilidad(ActorPersonaje* personaje) {
+        return imagenes_elementos[personaje->indice()];
+    }
+
 
     void PresenciaHabilidades::prepara () {
         texturas_fondos     .resize (actor_tablero->juego->habilidades ().size ());
         texturas_habilidades.resize (actor_tablero->juego->habilidades ().size ());
+        texturas_elementos.resize(actor_tablero->juego->habilidades().size());
         for (int indc = 0; indc < texturas_habilidades.size (); ++ indc) {
             Habilidad * habld = actor_tablero->juego->habilidades () [indc];
             texturas_fondos      [indc] = new unir2d::Textura {};
             texturas_habilidades [indc] = new unir2d::Textura {};
+            texturas_elementos [indc] = new unir2d::Textura{};
             texturas_fondos      [indc]->carga (habld->archivoFondoImagen ());
             texturas_habilidades [indc]->carga (habld->archivoImagen ());
+            texturas_elementos[indc]->carga(habld->archivoElemento());
         }
         imagenes_fondos     .resize (actor_tablero->juego->personajes ().size ());
         imagenes_habilidades.resize (actor_tablero->juego->personajes ().size ());
+        imagenes_elementos.resize(actor_tablero->juego->personajes().size());
         for (int indc_persj = 0; indc_persj < imagenes_habilidades.size (); ++ indc_persj) {
             ActorPersonaje * persj = actor_tablero->juego->personajes () [indc_persj];
             imagenes_fondos      [indc_persj].resize (persj->habilidades ().size ());
             imagenes_habilidades [indc_persj].resize (persj->habilidades ().size ());
+            imagenes_elementos   [indc_persj].resize(persj->habilidades().size());
             for (int indc_habld = 0; indc_habld < imagenes_habilidades [indc_persj].size (); ++ indc_habld) {
                 Habilidad * habld = persj->habilidades () [indc_habld];
                 imagenes_fondos      [indc_persj] [indc_habld] = new unir2d::Imagen {};
@@ -52,9 +61,19 @@ namespace tapete {
                 imagenes_fondos      [indc_persj] [indc_habld]->asigna (texturas_fondos      [habld->indice ()]);
                 imagenes_habilidades [indc_persj] [indc_habld]->asigna (texturas_habilidades [habld->indice ()]);
                 imagenes_fondos      [indc_persj] [indc_habld]->ponVisible (false);   
-                imagenes_habilidades [indc_persj] [indc_habld]->ponVisible (false);   
+                imagenes_habilidades [indc_persj] [indc_habld]->ponVisible (false); 
+
                 actor_tablero->agregaDibujo (imagenes_fondos      [indc_persj] [indc_habld]);
                 actor_tablero->agregaDibujo (imagenes_habilidades [indc_persj] [indc_habld]);
+            }
+
+            for (int indc_habld = 0; indc_habld < imagenes_habilidades[indc_persj].size(); ++indc_habld) {
+                Habilidad* habld = persj->habilidades()[indc_habld];
+                imagenes_elementos[indc_persj][indc_habld] = new unir2d::Imagen{};
+                imagenes_elementos[indc_persj][indc_habld]->asigna(texturas_elementos[habld->indice()]);
+                imagenes_elementos[indc_persj][indc_habld]->ponVisible(false);
+
+                actor_tablero->agregaDibujo(imagenes_elementos[indc_persj][indc_habld]);
             }
         }
         sonidos_habilidades.resize (actor_tablero->juego->habilidades ().size ());

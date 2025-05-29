@@ -1245,7 +1245,10 @@ namespace tapete {
             juego ()->tablero ()->escribeMonitor (std::vector <wstring>
                     { L"Habilidad usada.",
                       L"Pulsa 'espacio'."},
-                    { habilidadAccion ()->nombre () }     );
+                    { std::format(L"Dano Base: {}", danoBase()),
+                        std::format(L"Bonus Elemental: {}%", bonusElemental()),
+                std::format(L"Dano Total: {}", danoTotal()),
+                          habilidadAccion()->nombre() });
             break;
         case EstadoJuegoComun::preparacionHabilidadArea:
             juego ()->tablero ()->escribeMonitor (std::vector <wstring>

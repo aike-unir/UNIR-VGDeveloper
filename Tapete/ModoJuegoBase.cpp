@@ -133,6 +133,24 @@ namespace tapete {
     }
 
 
+    int ModoJuegoBase::danoBase() const {
+        return dano_base;
+    }
+    
+    int ModoJuegoBase::bonusElemental() const {
+        return bonus_elemental;
+    }
+
+    int ModoJuegoBase::danoTotal() const {
+        return dano_total;
+    }
+
+    void ModoJuegoBase::aplicaDano(int base, int elemental, int total) {
+        dano_base = base;
+        bonus_elemental = elemental;
+        dano_total = total;
+    }
+
     //----------------------------------------------------------------------------------------------
 
 
@@ -472,6 +490,8 @@ namespace tapete {
         juego_->tablero ()->emiteSonidoEstablece ();
     }
 
+
+    
 
     void ModoJuegoBase::estableceModoAccionHabilidad (int indice_habilidad) {
         // solo usado en 'ModoJuegoComun'
@@ -1474,5 +1494,5 @@ namespace tapete {
         lista_informes [lista_informes.size () - 1] = primero;
     }
 
-
+    
 }

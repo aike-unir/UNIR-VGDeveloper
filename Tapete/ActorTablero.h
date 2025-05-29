@@ -34,6 +34,9 @@ namespace tapete {
 
         const std::vector <Coord> & sitiosMuros () const;
         const std::vector <Coord>& sitiosFuego() const;
+        const std::vector <Coord>& sitiosVeneno() const;
+
+        const Elemento elementoCoordenada(Coord coordenada) const;
 
         void situaMuros (const GraficoMuros & grafico_muros);
         void validaGraficoMuros ();
@@ -94,6 +97,7 @@ namespace tapete {
         const GraficoMuros * grafico_muros;
         std::vector <Coord>  sitios_muros {};
         std::vector <Coord>  sitios_fuego{};
+        std::vector <Coord>  sitios_veneno{};
 
         PresenciaTablero     presencia_tablero        {this};
         RejillaTablero       rejilla_tablero          {this};
