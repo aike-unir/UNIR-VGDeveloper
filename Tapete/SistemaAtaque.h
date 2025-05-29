@@ -65,7 +65,9 @@ namespace tapete {
             // vitalidad original del oponente
             int                vitalidad_origen;      
             // vitalidad del oponente ajustada con el valor final del daño
-            int                vitalidad_final;       
+            int                vitalidad_final; 
+            // porcentaje de daño elemental aplicado
+            int                dano_elemental;
         };
         const std::vector <AtaqueOponente> & ataquesOponente () const;
 
@@ -178,7 +180,9 @@ namespace tapete {
 
         void reinicia ();
 
-        void calculaAtaque   (ActorPersonaje * oponente, int aleatorio_100);
+        int calculaPorcentajeElemental(Elemento atacante, Elemento defensor);
+        int calculaDanoElemental(Elemento atacante, Elemento casilla, Elemento habilidad, Elemento defensor);
+        void calculaAtaque   (ActorPersonaje * oponente, int aleatorio_100, int bonusElemental);
         void calculaCuracion (ActorPersonaje * oponente);
 
     };

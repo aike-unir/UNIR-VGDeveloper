@@ -140,8 +140,16 @@ namespace tapete {
         this->atacante_  = atacante;
         this->habilidad_ = habilidad;
         //
+
+        Coord posicionFicha = atacante->sitioFicha();
+        Elemento elementoCasilla = atacante->juego()->tablero()->elementoCoordenada(posicionFicha);
+        Elemento elementoAtacante = atacante->elemento();
+        Elemento elementoHabilidad = habilidad->elemento();
+
         if (habilidad_->antagonista () == Antagonista::oponente) {
-            calculaAtaque (oponente, aleatorio_100);
+            Elemento elementoDefensor = oponente->elemento();
+            int bonusElemental = calculaDanoElemental(elementoAtacante, elementoCasilla, elementoHabilidad, elementoDefensor);
+            calculaAtaque (oponente, aleatorio_100, bonusElemental);
         } else {
             calculaCuracion (oponente);
         }
@@ -175,9 +183,19 @@ namespace tapete {
         curaciones_oponente.clear ();
         cambios_efecto     .clear ();
         //
+
+        Coord posicionFicha = atacante->sitioFicha();
+
+        Elemento elementoCasilla = atacante->juego()->tablero()->elementoCoordenada(posicionFicha);
+        Elemento elementoAtacante = atacante->elemento();
+        Elemento elementoHabilidad = habilidad->elemento();
+        
+        
         for (ActorPersonaje * oponente : lista_oponentes) {
             if (habilidad_->antagonista () == Antagonista::oponente) {
-                calculaAtaque (oponente, aleatorio_100);
+                Elemento elementoDefensor = oponente->elemento();
+                int bonusElemental = calculaDanoElemental(elementoAtacante, elementoCasilla, elementoHabilidad, elementoDefensor);
+                calculaAtaque (oponente, aleatorio_100, bonusElemental);
             } else {
                 calculaCuracion (oponente);
             }
@@ -194,8 +212,81 @@ namespace tapete {
     }
 
 
+    int SistemaAtaque::calculaDanoElemental(Elemento atacante, Elemento casilla, Elemento habilidad, Elemento defensor) {
+        int porcentajeDano = 100;
+        porcentajeDano += calculaPorcentajeElemental(atacante, defensor);
+        porcentajeDano += calculaPorcentajeElemental(casilla, defensor);
+        porcentajeDano += calculaPorcentajeElemental(habilidad, defensor);
+        return porcentajeDano;
+    }
+
+    int SistemaAtaque::calculaPorcentajeElemental(Elemento atacante, Elemento defensor) {
+        
+        if (atacante == Elemento::Fuego) {
+            if (defensor == Elemento::Hielo) {
+                return -20;
+            }
+            else if (defensor == Elemento::Veneno) {
+                return 20;
+            }
+            else {
+                return 0;
+            }
+        }
+        else if (atacante == Elemento::Veneno) {
+            if (defensor == Elemento::Fuego) {
+                return -20;
+            }
+            else if (defensor == Elemento::Piedra) {
+                return 20;
+            }
+            else {
+                return 0;
+            }
+        }
+
+        else if (atacante == Elemento::Piedra) {
+            if (defensor == Elemento::Veneno) {
+                return -20;
+            }
+            else if (defensor == Elemento::Rayo) {
+                return 20;
+            }
+            else {
+                return 0;
+            }
+        }
+
+        else if (atacante == Elemento::Rayo) {
+            if (defensor == Elemento::Piedra) {
+                return -20;
+            }
+            else if (defensor == Elemento::Hielo) {
+                return 20;
+            }
+            else {
+                return 0;
+            }
+        }
+
+        else if (atacante == Elemento::Hielo) {
+            if (defensor == Elemento::Rayo) {
+                return -20;
+            }
+            else if (defensor == Elemento::Fuego) {
+                return 20;
+            }
+            else {
+                return 0;
+            }
+        }
+        else {
+            return 0;
+        }
+    }
+
     // Cálculo para una habilidad "de ataque" y para uno de los personajes afectados
-    void SistemaAtaque::calculaAtaque (ActorPersonaje * oponente, int aleatorio_100) {
+    void SistemaAtaque::calculaAtaque (ActorPersonaje * oponente, int aleatorio_100, int bonusElemental) {
         assert (habilidad_->antagonista () == Antagonista::oponente);
         //
         AtaqueOponente registro {};
@@ -234,6 +325,8 @@ namespace tapete {
         registro.ventaja = registro.valor_ataque - registro.valor_defensa;
         registro.aleatorio_100 = aleatorio_100;
         registro.valor_final_ataque = registro.ventaja + registro.aleatorio_100;
+
+        
         //
         // véase: 'ValidacionJuego::SistemaAtaque'
         if (grados_efectividad.size () == 0) {
@@ -270,7 +363,8 @@ namespace tapete {
         if (registro.valor_dano < 0 || ActorPersonaje::maximaVitalidad < registro.valor_dano) {
             throw std::logic_error {"Sistema de ataque mal configurado, aplicando ataque: valor de reducción de daño inválido"};
         }
-        registro.valor_final_dano = registro.valor_ajustado_dano - registro.valor_reduce_dano;
+        int dano_base = registro.valor_ajustado_dano - registro.valor_reduce_dano;
+        registro.valor_final_dano = (int)((double)dano_base * ((double)bonusElemental / 100.0));
         //
         registro.vitalidad_origen = oponente->vitalidad ();
         registro.vitalidad_final  = oponente->vitalidad ();
@@ -286,6 +380,10 @@ namespace tapete {
         }
         //
         ataques_oponente.push_back (registro);
+
+        registro.dano_elemental = bonusElemental - 100;
+
+        oponente->juego()->modo()->aplicaDano(dano_base, bonusElemental - 100, registro.valor_final_dano);
     }
 
 

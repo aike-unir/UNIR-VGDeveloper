@@ -163,7 +163,7 @@ namespace tapete {
     void PresenciaActuante::preparaBarraVida () {
         if (textura_barras_vida == nullptr) {
             textura_barras_vida = new unir2d::Textura {};
-            textura_barras_vida->carga (JuegoMesaBase::carpetaActivos () + "barras_larga_vida.png");
+            textura_barras_vida->carga (JuegoMesaBase::carpetaActivos () + "barras_larga_vida_verde.png");
         }
         imagen_barra_vida = new unir2d::Imagen {};
         imagen_barra_vida->asigna (textura_barras_vida);
@@ -225,12 +225,20 @@ namespace tapete {
                 actor_tablero->presencia_habilidades.imagenesHabilidades (personaje);
         std::vector <unir2d::Imagen *> lista_fonds = 
                 actor_tablero->presencia_habilidades.imagenesFondosHabilidad (personaje);
+
+        std::vector <unir2d::Imagen*> lista_elementos =
+            actor_tablero->presencia_habilidades.imagenesElementosHabilidad(personaje);
+
         for (int indc = 0; indc < lista_habld.size (); ++ indc) {
             lista_habld [indc]->ponPosicion (imagen_marco_habilidad [indc]->posicion () + Vector {2, 2});
             lista_fonds [indc]->ponPosicion (imagen_marco_habilidad [indc]->posicion () + Vector {2, 2});
+            lista_elementos[indc]->ponPosicion(imagen_marco_habilidad[indc]->posicion() + Vector{ 17, 44 });
             lista_habld [indc]->ponVisible (true);
             lista_fonds [indc]->ponVisible (true);
+            lista_elementos[indc]->ponVisible(true);
         }
+
+
 
         //int indc = 0;
         //for (unir2d::Imagen * imagen : 
@@ -267,9 +275,12 @@ namespace tapete {
                 actor_tablero->presencia_habilidades.imagenesHabilidades (personaje_mostrado);
         std::vector <unir2d::Imagen *> lista_fonds = 
                 actor_tablero->presencia_habilidades.imagenesFondosHabilidad (personaje_mostrado);
+        std::vector <unir2d::Imagen*> lista_elementos =
+            actor_tablero->presencia_habilidades.imagenesElementosHabilidad(personaje_mostrado);
         for (int indc = 0; indc < lista_habld.size (); ++ indc) {
             lista_habld [indc]->ponVisible (false);
             lista_fonds [indc]->ponVisible (false);
+            lista_elementos[indc]->ponVisible(false);
         }
 
         //for (unir2d::Imagen * imagen : 

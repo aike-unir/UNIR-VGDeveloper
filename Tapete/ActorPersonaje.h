@@ -37,6 +37,7 @@ namespace tapete {
         const wstring & nombre () const;
 
         const string & archivoRetrato () const;
+        string archivoElemento();
         void ponArchivoRetrato (const string & valor);
         const string & archivoFicha () const;
         void ponArchivoFicha (const string & valor);

@@ -64,6 +64,36 @@ namespace tapete {
     }
 
 
+    string Habilidad::archivoElemento() {
+
+        switch (elemento_) {
+        case Elemento::Fuego:
+            return "./habilidades/marco_fuego.png";
+            break;
+        case Elemento::Hielo:
+            return "./habilidades/marco_hielo.png";
+            break;
+        case Elemento::Piedra:
+            return "./habilidades/marco_piedra.png";
+            break;
+        case Elemento::Rayo:
+            return "./habilidades/marco_rayo.png";
+            break;
+        case Elemento::Veneno:
+            return "./habilidades/marco_veneno.png";
+            break;
+        case Elemento::nulo:
+            return "./habilidades/marco_none.png";
+            break;
+        default:
+            return "./habilidades/marco_none.png";
+            break;
+        }
+        
+    }
+
+
+
     const string & Habilidad::archivoFondoImagen () const {
         return archivo_fondo_imagen;
     }

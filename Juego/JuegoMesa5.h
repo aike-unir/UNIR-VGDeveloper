@@ -34,6 +34,9 @@ namespace juego5 {
         Habilidad* curacionSimple{};
         Habilidad* curacionGrupo{};
 
+        Habilidad* bastonazo{};
+        Habilidad* flechaEnvenenada{};
+        Habilidad* flechaCongelada{};
 
         TipoAtaque* ataqueCuerpoACuerpo{};
         TipoAtaque* ataqueADistancia{};
@@ -41,8 +44,6 @@ namespace juego5 {
         TipoDefensa* defensaADistancia{};
         TipoDano* danoFisico{};
 
-        GradoEfectividad* fallo{};
-        GradoEfectividad* roce{};
         GradoEfectividad* impacto{};
         GradoEfectividad* critico{};
 

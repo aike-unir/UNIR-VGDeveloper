@@ -16,6 +16,7 @@ namespace tapete {
 
         JuegoMesaBase * juego ();
 
+        void aplicaDano(int base, int elemental, int total);
         float puntosAccionDeDesplaza () const;
         void configuraDesplaza (float puntos_accion_desplaza);
 
@@ -39,14 +40,21 @@ namespace tapete {
         ActorPersonaje * oponente () const;
         const AreaCentradaCeldas & areaCeldas () const;
 
+        int danoBase() const;
+        int bonusElemental() const;
+        int danoTotal() const;
+
         // para depurar
         const string textoInforme () const;
+
+        
 
     protected:
 
         ModoJuegoBase (JuegoMesaBase * juego);
 
         bool cuentaPersonajesIgual ();
+        
 
         void iniciaRondas ();
         void avanzaJugada ();
@@ -204,6 +212,10 @@ namespace tapete {
         ActorPersonaje *     oponente_ {};
         AreaCentradaCeldas   area_celdas {};
 
+        int dano_base{};
+        int bonus_elemental{};
+        int dano_total {};
+
         int valor_aleatorio_100 {};
 
         InformesProceso informes_proceso {};
@@ -233,6 +245,7 @@ namespace tapete {
         void asertaHabilidadArea     (const string & metodo, bool con_area);
         void aserta (bool condicion, const string & metodo, const string & explicacion) const;
 
+        
 
         friend class InformesProceso;
 

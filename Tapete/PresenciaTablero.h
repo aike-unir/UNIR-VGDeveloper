@@ -61,14 +61,22 @@ namespace tapete {
 
         unir2d::Textura  * textura_fondo {};
         unir2d::Textura  * textura_background{};
+        unir2d::Textura  * textura_logo{};
+        unir2d::Textura  * textura_jerarquia{};
         unir2d::Baldosas * baldosas_fondo {};
-        unir2d::Imagen   * background_fondo{};
+        unir2d::Imagen   * background_fondo {};
+        unir2d::Imagen   * background_logo {};
+        unir2d::Imagen   * background_jerarquia{};
         unir2d::Textura  * textura_muros {};
         unir2d::Malla    * malla_muros {};
 
         unir2d::Textura* textura_fuego{};
         unir2d::Malla* malla_fuego{};
         unir2d::Imagen* imagen_fuego{};
+
+        unir2d::Textura* textura_veneno{};
+        unir2d::Malla* malla_veneno{};
+        unir2d::Imagen* imagen_veneno{};
 
         unir2d::Textura * textura_panel_vertcl {};
         unir2d::Imagen  * imagen_panel_vertcl_izqrd {};
@@ -155,6 +163,10 @@ namespace tapete {
                 const IndicesEstampas & indices_estampas,
                 const PuntosHexagonos & puntos_textura   );
         void estableceMallaFuego(
+            const PuntosHexagonos& puntos_rejilla,
+            const IndicesEstampas& indices_estampas,
+            const PuntosHexagonos& puntos_textura);
+        void estableceMallaVeneno(
             const PuntosHexagonos& puntos_rejilla,
             const IndicesEstampas& indices_estampas,
             const PuntosHexagonos& puntos_textura);

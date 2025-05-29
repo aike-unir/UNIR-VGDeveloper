@@ -156,8 +156,8 @@ namespace juegoNivel {
     void JuegoNivel::preparaPersonajes() {
        
         //
-        Miner = new ActorPersonaje{ this, LadoTablero::Izquierda, 0, L"Miner" , Elemento::nulo };
-        Aristo = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Aristo" , Elemento::nulo };
+        Miner = new ActorPersonaje{ this, LadoTablero::Izquierda, 0, L"Miner2" , Elemento::nulo };
+        Aristo = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Arist2o" , Elemento::nulo };
 
 
         //

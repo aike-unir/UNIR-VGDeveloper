@@ -29,10 +29,10 @@ namespace juego5 {
 
 
     static ActorTablero::GraficoMuros grafico_muros_vacio{
-        "-     -     -     -     -     -     -     -     -",
+        "F     -     -     -     -     -     -     -     -",
         "   -     -     -     -     O     -     -     -   ",
         "-     -     -     -     -     O     -     -     -",
-        "   -     -     -     -     -     O     -     -   ",
+        "   -     P     -     -     -     O     -     -   ",
         "-     -     -     F     -     -     O     -     -",
         "   -     -     -     -     -     -     O     -   ",
         "-     -     -     -     F     -     O     -     -",
@@ -49,7 +49,7 @@ namespace juego5 {
         agregaTablero(new ActorTablero(this));
 
         tablero()->ponArchivoBaldosas(carpeta_activos_juego + "estampas_fondo.png");
-        tablero()->ponArchivoFondo(carpeta_activos_juego + "fondo_volcanes.png");
+        tablero()->ponArchivoFondo(carpeta_activos_juego + "fondo_bosque2.png");
 
         tablero()->equipa(LadoTablero::Izquierda, L"Devils", carpeta_activos_juego + "escudo_devils.png");
         tablero()->equipa(LadoTablero::Derecha, L"Tusk", carpeta_activos_juego + "escudo_tusk.png");
@@ -67,8 +67,8 @@ namespace juego5 {
         Clint = new ActorPersonaje{ this, LadoTablero::Izquierda, 3, L"Clint", Elemento::Piedra };
         Panoramix = new ActorPersonaje{ this, LadoTablero::Izquierda, 4, L"Panoramix", Elemento::Veneno };
 
-        Enemigo1 = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Enemigo1", Elemento::nulo };
-        Enemigo2 = new ActorPersonaje{ this, LadoTablero::Derecha,   1, L"Enemigo2", Elemento::nulo };
+        Enemigo1 = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Ent 1", Elemento::Veneno };
+        Enemigo2 = new ActorPersonaje{ this, LadoTablero::Derecha,   1, L"Ent 2", Elemento::Veneno };
 
 
         //
@@ -76,20 +76,20 @@ namespace juego5 {
         Wuuf->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Rosa->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Clint->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
-        Panoramix->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
+        Panoramix->ponArchivoRetrato(carpeta_retratos_juego + "panoramix_retrato.png");
 
-        Enemigo1->ponArchivoRetrato(carpeta_retratos_juego + "aristocrat_75.png");
-        Enemigo2->ponArchivoRetrato(carpeta_retratos_juego + "aristocrat_75.png");
+        Enemigo1->ponArchivoRetrato(carpeta_retratos_juego + "ent_retrato.png");
+        Enemigo2->ponArchivoRetrato(carpeta_retratos_juego + "ent_retrato.png");
 
         //
         Guillermo->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Wuuf->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Rosa->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Clint->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
-        Panoramix->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
+        Panoramix->ponArchivoFicha(carpeta_retratos_juego + "druida.png");
 
-        Enemigo1->ponArchivoFicha(carpeta_retratos_juego + "sprite2.png");
-        Enemigo2->ponArchivoFicha(carpeta_retratos_juego + "sprite2.png");
+        Enemigo1->ponArchivoFicha(carpeta_retratos_juego + "ent.png");
+        Enemigo2->ponArchivoFicha(carpeta_retratos_juego + "ent.png");
 
         //
         Guillermo->ponIniciativa(20);
@@ -135,6 +135,19 @@ namespace juego5 {
                 L"Curación en grupo",
                 EnfoqueHabilidad::area,      AccesoHabilidad::directo,   Antagonista::aliado, Elemento::nulo };
 
+        bastonazo = new Habilidad{
+                L"Ataque cuerpo con bastón",
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
+
+        flechaEnvenenada = new Habilidad{
+                L"Ataque a distancia envenenado",
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Veneno };
+
+        flechaCongelada = new Habilidad{
+                L"Ataque a distancia envenenado",
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Hielo };
+
+
         //
         ataqueEspadaNormal->ponDescripcion(
             L"El personaje usa su espada para atacar a un enemigo que se encuentra en una casilla próxima.");
@@ -148,6 +161,15 @@ namespace juego5 {
             L"El personaje canaliza poder divino para sanar a un aliado.");
         curacionGrupo->ponDescripcion(
             L"El personaje canaliza poder divino para sanar a todos los personajes en un área.");
+
+        bastonazo->ponDescripcion(
+            L"El personaje usa su bastón para atacar a un enemigo que se encuentra en una casilla próxima.");
+
+        flechaEnvenenada->ponDescripcion(
+            L"El personaje usa su arco para atacar a un enemigo con el elemento veneno.");
+
+        flechaCongelada->ponDescripcion(
+            L"El personaje usa su arco para atacar a un enemigo con el elemento hielo.");
 
         //
         ataqueEspadaNormal->ponArchivosImagenes(
@@ -163,6 +185,15 @@ namespace juego5 {
         curacionGrupo->ponArchivosImagenes(
             carpeta_habilids_juego + "vela_triple.png", carpeta_habilids_juego + "fondo_5.png");
 
+        bastonazo->ponArchivosImagenes(
+            carpeta_habilids_juego + "bastonazo.png", carpeta_habilids_juego + "fondo_5.png");
+
+        flechaEnvenenada->ponArchivosImagenes(
+            carpeta_habilids_juego + "flecha_envenenada.png", carpeta_habilids_juego + "fondo_veneno.png");
+
+        flechaCongelada->ponArchivosImagenes(
+            carpeta_habilids_juego + "flecha_congelada.png", carpeta_habilids_juego + "fondo_hielo.png");
+
         //
         ataqueEspadaNormal->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         ataqueArco->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
@@ -171,6 +202,10 @@ namespace juego5 {
         curacionSimple->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionGrupo->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
 
+        bastonazo->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+        flechaEnvenenada->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+        flechaCongelada->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+
         //
         agregaHabilidad(ataqueEspadaNormal);
         agregaHabilidad(ataqueArco);
@@ -178,6 +213,10 @@ namespace juego5 {
         agregaHabilidad(defensaFerrea);
         agregaHabilidad(curacionSimple);
         agregaHabilidad(curacionGrupo);
+
+        agregaHabilidad(bastonazo);
+        agregaHabilidad(flechaEnvenenada);
+        agregaHabilidad(flechaCongelada);
 
 
     }
@@ -226,19 +265,17 @@ namespace juego5 {
 
         Panoramix->agregaHabilidad(ataqueEspadaNormal);
         Panoramix->agregaHabilidad(ataqueArco);
-        Panoramix->agregaHabilidad(ataqueEspadaPoderoso);
-        Panoramix->agregaHabilidad(defensaFerrea);
+        Panoramix->agregaHabilidad(bastonazo);
+        Panoramix->agregaHabilidad(flechaEnvenenada);
+        Panoramix->agregaHabilidad(flechaCongelada);
 
         //
-        Enemigo1->agregaHabilidad(ataqueEspadaNormal);
-        Enemigo1->agregaHabilidad(ataqueArco);
-        Enemigo1->agregaHabilidad(ataqueEspadaPoderoso);
+        Enemigo1->agregaHabilidad(bastonazo);
         Enemigo1->agregaHabilidad(defensaFerrea);
 
 
-        Enemigo2->agregaHabilidad(ataqueEspadaNormal);
-        Enemigo2->agregaHabilidad(ataqueArco);
-        Enemigo2->agregaHabilidad(ataqueEspadaPoderoso);
+
+        Enemigo2->agregaHabilidad(bastonazo);
         Enemigo2->agregaHabilidad(defensaFerrea);
 
     }
@@ -279,6 +316,23 @@ namespace juego5 {
         curacionGrupo->asignaCuracion(40);
         //
 
+        bastonazo->ponCoste(4);
+        bastonazo->ponAlcance(2);
+        bastonazo->asignaAtaque(ataqueCuerpoACuerpo);
+        bastonazo->asignaDefensa(defensaCuerpoACuerpo);
+        bastonazo->asignaDano(danoFisico, 25);
+
+        flechaEnvenenada->ponCoste(5);
+        flechaEnvenenada->ponAlcance(20);
+        flechaEnvenenada->asignaAtaque(ataqueADistancia);
+        flechaEnvenenada->asignaDefensa(defensaADistancia);
+        flechaEnvenenada->asignaDano(danoFisico, 20);
+
+        flechaCongelada->ponCoste(5);
+        flechaCongelada->ponAlcance(20);
+        flechaCongelada->asignaAtaque(ataqueADistancia);
+        flechaCongelada->asignaDefensa(defensaADistancia);
+        flechaCongelada->asignaDano(danoFisico, 20);
     }
 
 
@@ -338,18 +392,14 @@ namespace juego5 {
     void JuegoMesa5::preparaSistemaAtaque() {
 
         //
-        GradoEfectividad* fallo = new GradoEfectividad{ L"Fallo" };
-        GradoEfectividad* roce = new GradoEfectividad{ L"Roce" };
         GradoEfectividad* impacto = new GradoEfectividad{ L"Impacto" };
         GradoEfectividad* critico = new GradoEfectividad{ L"Impacto crítico" };
         //
-        fallo->estableceRango(INT_MIN, 9, 0);
-        roce->estableceRango(10, 49, 50);
-        impacto->estableceRango(50, 89, 100);
+
+        impacto->estableceRango(INT_MIN, 89, 100);
         critico->estableceRango(90, INT_MAX, 150);
         //
-        agregaEfectividad(fallo);
-        agregaEfectividad(roce);
+
         agregaEfectividad(impacto);
         agregaEfectividad(critico);
 
@@ -367,7 +417,8 @@ namespace juego5 {
         Clint->ponSitioFicha(Coord{ 7,1 });
         Panoramix->ponSitioFicha(Coord{ 9,1 });
 
-        Enemigo1->ponSitioFicha(Coord{ 5,17 });
+       // Enemigo1->ponSitioFicha(Coord{ 5,17 });
+        Enemigo1->ponSitioFicha(Coord{ 2,2 });
         Enemigo2->ponSitioFicha(Coord{ 9,17 });
 
         //

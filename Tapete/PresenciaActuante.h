@@ -43,6 +43,7 @@ namespace tapete {
 
         inline static unir2d::Textura *                  textura_marco_habilidad {};
         std::array <unir2d::Imagen *, cuentaHabilidades> imagen_marco_habilidad {};
+        std::array <unir2d::Imagen*, cuentaHabilidades> imagen_elemento_habilidad{};
         //
         inline static unir2d::Textura *                   textura_luces_punto_accion {};
         std::array <unir2d::Imagen *, cuentaPuntosAccion> imagen_luces_punto_accion {};
