@@ -178,15 +178,11 @@
     <ClInclude Include="JuegoNivel.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="activos\Baldosa2_0001.png" />
     <Image Include="activos\casilla_fuego.png" />
-    <Image Include="activos\Dunas.png" />
     <Image Include="activos\escudo_devils.png" />
     <Image Include="activos\escudo_tusk.png" />
-    <Image Include="activos\estampas_fondo.png" />
+    <Image Include="activos\estampa_desierto.png" />
     <Image Include="activos\FondoDesierto.png" />
-    <Image Include="activos\Grande.png" />
-    <Image Include="activos\Pequeño.png" />
     <Image Include="habilidades\arco_flecha.png" />
     <Image Include="habilidades\bola_fuego.png" />
     <Image Include="habilidades\cristales.png" />

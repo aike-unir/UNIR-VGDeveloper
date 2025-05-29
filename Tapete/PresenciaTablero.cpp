@@ -157,7 +157,8 @@ namespace tapete {
 
     void PresenciaTablero::preparaMuros () {
         textura_muros  = new unir2d::Textura {};
-        textura_muros->carga (JuegoMesaBase::carpetaActivos () + "muro_piedra.png");
+     // textura_muros->carga (JuegoMesaBase::carpetaActivos () + "muro_piedra.png");
+        textura_muros->carga (JuegoMesaBase::carpetaActivos () + "muro_piedra2.png");
         malla_muros = new unir2d::Malla {};
         malla_muros->asigna (textura_muros);
         malla_muros->ponPosicion (PresenciaTablero::regionRejilla.posicion ());

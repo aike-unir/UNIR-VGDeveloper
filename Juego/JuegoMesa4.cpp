@@ -29,18 +29,18 @@ namespace juego4 {
 
 
     static ActorTablero::GraficoMuros grafico_muros_vacio{
+        "-     -     -     -     -     -     T     -     -",
+        "   -     -     T     -     -     -     -     -   ",
+        "-     -     -     -     -     -     O     -     -",
+        "   -     -     -     -     -     -     -     -   ",
+        "-     -     -     -     -     -     O     -     -",
+        "   -     -     -     -     -     -     -     -   ",
+        "-     -     -     -     -     -     O     -     -",
+        "   -     -     -     -     -     O     O     -   ",
         "-     -     -     -     -     -     -     -     -",
-        "   -     -     -     -     O     -     -     -   ",
-        "-     -     -     -     -     O     -     -     -",
-        "   -     -     -     -     -     O     -     -   ",
-        "-     -     -     F     -     -     O     -     -",
-        "   -     -     -     -     -     -     O     -   ",
-        "-     -     T     -     F     -     O     -     -",
-        "   -     -     -     -     -     O     -     -   ",
-        "-     -     -     -     -     O     O     -     -",
-        "   -     -     T     -     -     O     -     -   ",
+        "   -     T     -     -     -     -     -     -   ",
         "-     -     -     -     -     -     -     -     -",
-        "   -     -     -     -     F     -     -     -   ",
+        "   -     -     -     -     -     -     -     -   ",
         "-     -     -     -     -     -     -     -     -" };
 
 
@@ -48,7 +48,9 @@ namespace juego4 {
     void JuegoMesa4::preparaTablero() {
         agregaTablero(new ActorTablero(this));
 
-        tablero()->ponArchivoBaldosas(carpeta_activos_juego + "Dunas.png");
+        tablero()->ponArchivoBaldosas(carpeta_activos_juego + "estampa_desierto.png");
+       // tablero()->ponArchivoBaldosas(carpeta_activos_juego + "estampas_fondo.png");
+
         tablero()->ponArchivoFondo(carpeta_activos_juego + "FondoDesierto.png");
 
         tablero()->equipa(LadoTablero::Izquierda, L"Devils", carpeta_activos_juego + "escudo_devils.png");
@@ -373,7 +375,7 @@ namespace juego4 {
         //
         tablero()->asignaSonidoEstablece(carpeta_sonidos_juego + "Metal Click.wav", 100);
         tablero()->asignaSonidoDesplaza(carpeta_sonidos_juego + "SnowWalk.ogg", 100);
-        musica()->asignaMusica(carpeta_sonidos_juego + "Track_1.ogg", 100);
+        musica()->asignaMusica(carpeta_sonidos_juego + "Track_1.ogg", 0);
         //
         agregaNombreAlumno(L"Maksym Chernykh");
         agregaNombreAlumno(L"Aike Fernández Roza");

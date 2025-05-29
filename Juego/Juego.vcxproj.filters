@@ -139,31 +139,16 @@
     <Image Include="activos\escudo_tusk.png">
       <Filter>Archivos de recursos\activos</Filter>
     </Image>
-    <Image Include="activos\estampas_fondo.png">
-      <Filter>Archivos de recursos\activos</Filter>
-    </Image>
     <Image Include="retratos\ficha_azul.png">
       <Filter>Archivos de recursos\retratos</Filter>
     </Image>
     <Image Include="retratos\ficha_roja.png">
       <Filter>Archivos de recursos\retratos</Filter>
     </Image>
-    <Image Include="activos\Baldosa2_0001.png">
-      <Filter>Archivos de recursos\activos</Filter>
-    </Image>
     <Image Include="activos\FondoDesierto.png">
       <Filter>Archivos de recursos\activos</Filter>
     </Image>
-    <Image Include="activos\Dunas.png">
-      <Filter>Archivos de recursos\activos</Filter>
-    </Image>
-    <Image Include="activos\Grande.png">
-      <Filter>Archivos de recursos\activos</Filter>
-    </Image>
     <Image Include="activos\casilla_fuego.png">
-      <Filter>Archivos de recursos\activos</Filter>
-    </Image>
-    <Image Include="activos\Pequeño.png">
       <Filter>Archivos de recursos\activos</Filter>
     </Image>
     <Image Include="retratos\sprite1.png">
@@ -177,6 +162,9 @@
     </Image>
     <Image Include="retratos\Clint.png">
       <Filter>Archivos de recursos\retratos</Filter>
+    </Image>
+    <Image Include="activos\estampa_desierto.png">
+      <Filter>Archivos de recursos\activos</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
