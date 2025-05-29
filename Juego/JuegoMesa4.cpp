@@ -1,6 +1,6 @@
 // proyecto: Grupal/Juego
 // arhivo:   JuegoMesa.cpp
-// versión:  1.1  (9-Ene-2023)
+// versiï¿½n:  1.1  (9-Ene-2023)
 
 
 #include "juego.h"
@@ -29,19 +29,19 @@ namespace juego4 {
 
 
     static ActorTablero::GraficoMuros grafico_muros_vacio{
-        "-     -     -     -     -     -     -     -     -",
-        "   -     -     -     -     O     -     -     -   ",
-        "-     -     -     -     -     O     -     -     -",
-        "   -     -     -     -     -     O     -     -   ",
-        "-     -     -     F     -     -     O     -     -",
-        "   -     -     -     -     -     -     O     -   ",
-        "-     -     -     -     F     -     O     -     -",
-        "   -     -     -     -     -     O     -     -   ",
-        "-     -     -     -     -     O     O     -     -",
-        "   -     -     -     -     -     O     -     -   ",
-        "-     -     -     -     -     -     -     -     -",
-        "   -     -     -     -     F     -     -     -   ",
-        "-     -     -     -     -     -     -     -     -" };
+        "-     -     -     -     -     -     T     -     -",
+        "   -     -     T     O     -     -     -     -   ",
+        "-     -     -     -     -     -     O     O     -",
+        "   -     -     -     O     -     -     -     O   ",
+        "-     -     O     -     -     -     O     -     -",
+        "   -     O     O     -     -     -     -     O   ",
+        "-     -     O     -     -     -     -     -     -",
+        "   -     -     -     -     -     -     T     O   ",
+        "-     -     -     -     -     -     O     -     -",
+        "   -     T     O     -     O     -     O     O   ",
+        "-     -     O     O     O     -     O     -     -",
+        "   -     O     O     O     O     -     O     -   ",
+        "-     O     O     O     O     -     -     -     -" };
 
 
 
@@ -67,19 +67,19 @@ namespace juego4 {
         Clint = new ActorPersonaje{ this, LadoTablero::Izquierda, 3, L"Clint", Elemento::Piedra };
         Panoramix = new ActorPersonaje{ this, LadoTablero::Izquierda, 4, L"Panoramix", Elemento::Veneno };
 
-        Enemigo1 = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Enemigo1", Elemento::nulo };
-        Enemigo2 = new ActorPersonaje{ this, LadoTablero::Derecha,   1, L"Enemigo2", Elemento::nulo };
+        CoyoteTormenta = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Coyote Tormenta", Elemento::Rayo };
+        CoyoteTormenta2 = new ActorPersonaje{ this, LadoTablero::Derecha,   1, L"Coyote Tormenta", Elemento::Rayo };
 
 
         //
         Guillermo->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Wuuf->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Rosa->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
-        Clint->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
+        Clint->ponArchivoRetrato(carpeta_retratos_juego + "retrato_clint.png");
         Panoramix->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
 
-        Enemigo1->ponArchivoRetrato(carpeta_retratos_juego + "aristocrat_75.png");
-        Enemigo2->ponArchivoRetrato(carpeta_retratos_juego + "aristocrat_75.png");
+        CoyoteTormenta->ponArchivoRetrato(carpeta_retratos_juego + "retrato_coyote_rayo.png");
+        CoyoteTormenta2->ponArchivoRetrato(carpeta_retratos_juego + "retrato_coyote_rayo.png");
 
         //
         Guillermo->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
@@ -88,8 +88,8 @@ namespace juego4 {
         Clint->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Panoramix->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
 
-        Enemigo1->ponArchivoFicha(carpeta_retratos_juego + "sprite2.png");
-        Enemigo2->ponArchivoFicha(carpeta_retratos_juego + "sprite2.png");
+        CoyoteTormenta->ponArchivoFicha(carpeta_retratos_juego + "coyote_rayo.png");
+        CoyoteTormenta2->ponArchivoFicha(carpeta_retratos_juego + "coyote_rayo.png");
 
         //
         Guillermo->ponIniciativa(20);
@@ -98,8 +98,8 @@ namespace juego4 {
         Clint->ponIniciativa(15);
         Panoramix->ponIniciativa(22);
 
-        Enemigo1->ponIniciativa(19);
-        Enemigo2->ponIniciativa(17);
+        CoyoteTormenta->ponIniciativa(19);
+        CoyoteTormenta2->ponIniciativa(17);
 
         //
         agregaPersonaje(Guillermo);
@@ -108,8 +108,8 @@ namespace juego4 {
         agregaPersonaje(Clint);
         agregaPersonaje(Panoramix);
 
-        agregaPersonaje(Enemigo1);
-        agregaPersonaje(Enemigo2);
+        agregaPersonaje(CoyoteTormenta);
+        agregaPersonaje(CoyoteTormenta2);
 
     }
 
@@ -126,28 +126,33 @@ namespace juego4 {
                 L"Ataque poderoso",
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Fuego };
         defensaFerrea = new Habilidad{
-                L"Defensa férrea",
+                L"Defensa fï¿½rrea",
                 EnfoqueHabilidad::si_mismo,  AccesoHabilidad::ninguno,   Antagonista::si_mismo, Elemento::nulo };
         curacionSimple = new Habilidad{
-                L"Curación",
+                L"Curaciï¿½n",
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::aliado, Elemento::nulo };
         curacionGrupo = new Habilidad{
-                L"Curación en grupo",
+                L"Curaciï¿½n en grupo",
                 EnfoqueHabilidad::area,      AccesoHabilidad::directo,   Antagonista::aliado, Elemento::nulo };
+		revolverVeloz = new Habilidad{
+				L"Revolver veloz",
+				EnfoqueHabilidad::personaje, AccesoHabilidad::directo, Antagonista::oponente, Elemento::nulo };
 
         //
         ataqueEspadaNormal->ponDescripcion(
-            L"El personaje usa su espada para atacar a un enemigo que se encuentra en una casilla próxima.");
+            L"El personaje usa su espada para atacar a un enemigo que se encuentra en una casilla prï¿½xima.");
         ataqueArco->ponDescripcion(
-            L"El personaje usa su arco para atacar a un enemigo que se encuentra en una casilla próxima.");
+            L"El personaje usa su arco para atacar a un enemigo que se encuentra en una casilla prï¿½xima.");
         ataqueEspadaPoderoso->ponDescripcion(
-            L"El personaje blande su espada con fuerza para atacar a un enemigo que se encuentra en una casilla próxima.");
+            L"El personaje blande su espada con fuerza para atacar a un enemigo que se encuentra en una casilla prï¿½xima.");
         defensaFerrea->ponDescripcion(
-            L"El personaje aumenta su defensa hasta su próximo ronda.");
+            L"El personaje aumenta su defensa hasta su prï¿½ximo ronda.");
         curacionSimple->ponDescripcion(
             L"El personaje canaliza poder divino para sanar a un aliado.");
         curacionGrupo->ponDescripcion(
-            L"El personaje canaliza poder divino para sanar a todos los personajes en un área.");
+            L"El personaje canaliza poder divino para sanar a todos los personajes en un ï¿½rea.");
+		revolverVeloz->ponDescripcion(
+			L"El personaje dispara rï¿½pidamente con su revolver a un enemigo que se encuentra en una casilla prï¿½xima.");
 
         //
         ataqueEspadaNormal->ponArchivosImagenes(
@@ -162,6 +167,8 @@ namespace juego4 {
             carpeta_habilids_juego + "vela.png", carpeta_habilids_juego + "fondo_5.png");
         curacionGrupo->ponArchivosImagenes(
             carpeta_habilids_juego + "vela_triple.png", carpeta_habilids_juego + "fondo_5.png");
+		revolverVeloz->ponArchivosImagenes(
+			carpeta_habilids_juego + "revolver.png", carpeta_habilids_juego + "fondo_5.png");
 
         //
         ataqueEspadaNormal->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
@@ -170,6 +177,7 @@ namespace juego4 {
         defensaFerrea->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionSimple->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionGrupo->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+		revolverVeloz->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
 
         //
         agregaHabilidad(ataqueEspadaNormal);
@@ -178,6 +186,7 @@ namespace juego4 {
         agregaHabilidad(defensaFerrea);
         agregaHabilidad(curacionSimple);
         agregaHabilidad(curacionGrupo);
+		agregaHabilidad(revolverVeloz);
 
 
     }
@@ -190,7 +199,7 @@ namespace juego4 {
         ataqueADistancia = new TipoAtaque{ L"Ataque a distancia" };
         defensaCuerpoACuerpo = new TipoDefensa{ L"Defensa cuerpo a cuerpo" };
         defensaADistancia = new TipoDefensa{ L"Defensa a distancia" };
-        danoFisico = new TipoDano{ L"Daño físico" };
+        danoFisico = new TipoDano{ L"Daï¿½o fï¿½sico" };
         //
         agregaAtaque(ataqueCuerpoACuerpo);
         agregaAtaque(ataqueADistancia);
@@ -203,7 +212,8 @@ namespace juego4 {
 
     void JuegoMesa4::agregaHabilidadesPersonajes() {
 
-        Guillermo->agregaHabilidad(ataqueEspadaNormal);
+		Guillermo->agregaHabilidad(revolverVeloz);
+        //Guillermo->agregaHabilidad(ataqueEspadaNormal);
         Guillermo->agregaHabilidad(ataqueArco);
         Guillermo->agregaHabilidad(ataqueEspadaPoderoso);
         Guillermo->agregaHabilidad(defensaFerrea);
@@ -230,16 +240,16 @@ namespace juego4 {
         Panoramix->agregaHabilidad(defensaFerrea);
 
         //
-        Enemigo1->agregaHabilidad(ataqueEspadaNormal);
-        Enemigo1->agregaHabilidad(ataqueArco);
-        Enemigo1->agregaHabilidad(ataqueEspadaPoderoso);
-        Enemigo1->agregaHabilidad(defensaFerrea);
+        CoyoteTormenta->agregaHabilidad(ataqueEspadaNormal);
+        CoyoteTormenta->agregaHabilidad(ataqueArco);
+        CoyoteTormenta->agregaHabilidad(ataqueEspadaPoderoso);
+        CoyoteTormenta->agregaHabilidad(defensaFerrea);
 
 
-        Enemigo2->agregaHabilidad(ataqueEspadaNormal);
-        Enemigo2->agregaHabilidad(ataqueArco);
-        Enemigo2->agregaHabilidad(ataqueEspadaPoderoso);
-        Enemigo2->agregaHabilidad(defensaFerrea);
+        CoyoteTormenta2->agregaHabilidad(ataqueEspadaNormal);
+        CoyoteTormenta2->agregaHabilidad(ataqueArco);
+        CoyoteTormenta2->agregaHabilidad(ataqueEspadaPoderoso);
+        CoyoteTormenta2->agregaHabilidad(defensaFerrea);
 
     }
 
@@ -277,6 +287,12 @@ namespace juego4 {
         curacionGrupo->ponAlcance(3);
         curacionGrupo->ponRadioAlcance(3);
         curacionGrupo->asignaCuracion(40);
+        //
+		revolverVeloz->ponCoste(7);
+		revolverVeloz->ponAlcance(15);
+		revolverVeloz->asignaAtaque(ataqueADistancia);
+		revolverVeloz->asignaDefensa(defensaADistancia);
+        revolverVeloz->asignaDano(danoFisico, 30);
         //
 
     }
@@ -318,17 +334,17 @@ namespace juego4 {
         //
 
         //                       
-        Enemigo1->agregaAtaque(ataqueCuerpoACuerpo, 70);
-        Enemigo1->agregaAtaque(ataqueADistancia, 50);
-        Enemigo1->agregaDefensa(defensaCuerpoACuerpo, 70);
-        Enemigo1->agregaDefensa(defensaADistancia, 70);
-        Enemigo1->agregaReduceDano(danoFisico, 10);
+        CoyoteTormenta->agregaAtaque(ataqueCuerpoACuerpo, 70);
+        CoyoteTormenta->agregaAtaque(ataqueADistancia, 50);
+        CoyoteTormenta->agregaDefensa(defensaCuerpoACuerpo, 70);
+        CoyoteTormenta->agregaDefensa(defensaADistancia, 70);
+        CoyoteTormenta->agregaReduceDano(danoFisico, 10);
 
-        Enemigo2->agregaAtaque(ataqueCuerpoACuerpo, 70);
-        Enemigo2->agregaAtaque(ataqueADistancia, 50);
-        Enemigo2->agregaDefensa(defensaCuerpoACuerpo, 70);
-        Enemigo2->agregaDefensa(defensaADistancia, 70);
-        Enemigo2->agregaReduceDano(danoFisico, 10);
+        CoyoteTormenta2->agregaAtaque(ataqueCuerpoACuerpo, 70);
+        CoyoteTormenta2->agregaAtaque(ataqueADistancia, 50);
+        CoyoteTormenta2->agregaDefensa(defensaCuerpoACuerpo, 70);
+        CoyoteTormenta2->agregaDefensa(defensaADistancia, 70);
+        CoyoteTormenta2->agregaReduceDano(danoFisico, 10);
         //                       
 
 
@@ -341,7 +357,7 @@ namespace juego4 {
         GradoEfectividad* fallo = new GradoEfectividad{ L"Fallo" };
         GradoEfectividad* roce = new GradoEfectividad{ L"Roce" };
         GradoEfectividad* impacto = new GradoEfectividad{ L"Impacto" };
-        GradoEfectividad* critico = new GradoEfectividad{ L"Impacto crítico" };
+        GradoEfectividad* critico = new GradoEfectividad{ L"Impacto crï¿½tico" };
         //
         fallo->estableceRango(INT_MIN, 9, 0);
         roce->estableceRango(10, 49, 50);
@@ -367,19 +383,20 @@ namespace juego4 {
         Clint->ponSitioFicha(Coord{ 7,1 });
         Panoramix->ponSitioFicha(Coord{ 9,1 });
 
-        Enemigo1->ponSitioFicha(Coord{ 5,17 });
-        Enemigo2->ponSitioFicha(Coord{ 9,17 });
+        CoyoteTormenta->ponSitioFicha(Coord{ 5,17 });
+        CoyoteTormenta2->ponSitioFicha(Coord{ 9,17 });
+
 
         //
         tablero()->asignaSonidoEstablece(carpeta_sonidos_juego + "Metal Click.wav", 100);
         tablero()->asignaSonidoDesplaza(carpeta_sonidos_juego + "SnowWalk.ogg", 100);
-        musica()->asignaMusica(carpeta_sonidos_juego + "Track_1.ogg", 100);
+        musica()->asignaMusica(carpeta_sonidos_juego + "track_desierto.ogg", 0);
         //
         agregaNombreAlumno(L"Maksym Chernykh");
-        agregaNombreAlumno(L"Aike Fernández Roza");
-        agregaNombreAlumno(L"Julián Guérrez Losada");
+        agregaNombreAlumno(L"Aike Fernï¿½ndez Roza");
+        agregaNombreAlumno(L"Juliï¿½n Guï¿½rrez Losada");
         agregaNombreAlumno(L"Carlos Pablos Rivero");
-        agregaNombreAlumno(L"Vidal Rodrigo Mínguez");
+        agregaNombreAlumno(L"Vidal Rodrigo Mï¿½nguez");
         indicaCursoAcademico(L"2024 - 2025");
 
     }
@@ -394,8 +411,8 @@ namespace juego4 {
         Rosa = nullptr;
         Clint = nullptr;
         Panoramix = nullptr;
-        Enemigo1 = nullptr;
-        Enemigo2 = nullptr;
+        CoyoteTormenta = nullptr;
+        CoyoteTormenta2 = nullptr;
 
         //
         ataqueEspadaNormal = nullptr;
@@ -404,6 +421,7 @@ namespace juego4 {
         defensaFerrea = nullptr;
         curacionSimple = nullptr;
         curacionGrupo = nullptr;
+		revolverVeloz = nullptr;
 
         //
         ataqueCuerpoACuerpo = nullptr;
