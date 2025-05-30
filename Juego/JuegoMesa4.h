@@ -34,6 +34,9 @@ namespace juego4 {
         Habilidad* curacionSimple{};
         Habilidad* curacionGrupo{};
 		Habilidad* revolverVeloz{};
+		Habilidad* ataquePunal{};
+		Habilidad* ataqueGarraRelampago{};
+		Habilidad* ataqueMordiscoTormenta{};
 
 
 
