@@ -295,19 +295,16 @@ namespace juego1 {
 
     void JuegoMesa1::preparaSistemaAtaque() {
 
+
         //
-        GradoEfectividad* fallo = new GradoEfectividad{ L"Fallo" };
-        GradoEfectividad* roce = new GradoEfectividad{ L"Roce" };
         GradoEfectividad* impacto = new GradoEfectividad{ L"Impacto" };
         GradoEfectividad* critico = new GradoEfectividad{ L"Impacto crítico" };
         //
-        fallo->estableceRango(INT_MIN, 9, 0);
-        roce->estableceRango(10, 49, 50);
-        impacto->estableceRango(50, 89, 100);
+
+        impacto->estableceRango(INT_MIN, 89, 100);
         critico->estableceRango(90, INT_MAX, 150);
         //
-        agregaEfectividad(fallo);
-        agregaEfectividad(roce);
+
         agregaEfectividad(impacto);
         agregaEfectividad(critico);
 

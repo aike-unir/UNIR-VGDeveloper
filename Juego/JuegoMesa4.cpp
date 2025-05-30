@@ -37,8 +37,8 @@ namespace juego4 {
         "   -     O     O     -     -     -     -     O   ",
         "-     -     O     -     -     -     -     -     -",
         "   -     -     -     -     -     -     T     O   ",
-        "-     -     -     -     -     -     O     -     -",
-        "   -     T     O     -     O     -     O     O   ",
+        "-     -     -     L     -     -     O     -     -",
+        "   -     T     O     L     O     -     O     O   ",
         "-     -     O     O     O     -     O     -     -",
         "   -     O     O     O     O     -     O     -   ",
         "-     O     O     O     O     -     -     -     -" };
@@ -76,7 +76,7 @@ namespace juego4 {
         //
         Guillermo->ponArchivoRetrato(carpeta_retratos_juego + "guillermo_retrato.png");
         Wuuf->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
-        Rosa->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
+        Rosa->ponArchivoRetrato(carpeta_retratos_juego + "RosaPortreit.png");
         Clint->ponArchivoRetrato(carpeta_retratos_juego + "retrato_clint.png");
 
         CoyoteTormenta->ponArchivoRetrato(carpeta_retratos_juego + "retrato_coyote_rayo.png");
@@ -85,7 +85,7 @@ namespace juego4 {
         //
         Guillermo->ponArchivoFicha(carpeta_retratos_juego + "guillermo_idle.png");
         Wuuf->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
-        Rosa->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
+        Rosa->ponArchivoFicha(carpeta_retratos_juego + "RosaChar.png");
         Clint->ponArchivoFicha(carpeta_retratos_juego + "Clint.png");
 
         CoyoteTormenta->ponArchivoFicha(carpeta_retratos_juego + "coyote_rayo.png");
@@ -119,7 +119,7 @@ namespace juego4 {
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
         ataqueArco = new Habilidad{
                 L"Ataque a distancia normal",
-                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Rayo };
         ataqueEspadaPoderoso = new Habilidad{
                 L"Ataque poderoso de hielo",
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Hielo };
@@ -176,7 +176,7 @@ namespace juego4 {
         ataqueEspadaNormal->ponArchivosImagenes(
             carpeta_habilids_juego + "espada.png", carpeta_habilids_juego + "fondo_5.png");
         ataqueArco->ponArchivosImagenes(
-            carpeta_habilids_juego + "arco_flecha.png", carpeta_habilids_juego + "fondo_5.png");
+            carpeta_habilids_juego + "arco_flecha.png", carpeta_habilids_juego + "fondo_rayo.png");
         ataqueEspadaPoderoso->ponArchivosImagenes(
             carpeta_habilids_juego + "espada_poderosa.png", carpeta_habilids_juego + "fondo_hielo.png");
         llamarada->ponArchivosImagenes(
@@ -247,14 +247,12 @@ namespace juego4 {
     void JuegoMesa4::agregaHabilidadesPersonajes() {
 
         Guillermo->agregaHabilidad(ataqueEspadaNormal);
-        Guillermo->agregaHabilidad(ataqueArco);
         Guillermo->agregaHabilidad(ataqueEspadaPoderoso);
         Guillermo->agregaHabilidad(defensaFerrea);
         Guillermo->agregaHabilidad(llamarada);
 
 
         Wuuf->agregaHabilidad(ataqueEspadaNormal);
-        Wuuf->agregaHabilidad(ataqueArco);
         Wuuf->agregaHabilidad(ataqueEspadaPoderoso);
         Wuuf->agregaHabilidad(defensaFerrea);
 
@@ -396,19 +394,16 @@ namespace juego4 {
 
     void JuegoMesa4::preparaSistemaAtaque() {
 
+
         //
-        GradoEfectividad* fallo = new GradoEfectividad{ L"Fallo" };
-        GradoEfectividad* roce = new GradoEfectividad{ L"Roce" };
         GradoEfectividad* impacto = new GradoEfectividad{ L"Impacto" };
-        GradoEfectividad* critico = new GradoEfectividad{ L"Impacto cr�tico" };
+        GradoEfectividad* critico = new GradoEfectividad{ L"Impacto crítico" };
         //
-        fallo->estableceRango(INT_MIN, 9, 0);
-        roce->estableceRango(10, 49, 50);
-        impacto->estableceRango(50, 89, 100);
+
+        impacto->estableceRango(INT_MIN, 89, 100);
         critico->estableceRango(90, INT_MAX, 150);
         //
-        agregaEfectividad(fallo);
-        agregaEfectividad(roce);
+
         agregaEfectividad(impacto);
         agregaEfectividad(critico);
 

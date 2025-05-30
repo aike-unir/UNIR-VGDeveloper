@@ -19,8 +19,7 @@ namespace juego3 {
         ActorPersonaje* Guillermo{};
         ActorPersonaje* Wuuf{};
         ActorPersonaje* Rosa{};
-        ActorPersonaje* Clint{};
-        ActorPersonaje* Panoramix{};
+
 
         ActorPersonaje* Enemigo1{};
         ActorPersonaje* Enemigo2{};
@@ -30,6 +29,7 @@ namespace juego3 {
         Habilidad* ataqueEspadaNormal{};
         Habilidad* ataqueArco{};
         Habilidad* ataqueEspadaPoderoso{};
+        Habilidad* llamarada{};
         Habilidad* defensaFerrea{};
         Habilidad* curacionSimple{};
         Habilidad* curacionGrupo{};
@@ -41,8 +41,6 @@ namespace juego3 {
         TipoDefensa* defensaADistancia{};
         TipoDano* danoFisico{};
 
-        GradoEfectividad* fallo{};
-        GradoEfectividad* roce{};
         GradoEfectividad* impacto{};
         GradoEfectividad* critico{};
 

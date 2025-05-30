@@ -33,6 +33,10 @@ namespace juego5 {
         Habilidad* defensaFerrea{};
         Habilidad* curacionSimple{};
         Habilidad* curacionGrupo{};
+        Habilidad* llamarada{};
+        Habilidad* revolverVeloz{};
+        Habilidad* ataquePunal{};
+
 
         Habilidad* bastonazo{};
         Habilidad* flechaEnvenenada{};
