@@ -29,7 +29,7 @@ namespace juego5 {
 
 
     static ActorTablero::GraficoMuros grafico_muros_vacio{
-        "F     O     O     O     O     O     O     -     -",
+        "-     O     O     O     O     O     O     -     -",
         "   -     O     O     O     O     O     O     -   ",
         "-     -     -     -     -     -     -     -     -",
         "   -     P     P     -     -     -     -     -   ",
@@ -461,7 +461,7 @@ namespace juego5 {
         Panoramix->ponSitioFicha(Coord{ 13,1 });
 
        // Enemigo1->ponSitioFicha(Coord{ 5,17 });
-        Enemigo1->ponSitioFicha(Coord{ 2,2 });
+        Enemigo1->ponSitioFicha(Coord{ 2,17 });
         Enemigo2->ponSitioFicha(Coord{ 9,17 });
 
         //
