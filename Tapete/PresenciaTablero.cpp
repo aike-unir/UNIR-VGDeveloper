@@ -128,6 +128,7 @@ namespace tapete {
         // background_fondo->ponVisible(false);
 
         actor_tablero->agregaDibujo(background_jerarquia);
+
         
     }
 

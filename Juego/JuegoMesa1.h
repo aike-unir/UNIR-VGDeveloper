@@ -39,8 +39,6 @@ namespace juego1 {
         TipoDefensa* defensaADistancia{};
         TipoDano* danoFisico{};
 
-        GradoEfectividad* fallo{};
-        GradoEfectividad* roce{};
         GradoEfectividad* impacto{};
         GradoEfectividad* critico{};
 

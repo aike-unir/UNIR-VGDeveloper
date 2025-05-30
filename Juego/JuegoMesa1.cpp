@@ -34,9 +34,9 @@ namespace juego1 {
         "-     -     -     -     O     O     O     O     O",
         "   -     -     -     -     O     O     O     O   ",
         "-     -     -     -     F     O     O     O     O",
-        "   -     -     -     -     -     F     F     F   ",
+        "   -     -     -     -     P     F     F     F   ",
         "-     -     -     -     F     F     F     F     -",
-        "   -     -     -     -     -     F     F     F   ",
+        "   -     -     -     -     P     F     F     F   ",
         "-     -     -     -     F     O     O     O     O",
         "   -     -     -     -     O     O     O     O   ",
         "-     -     -     -     O     O     O     O     O",
@@ -65,7 +65,7 @@ namespace juego1 {
         Guillermo = new ActorPersonaje{ this, LadoTablero::Izquierda, 0, L"Guillermo" , Elemento::Fuego };
 
 
-        Enemigo1 = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Enemigo1", Elemento::nulo };
+        Enemigo1 = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Enemigo1", Elemento::Fuego };
 
 
         //
@@ -296,18 +296,14 @@ namespace juego1 {
     void JuegoMesa1::preparaSistemaAtaque() {
 
         //
-        GradoEfectividad* fallo = new GradoEfectividad{ L"Fallo" };
-        GradoEfectividad* roce = new GradoEfectividad{ L"Roce" };
         GradoEfectividad* impacto = new GradoEfectividad{ L"Impacto" };
         GradoEfectividad* critico = new GradoEfectividad{ L"Impacto crítico" };
         //
-        fallo->estableceRango(INT_MIN, 9, 0);
-        roce->estableceRango(10, 49, 50);
-        impacto->estableceRango(50, 89, 100);
+
+        impacto->estableceRango(INT_MIN, 89, 100);
         critico->estableceRango(90, INT_MAX, 150);
         //
-        agregaEfectividad(fallo);
-        agregaEfectividad(roce);
+
         agregaEfectividad(impacto);
         agregaEfectividad(critico);
 

@@ -48,7 +48,7 @@ namespace juego5 {
     void JuegoMesa5::preparaTablero() {
         agregaTablero(new ActorTablero(this));
 
-        tablero()->ponArchivoMuro(carpeta_activos_juego + "muro_piedra.png");
+        tablero()->ponArchivoMuro(carpeta_activos_juego + "muro_piedra5.png");
         tablero()->ponArchivoBaldosas(carpeta_activos_juego + "estampas_fondo.png");
         tablero()->ponArchivoFondo(carpeta_activos_juego + "fondo_bosque2.png");
 
