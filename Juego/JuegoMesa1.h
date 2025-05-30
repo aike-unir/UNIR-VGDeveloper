@@ -28,8 +28,10 @@ namespace juego1 {
 
 
         Habilidad* ataqueEspadaNormal{};
+        Habilidad* garra{};
         Habilidad* ataqueArco{};
         Habilidad* ataqueEspadaPoderoso{};
+        Habilidad* llamarada{};
         Habilidad* defensaFerrea{};
         Habilidad* curacionSimple{};
         Habilidad* curacionGrupo{};
