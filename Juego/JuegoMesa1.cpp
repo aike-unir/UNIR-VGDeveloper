@@ -48,7 +48,7 @@ namespace juego1 {
     void JuegoMesa1::preparaTablero() {
         agregaTablero(new ActorTablero(this));
 
-        tablero()->ponArchivoBaldosas(carpeta_activos_juego + "estampas_fondo.png");
+        tablero()->ponArchivoBaldosas(carpeta_activos_juego + "suelo_lava.png");
         tablero()->ponArchivoFondo(carpeta_activos_juego + "fondo_volcanes.png");
 
         tablero()->equipa(LadoTablero::Izquierda, L"Devils", carpeta_activos_juego + "escudo_devils.png");
@@ -72,23 +72,23 @@ namespace juego1 {
 
 
         //
-        Guillermo->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
+        Guillermo->ponArchivoRetrato(carpeta_retratos_juego + "guillermo_retrato.png");
         Wuuf->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Rosa->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Clint->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Panoramix->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
 
-        Enemigo1->ponArchivoRetrato(carpeta_retratos_juego + "aristocrat_75.png");
+        Enemigo1->ponArchivoRetrato(carpeta_retratos_juego + "dragon_retrato.png");
         Enemigo2->ponArchivoRetrato(carpeta_retratos_juego + "aristocrat_75.png");
 
         //
-        Guillermo->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
+        Guillermo->ponArchivoFicha(carpeta_retratos_juego + "guillermo_idle.png");
         Wuuf->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Rosa->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Clint->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Panoramix->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
 
-        Enemigo1->ponArchivoFicha(carpeta_retratos_juego + "sprite2.png");
+        Enemigo1->ponArchivoFicha(carpeta_retratos_juego + "dragon_idle.png");
         Enemigo2->ponArchivoFicha(carpeta_retratos_juego + "sprite2.png");
 
         //
@@ -119,10 +119,16 @@ namespace juego1 {
         ataqueEspadaNormal = new Habilidad{
                 L"Ataque cuerpo a cuerpo normal",
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
+        garra = new Habilidad{
+                L"Ataque cuerpo a cuerpo normal",
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
         ataqueArco = new Habilidad{
                 L"Ataque a distancia normal",
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
         ataqueEspadaPoderoso = new Habilidad{
+                L"Ataque poderoso",
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Fuego };
+        llamarada = new Habilidad{
                 L"Ataque poderoso",
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Fuego };
         defensaFerrea = new Habilidad{
@@ -138,10 +144,14 @@ namespace juego1 {
         //
         ataqueEspadaNormal->ponDescripcion(
             L"El personaje usa su espada para atacar a un enemigo que se encuentra en una casilla próxima.");
+        garra->ponDescripcion(
+            L"El personaje usa su garra para atacar a un enemigo que se encuentra en una casilla próxima.");
         ataqueArco->ponDescripcion(
             L"El personaje usa su arco para atacar a un enemigo que se encuentra en una casilla próxima.");
         ataqueEspadaPoderoso->ponDescripcion(
             L"El personaje blande su espada con fuerza para atacar a un enemigo que se encuentra en una casilla próxima.");
+        llamarada->ponDescripcion(
+            L"El personaje lanza fuego para atacar a un enemigo que se encuentra en una casilla próxima.");
         defensaFerrea->ponDescripcion(
             L"El personaje aumenta su defensa hasta su próximo ronda.");
         curacionSimple->ponDescripcion(
@@ -152,10 +162,14 @@ namespace juego1 {
         //
         ataqueEspadaNormal->ponArchivosImagenes(
             carpeta_habilids_juego + "espada.png", carpeta_habilids_juego + "fondo_5.png");
+        garra->ponArchivosImagenes(
+            carpeta_habilids_juego + "garra.png", carpeta_habilids_juego + "fondo_5.png");
         ataqueArco->ponArchivosImagenes(
             carpeta_habilids_juego + "arco_flecha.png", carpeta_habilids_juego + "fondo_5.png");
         ataqueEspadaPoderoso->ponArchivosImagenes(
             carpeta_habilids_juego + "espada_poderosa.png", carpeta_habilids_juego + "fondo_5.png");
+        llamarada->ponArchivosImagenes(
+            carpeta_habilids_juego + "llamarada.png", carpeta_habilids_juego + "fondo_5.png");
         defensaFerrea->ponArchivosImagenes(
             carpeta_habilids_juego + "escudo.png", carpeta_habilids_juego + "fondo_5.png");
         curacionSimple->ponArchivosImagenes(
@@ -165,16 +179,20 @@ namespace juego1 {
 
         //
         ataqueEspadaNormal->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+        garra->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         ataqueArco->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         ataqueEspadaPoderoso->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+        llamarada->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         defensaFerrea->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionSimple->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionGrupo->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
 
         //
         agregaHabilidad(ataqueEspadaNormal);
+        agregaHabilidad(garra);
         agregaHabilidad(ataqueArco);
         agregaHabilidad(ataqueEspadaPoderoso);
+        agregaHabilidad(llamarada);
         agregaHabilidad(defensaFerrea);
         agregaHabilidad(curacionSimple);
         agregaHabilidad(curacionGrupo);
@@ -230,11 +248,9 @@ namespace juego1 {
         Panoramix->agregaHabilidad(defensaFerrea);
 
         //
-        Enemigo1->agregaHabilidad(ataqueEspadaNormal);
-        Enemigo1->agregaHabilidad(ataqueArco);
-        Enemigo1->agregaHabilidad(ataqueEspadaPoderoso);
-        Enemigo1->agregaHabilidad(defensaFerrea);
-
+        Enemigo1->agregaHabilidad(garra);
+        Enemigo1->agregaHabilidad(llamarada);
+        
 
         Enemigo2->agregaHabilidad(ataqueEspadaNormal);
         Enemigo2->agregaHabilidad(ataqueArco);
@@ -253,6 +269,12 @@ namespace juego1 {
         ataqueEspadaNormal->asignaDefensa(defensaCuerpoACuerpo);
         ataqueEspadaNormal->asignaDano(danoFisico, 20);
         //
+        garra->ponCoste(3);
+        garra->ponAlcance(1);
+        garra->asignaAtaque(ataqueCuerpoACuerpo);
+        garra->asignaDefensa(defensaCuerpoACuerpo);
+        garra->asignaDano(danoFisico, 20);
+        //
         ataqueArco->ponCoste(5);
         ataqueArco->ponAlcance(15);
         ataqueArco->asignaAtaque(ataqueADistancia);
@@ -260,10 +282,16 @@ namespace juego1 {
         ataqueArco->asignaDano(danoFisico, 20);
         //
         ataqueEspadaPoderoso->ponCoste(5);
-        ataqueEspadaPoderoso->ponAlcance(1);
+        ataqueEspadaPoderoso->ponAlcance(3);
         ataqueEspadaPoderoso->asignaAtaque(ataqueCuerpoACuerpo);
         ataqueEspadaPoderoso->asignaDefensa(defensaCuerpoACuerpo);
         ataqueEspadaPoderoso->asignaDano(danoFisico, 50);
+        //
+        llamarada->ponCoste(5);
+        llamarada->ponAlcance(1);
+        llamarada->asignaAtaque(ataqueCuerpoACuerpo);
+        llamarada->asignaDefensa(defensaCuerpoACuerpo);
+        llamarada->asignaDano(danoFisico, 50);
         //
         defensaFerrea->ponCoste(3);
         defensaFerrea->agregaEfectoDefensa(defensaCuerpoACuerpo, 30);
@@ -404,6 +432,8 @@ namespace juego1 {
         defensaFerrea = nullptr;
         curacionSimple = nullptr;
         curacionGrupo = nullptr;
+        garra = nullptr;
+        llamarada = nullptr;
 
         //
         ataqueCuerpoACuerpo = nullptr;
