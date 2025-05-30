@@ -35,6 +35,7 @@ namespace juego4 {
         Habilidad* curacionGrupo{};
 		Habilidad* revolverVeloz{};
 		Habilidad* ataquePunal{};
+
 		Habilidad* ataqueGarraRelampago{};
 		Habilidad* ataqueMordiscoTormenta{};
 
@@ -46,8 +47,6 @@ namespace juego4 {
         TipoDefensa* defensaADistancia{};
         TipoDano* danoFisico{};
 
-        GradoEfectividad* fallo{};
-        GradoEfectividad* roce{};
         GradoEfectividad* impacto{};
         GradoEfectividad* critico{};
 

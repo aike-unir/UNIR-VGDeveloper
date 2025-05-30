@@ -29,7 +29,7 @@ namespace juego3 {
 
 
     static ActorTablero::GraficoMuros grafico_muros_vacio{
-        "-     -     -     -     -     -     -     -     -",
+        "-     -     P     -     -     -     -     F     -",
         "   -     -     -     -     O     -     -     -   ",
         "-     -     -     -     -     O     -     -     -",
         "   -     -     -     -     -     O     -     -   ",
@@ -39,7 +39,7 @@ namespace juego3 {
         "   -     -     -     -     -     O     -     -   ",
         "-     -     -     -     -     O     O     -     -",
         "   -     -     -     -     -     O     -     -   ",
-        "-     -     -     -     -     -     -     -     -",
+        "-     -     F     -     -     -     -     -     -",
         "   -     -     -     -     L     -     -     -   ",
         "-     -     -     -     -     -     -     -     -" };
 
@@ -64,32 +64,28 @@ namespace juego3 {
 
     void JuegoMesa3::preparaPersonajes() {
 
-        Guillermo = new ActorPersonaje{ this, LadoTablero::Izquierda, 0, L"Guillerm2" , Elemento::Fuego };
+        Guillermo = new ActorPersonaje{ this, LadoTablero::Izquierda, 0, L"Guillermo" , Elemento::Fuego };
         Wuuf = new ActorPersonaje{ this, LadoTablero::Izquierda, 1, L"Wuuf", Elemento::Hielo };
         Rosa = new ActorPersonaje{ this, LadoTablero::Izquierda, 2, L"Rosa", Elemento::Rayo };
-        Clint = new ActorPersonaje{ this, LadoTablero::Izquierda, 3, L"Clint", Elemento::Piedra };
-        Panoramix = new ActorPersonaje{ this, LadoTablero::Izquierda, 4, L"Panoramix", Elemento::Veneno };
+
 
         Enemigo1 = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Enemigo1", Elemento::Rayo };
         Enemigo2 = new ActorPersonaje{ this, LadoTablero::Derecha,   1, L"Enemigo2", Elemento::nulo };
 
-
         //
-        Guillermo->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
+        Guillermo->ponArchivoRetrato(carpeta_retratos_juego + "guillermo_retrato.png");
         Wuuf->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Rosa->ponArchivoRetrato(carpeta_retratos_juego + "RosaPortreit.png");
-        Clint->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
-        Panoramix->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
+
 
         Enemigo1->ponArchivoRetrato(carpeta_retratos_juego + "ElectromentalPortreit.png");
         Enemigo2->ponArchivoRetrato(carpeta_retratos_juego + "aristocrat_75.png");
 
         //
-        Guillermo->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
+        Guillermo->ponArchivoFicha(carpeta_retratos_juego + "guillermo_idle.png");
         Wuuf->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Rosa->ponArchivoFicha(carpeta_retratos_juego + "RosaChar.png");
-        Clint->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
-        Panoramix->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
+
 
         Enemigo1->ponArchivoFicha(carpeta_retratos_juego + "sprite2.png");
         Enemigo2->ponArchivoFicha(carpeta_retratos_juego + "Electromental4Frame.png");
@@ -98,8 +94,7 @@ namespace juego3 {
         Guillermo->ponIniciativa(20);
         Wuuf->ponIniciativa(18);
         Rosa->ponIniciativa(16);
-        Clint->ponIniciativa(15);
-        Panoramix->ponIniciativa(22);
+
 
         Enemigo1->ponIniciativa(19);
         Enemigo2->ponIniciativa(17);
@@ -108,8 +103,7 @@ namespace juego3 {
         agregaPersonaje(Guillermo);
         agregaPersonaje(Wuuf);
         agregaPersonaje(Rosa);
-        agregaPersonaje(Clint);
-        agregaPersonaje(Panoramix);
+
 
         agregaPersonaje(Enemigo1);
         agregaPersonaje(Enemigo2);
@@ -124,10 +118,13 @@ namespace juego3 {
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
         ataqueArco = new Habilidad{
                 L"Ataque a distancia normal",
-                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Rayo };
         ataqueEspadaPoderoso = new Habilidad{
                 L"Ataque poderoso",
-                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Fuego };
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Hielo };
+        llamarada = new Habilidad{
+             L"Ataque poderoso de fuego",
+             EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Fuego };
         defensaFerrea = new Habilidad{
                 L"Defensa f�rrea",
                 EnfoqueHabilidad::si_mismo,  AccesoHabilidad::ninguno,   Antagonista::si_mismo, Elemento::nulo };
@@ -145,6 +142,8 @@ namespace juego3 {
             L"El personaje usa su arco para atacar a un enemigo que se encuentra en una casilla pr�xima.");
         ataqueEspadaPoderoso->ponDescripcion(
             L"El personaje blande su espada con fuerza para atacar a un enemigo que se encuentra en una casilla pr�xima.");
+        llamarada->ponDescripcion(
+            L"El personaje lanza fuego para atacar a un enemigo que se encuentra en una casilla próxima.");
         defensaFerrea->ponDescripcion(
             L"El personaje aumenta su defensa hasta su pr�ximo ronda.");
         curacionSimple->ponDescripcion(
@@ -156,9 +155,11 @@ namespace juego3 {
         ataqueEspadaNormal->ponArchivosImagenes(
             carpeta_habilids_juego + "espada.png", carpeta_habilids_juego + "fondo_5.png");
         ataqueArco->ponArchivosImagenes(
-            carpeta_habilids_juego + "arco_flecha.png", carpeta_habilids_juego + "fondo_5.png");
+            carpeta_habilids_juego + "arco_flecha.png", carpeta_habilids_juego + "fondo_rayo.png");
         ataqueEspadaPoderoso->ponArchivosImagenes(
-            carpeta_habilids_juego + "espada_poderosa.png", carpeta_habilids_juego + "fondo_5.png");
+            carpeta_habilids_juego + "espada_poderosa.png", carpeta_habilids_juego + "fondo_hielo.png");
+        llamarada->ponArchivosImagenes(
+            carpeta_habilids_juego + "llamarada.png", carpeta_habilids_juego + "fondo_fuego.png");
         defensaFerrea->ponArchivosImagenes(
             carpeta_habilids_juego + "escudo.png", carpeta_habilids_juego + "fondo_5.png");
         curacionSimple->ponArchivosImagenes(
@@ -170,6 +171,7 @@ namespace juego3 {
         ataqueEspadaNormal->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         ataqueArco->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         ataqueEspadaPoderoso->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+        llamarada->ponArchivoSonido(carpeta_sonidos_juego + "arrowFire.wav");
         defensaFerrea->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionSimple->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionGrupo->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
@@ -178,6 +180,7 @@ namespace juego3 {
         agregaHabilidad(ataqueEspadaNormal);
         agregaHabilidad(ataqueArco);
         agregaHabilidad(ataqueEspadaPoderoso);
+        agregaHabilidad(llamarada);
         agregaHabilidad(defensaFerrea);
         agregaHabilidad(curacionSimple);
         agregaHabilidad(curacionGrupo);
@@ -207,13 +210,12 @@ namespace juego3 {
     void JuegoMesa3::agregaHabilidadesPersonajes() {
 
         Guillermo->agregaHabilidad(ataqueEspadaNormal);
-        Guillermo->agregaHabilidad(ataqueArco);
         Guillermo->agregaHabilidad(ataqueEspadaPoderoso);
         Guillermo->agregaHabilidad(defensaFerrea);
+        Guillermo->agregaHabilidad(llamarada);
 
 
         Wuuf->agregaHabilidad(ataqueEspadaNormal);
-        Wuuf->agregaHabilidad(ataqueArco);
         Wuuf->agregaHabilidad(ataqueEspadaPoderoso);
         Wuuf->agregaHabilidad(defensaFerrea);
 
@@ -222,25 +224,14 @@ namespace juego3 {
         Rosa->agregaHabilidad(ataqueEspadaPoderoso);
         Rosa->agregaHabilidad(defensaFerrea);
 
-        Clint->agregaHabilidad(ataqueEspadaNormal);
-        Clint->agregaHabilidad(ataqueArco);
-        Clint->agregaHabilidad(ataqueEspadaPoderoso);
-        Clint->agregaHabilidad(defensaFerrea);
-
-        Panoramix->agregaHabilidad(ataqueEspadaNormal);
-        Panoramix->agregaHabilidad(ataqueArco);
-        Panoramix->agregaHabilidad(ataqueEspadaPoderoso);
-        Panoramix->agregaHabilidad(defensaFerrea);
 
         //
         Enemigo1->agregaHabilidad(ataqueEspadaNormal);
-        Enemigo1->agregaHabilidad(ataqueArco);
         Enemigo1->agregaHabilidad(ataqueEspadaPoderoso);
         Enemigo1->agregaHabilidad(defensaFerrea);
 
 
         Enemigo2->agregaHabilidad(ataqueEspadaNormal);
-        Enemigo2->agregaHabilidad(ataqueArco);
         Enemigo2->agregaHabilidad(ataqueEspadaPoderoso);
         Enemigo2->agregaHabilidad(defensaFerrea);
 
@@ -267,6 +258,12 @@ namespace juego3 {
         ataqueEspadaPoderoso->asignaAtaque(ataqueCuerpoACuerpo);
         ataqueEspadaPoderoso->asignaDefensa(defensaCuerpoACuerpo);
         ataqueEspadaPoderoso->asignaDano(danoFisico, 50);
+        //
+        llamarada->ponCoste(5);
+        llamarada->ponAlcance(1);
+        llamarada->asignaAtaque(ataqueCuerpoACuerpo);
+        llamarada->asignaDefensa(defensaCuerpoACuerpo);
+        llamarada->asignaDano(danoFisico, 50);
         //
         defensaFerrea->ponCoste(3);
         defensaFerrea->agregaEfectoDefensa(defensaCuerpoACuerpo, 30);
@@ -306,17 +303,7 @@ namespace juego3 {
         Rosa->agregaDefensa(defensaADistancia, 70);
         Rosa->agregaReduceDano(danoFisico, 10);
 
-        Clint->agregaAtaque(ataqueCuerpoACuerpo, 70);
-        Clint->agregaAtaque(ataqueADistancia, 50);
-        Clint->agregaDefensa(defensaCuerpoACuerpo, 70);
-        Clint->agregaDefensa(defensaADistancia, 70);
-        Clint->agregaReduceDano(danoFisico, 10);
 
-        Panoramix->agregaAtaque(ataqueCuerpoACuerpo, 70);
-        Panoramix->agregaAtaque(ataqueADistancia, 50);
-        Panoramix->agregaDefensa(defensaCuerpoACuerpo, 70);
-        Panoramix->agregaDefensa(defensaADistancia, 70);
-        Panoramix->agregaReduceDano(danoFisico, 10);
 
         //
 
@@ -340,19 +327,16 @@ namespace juego3 {
 
     void JuegoMesa3::preparaSistemaAtaque() {
 
+
         //
-        GradoEfectividad* fallo = new GradoEfectividad{ L"Fallo" };
-        GradoEfectividad* roce = new GradoEfectividad{ L"Roce" };
         GradoEfectividad* impacto = new GradoEfectividad{ L"Impacto" };
-        GradoEfectividad* critico = new GradoEfectividad{ L"Impacto cr�tico" };
+        GradoEfectividad* critico = new GradoEfectividad{ L"Impacto crítico" };
         //
-        fallo->estableceRango(INT_MIN, 9, 0);
-        roce->estableceRango(10, 49, 50);
-        impacto->estableceRango(50, 89, 100);
+
+        impacto->estableceRango(INT_MIN, 89, 100);
         critico->estableceRango(90, INT_MAX, 150);
         //
-        agregaEfectividad(fallo);
-        agregaEfectividad(roce);
+
         agregaEfectividad(impacto);
         agregaEfectividad(critico);
 
@@ -365,10 +349,9 @@ namespace juego3 {
         modo()->configuraDesplaza(RejillaTablero::distanciaCeldas);
         //
         Guillermo->ponSitioFicha(Coord{ 1,1 });
-        Wuuf->ponSitioFicha(Coord{ 3,1 });
-        Rosa->ponSitioFicha(Coord{ 5,1 });
-        Clint->ponSitioFicha(Coord{ 7,1 });
-        Panoramix->ponSitioFicha(Coord{ 9,1 });
+        Wuuf->ponSitioFicha(Coord{ 5,1 });
+        Rosa->ponSitioFicha(Coord{ 11,1 });
+
 
         Enemigo1->ponSitioFicha(Coord{ 5,17 });
         Enemigo2->ponSitioFicha(Coord{ 9,17 });
@@ -376,7 +359,7 @@ namespace juego3 {
         //
         tablero()->asignaSonidoEstablece(carpeta_sonidos_juego + "Metal Click.wav", 100);
         tablero()->asignaSonidoDesplaza(carpeta_sonidos_juego + "SnowWalk.ogg", 100);
-        musica()->asignaMusica(carpeta_sonidos_juego + "Track_1.ogg", 100);
+        musica()->asignaMusica(carpeta_sonidos_juego + "space.ogg", 100);
         //
         agregaNombreAlumno(L"Maksym Chernykh");
         agregaNombreAlumno(L"Aike Fern�ndez Roza");
@@ -395,8 +378,7 @@ namespace juego3 {
         Guillermo = nullptr;
         Wuuf = nullptr;
         Rosa = nullptr;
-        Clint = nullptr;
-        Panoramix = nullptr;
+
         Enemigo1 = nullptr;
         Enemigo2 = nullptr;
 
