@@ -48,6 +48,7 @@ namespace juego4 {
     void JuegoMesa4::preparaTablero() {
         agregaTablero(new ActorTablero(this));
 
+        tablero()->ponArchivoMuro(carpeta_activos_juego + "muro_piedra2.png");
         tablero()->ponArchivoBaldosas(carpeta_activos_juego + "estampa_desierto.png");
        // tablero()->ponArchivoBaldosas(carpeta_activos_juego + "estampas_fondo.png");
 
@@ -63,32 +64,29 @@ namespace juego4 {
 
     void JuegoMesa4::preparaPersonajes() {
 
-        Guillermo = new ActorPersonaje{ this, LadoTablero::Izquierda, 0, L"Guillerm2" , Elemento::Fuego };
+        Guillermo = new ActorPersonaje{ this, LadoTablero::Izquierda, 0, L"Guillermo" , Elemento::Fuego };
         Wuuf = new ActorPersonaje{ this, LadoTablero::Izquierda, 1, L"Wuuf", Elemento::Hielo };
         Rosa = new ActorPersonaje{ this, LadoTablero::Izquierda, 2, L"Rosa", Elemento::Rayo };
         Clint = new ActorPersonaje{ this, LadoTablero::Izquierda, 3, L"Clint", Elemento::Piedra };
-        Panoramix = new ActorPersonaje{ this, LadoTablero::Izquierda, 4, L"Panoramix", Elemento::Veneno };
 
-        CoyoteTormenta = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Coyote Tormenta", Elemento::Rayo };
-        CoyoteTormenta2 = new ActorPersonaje{ this, LadoTablero::Derecha,   1, L"Coyote Tormenta", Elemento::Rayo };
+        CoyoteTormenta = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Coyote", Elemento::Rayo };
+        CoyoteTormenta2 = new ActorPersonaje{ this, LadoTablero::Derecha,   1, L"Coyote", Elemento::Rayo };
 
 
         //
-        Guillermo->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
+        Guillermo->ponArchivoRetrato(carpeta_retratos_juego + "guillermo_retrato.png");
         Wuuf->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Rosa->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Clint->ponArchivoRetrato(carpeta_retratos_juego + "retrato_clint.png");
-        Panoramix->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
 
         CoyoteTormenta->ponArchivoRetrato(carpeta_retratos_juego + "retrato_coyote_rayo.png");
         CoyoteTormenta2->ponArchivoRetrato(carpeta_retratos_juego + "retrato_coyote_rayo.png");
 
         //
-        Guillermo->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
+        Guillermo->ponArchivoFicha(carpeta_retratos_juego + "guillermo_idle.png");
         Wuuf->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Rosa->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Clint->ponArchivoFicha(carpeta_retratos_juego + "Clint.png");
-        Panoramix->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
 
         CoyoteTormenta->ponArchivoFicha(carpeta_retratos_juego + "coyote_rayo.png");
         CoyoteTormenta2->ponArchivoFicha(carpeta_retratos_juego + "coyote_rayo.png");
@@ -98,7 +96,6 @@ namespace juego4 {
         Wuuf->ponIniciativa(18);
         Rosa->ponIniciativa(16);
         Clint->ponIniciativa(15);
-        Panoramix->ponIniciativa(22);
 
         CoyoteTormenta->ponIniciativa(19);
         CoyoteTormenta2->ponIniciativa(17);
@@ -108,7 +105,6 @@ namespace juego4 {
         agregaPersonaje(Wuuf);
         agregaPersonaje(Rosa);
         agregaPersonaje(Clint);
-        agregaPersonaje(Panoramix);
 
         agregaPersonaje(CoyoteTormenta);
         agregaPersonaje(CoyoteTormenta2);
@@ -125,8 +121,11 @@ namespace juego4 {
                 L"Ataque a distancia normal",
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
         ataqueEspadaPoderoso = new Habilidad{
-                L"Ataque poderoso",
-                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Fuego };
+                L"Ataque poderoso de hielo",
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Hielo };
+        llamarada = new Habilidad{
+              L"Ataque poderoso de fuego",
+              EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Fuego };
         defensaFerrea = new Habilidad{
                 L"Defensa f�rrea",
                 EnfoqueHabilidad::si_mismo,  AccesoHabilidad::ninguno,   Antagonista::si_mismo, Elemento::nulo };
@@ -138,7 +137,7 @@ namespace juego4 {
                 EnfoqueHabilidad::area,      AccesoHabilidad::directo,   Antagonista::aliado, Elemento::nulo };
 		revolverVeloz = new Habilidad{
 				L"Revolver veloz",
-				EnfoqueHabilidad::personaje, AccesoHabilidad::directo, Antagonista::oponente, Elemento::nulo };
+				EnfoqueHabilidad::personaje, AccesoHabilidad::directo, Antagonista::oponente, Elemento::Piedra };
 
         //
         ataqueEspadaNormal->ponDescripcion(
@@ -147,6 +146,8 @@ namespace juego4 {
             L"El personaje usa su arco para atacar a un enemigo que se encuentra en una casilla pr�xima.");
         ataqueEspadaPoderoso->ponDescripcion(
             L"El personaje blande su espada con fuerza para atacar a un enemigo que se encuentra en una casilla pr�xima.");
+        llamarada->ponDescripcion(
+            L"El personaje lanza fuego para atacar a un enemigo que se encuentra en una casilla próxima.");
         defensaFerrea->ponDescripcion(
             L"El personaje aumenta su defensa hasta su pr�ximo ronda.");
         curacionSimple->ponDescripcion(
@@ -162,7 +163,9 @@ namespace juego4 {
         ataqueArco->ponArchivosImagenes(
             carpeta_habilids_juego + "arco_flecha.png", carpeta_habilids_juego + "fondo_5.png");
         ataqueEspadaPoderoso->ponArchivosImagenes(
-            carpeta_habilids_juego + "espada_poderosa.png", carpeta_habilids_juego + "fondo_5.png");
+            carpeta_habilids_juego + "espada_poderosa.png", carpeta_habilids_juego + "fondo_hielo.png");
+        llamarada->ponArchivosImagenes(
+            carpeta_habilids_juego + "llamarada.png", carpeta_habilids_juego + "fondo_fuego.png");
         defensaFerrea->ponArchivosImagenes(
             carpeta_habilids_juego + "escudo.png", carpeta_habilids_juego + "fondo_5.png");
         curacionSimple->ponArchivosImagenes(
@@ -170,21 +173,23 @@ namespace juego4 {
         curacionGrupo->ponArchivosImagenes(
             carpeta_habilids_juego + "vela_triple.png", carpeta_habilids_juego + "fondo_5.png");
 		revolverVeloz->ponArchivosImagenes(
-			carpeta_habilids_juego + "revolver.png", carpeta_habilids_juego + "fondo_5.png");
+			carpeta_habilids_juego + "revolver.png", carpeta_habilids_juego + "fondo_tierra.png");
 
         //
         ataqueEspadaNormal->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         ataqueArco->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         ataqueEspadaPoderoso->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+        llamarada->ponArchivoSonido(carpeta_sonidos_juego + "arrowFire.wav");
         defensaFerrea->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionSimple->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionGrupo->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
-		revolverVeloz->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+		revolverVeloz->ponArchivoSonido(carpeta_sonidos_juego + "shoot.wav");
 
         //
         agregaHabilidad(ataqueEspadaNormal);
         agregaHabilidad(ataqueArco);
         agregaHabilidad(ataqueEspadaPoderoso);
+        agregaHabilidad(llamarada);
         agregaHabilidad(defensaFerrea);
         agregaHabilidad(curacionSimple);
         agregaHabilidad(curacionGrupo);
@@ -214,11 +219,11 @@ namespace juego4 {
 
     void JuegoMesa4::agregaHabilidadesPersonajes() {
 
-		Guillermo->agregaHabilidad(revolverVeloz);
-        //Guillermo->agregaHabilidad(ataqueEspadaNormal);
+        Guillermo->agregaHabilidad(ataqueEspadaNormal);
         Guillermo->agregaHabilidad(ataqueArco);
         Guillermo->agregaHabilidad(ataqueEspadaPoderoso);
         Guillermo->agregaHabilidad(defensaFerrea);
+        Guillermo->agregaHabilidad(llamarada);
 
 
         Wuuf->agregaHabilidad(ataqueEspadaNormal);
@@ -235,11 +240,8 @@ namespace juego4 {
         Clint->agregaHabilidad(ataqueArco);
         Clint->agregaHabilidad(ataqueEspadaPoderoso);
         Clint->agregaHabilidad(defensaFerrea);
+        Clint->agregaHabilidad(revolverVeloz);
 
-        Panoramix->agregaHabilidad(ataqueEspadaNormal);
-        Panoramix->agregaHabilidad(ataqueArco);
-        Panoramix->agregaHabilidad(ataqueEspadaPoderoso);
-        Panoramix->agregaHabilidad(defensaFerrea);
 
         //
         CoyoteTormenta->agregaHabilidad(ataqueEspadaNormal);
@@ -276,6 +278,12 @@ namespace juego4 {
         ataqueEspadaPoderoso->asignaAtaque(ataqueCuerpoACuerpo);
         ataqueEspadaPoderoso->asignaDefensa(defensaCuerpoACuerpo);
         ataqueEspadaPoderoso->asignaDano(danoFisico, 50);
+        //
+        llamarada->ponCoste(5);
+        llamarada->ponAlcance(1);
+        llamarada->asignaAtaque(ataqueCuerpoACuerpo);
+        llamarada->asignaDefensa(defensaCuerpoACuerpo);
+        llamarada->asignaDano(danoFisico, 50);
         //
         defensaFerrea->ponCoste(3);
         defensaFerrea->agregaEfectoDefensa(defensaCuerpoACuerpo, 30);
@@ -327,11 +335,6 @@ namespace juego4 {
         Clint->agregaDefensa(defensaADistancia, 70);
         Clint->agregaReduceDano(danoFisico, 10);
 
-        Panoramix->agregaAtaque(ataqueCuerpoACuerpo, 70);
-        Panoramix->agregaAtaque(ataqueADistancia, 50);
-        Panoramix->agregaDefensa(defensaCuerpoACuerpo, 70);
-        Panoramix->agregaDefensa(defensaADistancia, 70);
-        Panoramix->agregaReduceDano(danoFisico, 10);
 
         //
 
@@ -380,10 +383,9 @@ namespace juego4 {
         modo()->configuraDesplaza(RejillaTablero::distanciaCeldas);
         //
         Guillermo->ponSitioFicha(Coord{ 1,1 });
-        Wuuf->ponSitioFicha(Coord{ 3,1 });
-        Rosa->ponSitioFicha(Coord{ 5,1 });
-        Clint->ponSitioFicha(Coord{ 7,1 });
-        Panoramix->ponSitioFicha(Coord{ 9,1 });
+        Wuuf->ponSitioFicha(Coord{ 5,1 });
+        Rosa->ponSitioFicha(Coord{ 9,1 });
+        Clint->ponSitioFicha(Coord{ 13,1 });
 
         CoyoteTormenta->ponSitioFicha(Coord{ 5,17 });
         CoyoteTormenta2->ponSitioFicha(Coord{ 9,17 });
@@ -412,7 +414,6 @@ namespace juego4 {
         Wuuf = nullptr;
         Rosa = nullptr;
         Clint = nullptr;
-        Panoramix = nullptr;
         CoyoteTormenta = nullptr;
         CoyoteTormenta2 = nullptr;
 
@@ -420,6 +421,7 @@ namespace juego4 {
         ataqueEspadaNormal = nullptr;
         ataqueArco = nullptr;
         ataqueEspadaPoderoso = nullptr;
+        llamarada = nullptr;
         defensaFerrea = nullptr;
         curacionSimple = nullptr;
         curacionGrupo = nullptr;

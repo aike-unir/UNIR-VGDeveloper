@@ -20,7 +20,6 @@ namespace juego4 {
         ActorPersonaje* Wuuf{};
         ActorPersonaje* Rosa{};
         ActorPersonaje* Clint{};
-        ActorPersonaje* Panoramix{};
 
         ActorPersonaje* CoyoteTormenta{};
         ActorPersonaje* CoyoteTormenta2{};
@@ -30,6 +29,7 @@ namespace juego4 {
         Habilidad* ataqueEspadaNormal{};
         Habilidad* ataqueArco{};
         Habilidad* ataqueEspadaPoderoso{};
+        Habilidad* llamarada{};
         Habilidad* defensaFerrea{};
         Habilidad* curacionSimple{};
         Habilidad* curacionGrupo{};

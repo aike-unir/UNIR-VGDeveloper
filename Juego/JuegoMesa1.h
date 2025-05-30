@@ -17,13 +17,9 @@ namespace juego1 {
     private:
 
         ActorPersonaje* Guillermo{};
-        ActorPersonaje* Wuuf{};
-        ActorPersonaje* Rosa{};
-        ActorPersonaje* Clint{};
-        ActorPersonaje* Panoramix{};
+
 
         ActorPersonaje* Enemigo1{};
-        ActorPersonaje* Enemigo2{};
 
 
 

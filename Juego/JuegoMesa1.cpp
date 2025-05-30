@@ -29,25 +29,26 @@ namespace juego1 {
 
 
     static ActorTablero::GraficoMuros grafico_muros_vacio{
-        "-     -     -     -     -     -     -     -     -",
-        "   -     -     -     -     O     -     -     -   ",
-        "-     -     -     -     -     O     -     -     -",
-        "   -     -     -     -     -     O     -     -   ",
-        "-     -     -     F     -     -     O     -     -",
-        "   -     -     -     -     -     -     O     -   ",
-        "-     -     -     -     F     -     O     -     -",
-        "   -     -     -     -     -     O     -     -   ",
-        "-     -     -     -     -     O     O     -     -",
-        "   -     -     -     -     -     O     -     -   ",
-        "-     -     -     -     -     -     -     -     -",
-        "   -     -     -     -     F     -     -     -   ",
-        "-     -     -     -     -     -     -     -     -" };
+        "-     -     -     O     O     O     O     O     O",
+        "   -     -     -     O     O     O     O     O   ",
+        "-     -     -     -     O     O     O     O     O",
+        "   -     -     -     -     O     O     O     O   ",
+        "-     -     -     -     F     O     O     O     O",
+        "   -     -     -     -     -     F     F     F   ",
+        "-     -     -     -     F     F     F     F     -",
+        "   -     -     -     -     -     F     F     F   ",
+        "-     -     -     -     F     O     O     O     O",
+        "   -     -     -     -     O     O     O     O   ",
+        "-     -     -     -     O     O     O     O     O",
+        "   -     -     -     O     O     O     O     O   ",
+        "-     -     -     O     O     O     O     O     O" };
 
 
 
     void JuegoMesa1::preparaTablero() {
         agregaTablero(new ActorTablero(this));
 
+        tablero()->ponArchivoMuro(carpeta_activos_juego + "muro_piedra.png");
         tablero()->ponArchivoBaldosas(carpeta_activos_juego + "suelo_lava.png");
         tablero()->ponArchivoFondo(carpeta_activos_juego + "fondo_volcanes.png");
 
@@ -61,55 +62,35 @@ namespace juego1 {
 
     void JuegoMesa1::preparaPersonajes() {
 
-        Guillermo = new ActorPersonaje{ this, LadoTablero::Izquierda, 0, L"Guillerm2" , Elemento::Fuego };
-        Wuuf = new ActorPersonaje{ this, LadoTablero::Izquierda, 1, L"Wuuf", Elemento::Hielo };
-        Rosa = new ActorPersonaje{ this, LadoTablero::Izquierda, 2, L"Rosa", Elemento::Rayo };
-        Clint = new ActorPersonaje{ this, LadoTablero::Izquierda, 3, L"Clint", Elemento::Piedra };
-        Panoramix = new ActorPersonaje{ this, LadoTablero::Izquierda, 4, L"Panoramix", Elemento::Veneno };
+        Guillermo = new ActorPersonaje{ this, LadoTablero::Izquierda, 0, L"Guillermo" , Elemento::Fuego };
+
 
         Enemigo1 = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Enemigo1", Elemento::nulo };
-        Enemigo2 = new ActorPersonaje{ this, LadoTablero::Derecha,   1, L"Enemigo2", Elemento::nulo };
 
 
         //
         Guillermo->ponArchivoRetrato(carpeta_retratos_juego + "guillermo_retrato.png");
-        Wuuf->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
-        Rosa->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
-        Clint->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
-        Panoramix->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
+
 
         Enemigo1->ponArchivoRetrato(carpeta_retratos_juego + "dragon_retrato.png");
-        Enemigo2->ponArchivoRetrato(carpeta_retratos_juego + "aristocrat_75.png");
 
         //
         Guillermo->ponArchivoFicha(carpeta_retratos_juego + "guillermo_idle.png");
-        Wuuf->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
-        Rosa->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
-        Clint->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
-        Panoramix->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
+
 
         Enemigo1->ponArchivoFicha(carpeta_retratos_juego + "dragon_idle.png");
-        Enemigo2->ponArchivoFicha(carpeta_retratos_juego + "sprite2.png");
 
         //
         Guillermo->ponIniciativa(20);
-        Wuuf->ponIniciativa(18);
-        Rosa->ponIniciativa(16);
-        Clint->ponIniciativa(15);
-        Panoramix->ponIniciativa(22);
+
 
         Enemigo1->ponIniciativa(19);
-        Enemigo2->ponIniciativa(17);
 
         //
         agregaPersonaje(Guillermo);
-        agregaPersonaje(Wuuf);
-        agregaPersonaje(Rosa);
-        agregaPersonaje(Clint);
-        agregaPersonaje(Panoramix);
+
 
         agregaPersonaje(Enemigo1);
-        agregaPersonaje(Enemigo2);
 
     }
 
@@ -126,10 +107,10 @@ namespace juego1 {
                 L"Ataque a distancia normal",
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
         ataqueEspadaPoderoso = new Habilidad{
-                L"Ataque poderoso",
-                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Fuego };
+                L"Ataque poderoso de Hielo",
+                EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Hielo };
         llamarada = new Habilidad{
-                L"Ataque poderoso",
+                L"Ataque poderoso de fuego",
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Fuego };
         defensaFerrea = new Habilidad{
                 L"Defensa férrea",
@@ -167,9 +148,9 @@ namespace juego1 {
         ataqueArco->ponArchivosImagenes(
             carpeta_habilids_juego + "arco_flecha.png", carpeta_habilids_juego + "fondo_5.png");
         ataqueEspadaPoderoso->ponArchivosImagenes(
-            carpeta_habilids_juego + "espada_poderosa.png", carpeta_habilids_juego + "fondo_5.png");
+            carpeta_habilids_juego + "espada_poderosa.png", carpeta_habilids_juego + "fondo_hielo.png");
         llamarada->ponArchivosImagenes(
-            carpeta_habilids_juego + "llamarada.png", carpeta_habilids_juego + "fondo_5.png");
+            carpeta_habilids_juego + "llamarada.png", carpeta_habilids_juego + "fondo_fuego.png");
         defensaFerrea->ponArchivosImagenes(
             carpeta_habilids_juego + "escudo.png", carpeta_habilids_juego + "fondo_5.png");
         curacionSimple->ponArchivosImagenes(
@@ -182,7 +163,7 @@ namespace juego1 {
         garra->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         ataqueArco->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         ataqueEspadaPoderoso->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
-        llamarada->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+        llamarada->ponArchivoSonido(carpeta_sonidos_juego + "arrowFire.wav");
         defensaFerrea->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionSimple->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionGrupo->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
@@ -227,35 +208,11 @@ namespace juego1 {
         Guillermo->agregaHabilidad(defensaFerrea);
 
 
-        Wuuf->agregaHabilidad(ataqueEspadaNormal);
-        Wuuf->agregaHabilidad(ataqueArco);
-        Wuuf->agregaHabilidad(ataqueEspadaPoderoso);
-        Wuuf->agregaHabilidad(defensaFerrea);
-
-        Rosa->agregaHabilidad(ataqueEspadaNormal);
-        Rosa->agregaHabilidad(ataqueArco);
-        Rosa->agregaHabilidad(ataqueEspadaPoderoso);
-        Rosa->agregaHabilidad(defensaFerrea);
-
-        Clint->agregaHabilidad(ataqueEspadaNormal);
-        Clint->agregaHabilidad(ataqueArco);
-        Clint->agregaHabilidad(ataqueEspadaPoderoso);
-        Clint->agregaHabilidad(defensaFerrea);
-
-        Panoramix->agregaHabilidad(ataqueEspadaNormal);
-        Panoramix->agregaHabilidad(ataqueArco);
-        Panoramix->agregaHabilidad(ataqueEspadaPoderoso);
-        Panoramix->agregaHabilidad(defensaFerrea);
-
         //
         Enemigo1->agregaHabilidad(garra);
         Enemigo1->agregaHabilidad(llamarada);
         
 
-        Enemigo2->agregaHabilidad(ataqueEspadaNormal);
-        Enemigo2->agregaHabilidad(ataqueArco);
-        Enemigo2->agregaHabilidad(ataqueEspadaPoderoso);
-        Enemigo2->agregaHabilidad(defensaFerrea);
 
     }
 
@@ -319,29 +276,6 @@ namespace juego1 {
         Guillermo->agregaDefensa(defensaADistancia, 70);
         Guillermo->agregaReduceDano(danoFisico, 10);
 
-        Wuuf->agregaAtaque(ataqueCuerpoACuerpo, 70);
-        Wuuf->agregaAtaque(ataqueADistancia, 50);
-        Wuuf->agregaDefensa(defensaCuerpoACuerpo, 70);
-        Wuuf->agregaDefensa(defensaADistancia, 70);
-        Wuuf->agregaReduceDano(danoFisico, 10);
-
-        Rosa->agregaAtaque(ataqueCuerpoACuerpo, 70);
-        Rosa->agregaAtaque(ataqueADistancia, 50);
-        Rosa->agregaDefensa(defensaCuerpoACuerpo, 70);
-        Rosa->agregaDefensa(defensaADistancia, 70);
-        Rosa->agregaReduceDano(danoFisico, 10);
-
-        Clint->agregaAtaque(ataqueCuerpoACuerpo, 70);
-        Clint->agregaAtaque(ataqueADistancia, 50);
-        Clint->agregaDefensa(defensaCuerpoACuerpo, 70);
-        Clint->agregaDefensa(defensaADistancia, 70);
-        Clint->agregaReduceDano(danoFisico, 10);
-
-        Panoramix->agregaAtaque(ataqueCuerpoACuerpo, 70);
-        Panoramix->agregaAtaque(ataqueADistancia, 50);
-        Panoramix->agregaDefensa(defensaCuerpoACuerpo, 70);
-        Panoramix->agregaDefensa(defensaADistancia, 70);
-        Panoramix->agregaReduceDano(danoFisico, 10);
 
         //
 
@@ -352,11 +286,7 @@ namespace juego1 {
         Enemigo1->agregaDefensa(defensaADistancia, 70);
         Enemigo1->agregaReduceDano(danoFisico, 10);
 
-        Enemigo2->agregaAtaque(ataqueCuerpoACuerpo, 70);
-        Enemigo2->agregaAtaque(ataqueADistancia, 50);
-        Enemigo2->agregaDefensa(defensaCuerpoACuerpo, 70);
-        Enemigo2->agregaDefensa(defensaADistancia, 70);
-        Enemigo2->agregaReduceDano(danoFisico, 10);
+
         //                       
 
 
@@ -389,19 +319,15 @@ namespace juego1 {
 
         modo()->configuraDesplaza(RejillaTablero::distanciaCeldas);
         //
-        Guillermo->ponSitioFicha(Coord{ 1,1 });
-        Wuuf->ponSitioFicha(Coord{ 3,1 });
-        Rosa->ponSitioFicha(Coord{ 5,1 });
-        Clint->ponSitioFicha(Coord{ 7,1 });
-        Panoramix->ponSitioFicha(Coord{ 9,1 });
+        Guillermo->ponSitioFicha(Coord{ 7,1 });
 
-        Enemigo1->ponSitioFicha(Coord{ 5,17 });
-        Enemigo2->ponSitioFicha(Coord{ 9,17 });
+
+        Enemigo1->ponSitioFicha(Coord{ 7,17 });
 
         //
         tablero()->asignaSonidoEstablece(carpeta_sonidos_juego + "Metal Click.wav", 100);
         tablero()->asignaSonidoDesplaza(carpeta_sonidos_juego + "SnowWalk.ogg", 100);
-        musica()->asignaMusica(carpeta_sonidos_juego + "Track_1.ogg", 100);
+        musica()->asignaMusica(carpeta_sonidos_juego + "medieval.wav", 100);
         //
         agregaNombreAlumno(L"Maksym Chernykh");
         agregaNombreAlumno(L"Aike Fernández Roza");
@@ -418,12 +344,8 @@ namespace juego1 {
         // JuegoMesaBase::termina();
         //
         Guillermo = nullptr;
-        Wuuf = nullptr;
-        Rosa = nullptr;
-        Clint = nullptr;
-        Panoramix = nullptr;
+
         Enemigo1 = nullptr;
-        Enemigo2 = nullptr;
 
         //
         ataqueEspadaNormal = nullptr;
