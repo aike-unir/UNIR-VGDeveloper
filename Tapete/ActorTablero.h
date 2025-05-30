@@ -41,6 +41,7 @@ namespace tapete {
 
         const Elemento elementoCoordenada(Coord coordenada) const;
         const std::vector <Coord>& sitiosTierra() const;
+        const std::vector <Coord>& sitiosRayo() const;
 
         void situaMuros (const GraficoMuros & grafico_muros);
         void validaGraficoMuros ();
@@ -85,7 +86,7 @@ namespace tapete {
         void actualiza (double tiempo_seg) override;
 
     private:
-
+                
         JuegoMesaBase * juego {}; 
 
         string archivo_baldosas;
@@ -104,6 +105,7 @@ namespace tapete {
         std::vector <Coord>  sitios_fuego{};
         std::vector <Coord>  sitios_veneno{};
         std::vector <Coord>  sitios_tierra{};
+        std::vector <Coord>  sitios_rayo{};
 
         PresenciaTablero     presencia_tablero        {this};
         RejillaTablero       rejilla_tablero          {this};

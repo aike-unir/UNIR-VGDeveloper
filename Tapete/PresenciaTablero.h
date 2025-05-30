@@ -82,6 +82,12 @@ namespace tapete {
         unir2d::Malla* malla_veneno{};
         unir2d::Imagen* imagen_veneno{};
 
+        unir2d::Textura* textura_rayo{};
+        unir2d::Malla* malla_rayo{};
+        unir2d::Imagen* imagen_rayo{};
+
+
+
         unir2d::Textura * textura_panel_vertcl {};
         unir2d::Imagen  * imagen_panel_vertcl_izqrd {};
         unir2d::Imagen  * imagen_panel_vertcl_derch {};
@@ -179,6 +185,12 @@ namespace tapete {
             const PuntosHexagonos& puntos_rejilla,
             const IndicesEstampas& indices_estampas,
             const PuntosHexagonos& puntos_textura);
+
+            void estableceMallaRayo(
+                const PuntosHexagonos& puntos_rejilla,
+                const IndicesEstampas& indices_estampas,
+                const PuntosHexagonos& puntos_textura);
+        
 
         friend class ActorTablero;
 

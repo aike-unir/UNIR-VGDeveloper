@@ -38,6 +38,7 @@ namespace tapete {
         actor_tablero->agregaDibujo(malla_fuego);
         actor_tablero->agregaDibujo(malla_veneno);
 		actor_tablero->agregaDibujo(malla_tierra);
+        actor_tablero->agregaDibujo(malla_rayo);
         //
         actor_tablero->agregaDibujo (imagen_panel_vertcl_izqrd);
         actor_tablero->agregaDibujo (imagen_panel_vertcl_derch);
@@ -275,6 +276,27 @@ namespace tapete {
 		estableceMallaTierra(puntos_rejll_tierra, indcs_tierra, puntos_textr_tierra);
 		std::thread your_threadTierra(animaElemento, malla_tierra, indcs_tierra, puntos_rejll_tierra, puntos_textr_tierra); // Animacion de la ficha
 		your_threadTierra.detach();
+        //// Rayo
+
+        textura_rayo = new unir2d::Textura{};
+        textura_rayo->carga(JuegoMesaBase::carpetaActivos() + "casilla_rayo.png");
+
+        malla_rayo = new unir2d::Malla{};
+        malla_rayo->asigna(textura_rayo);
+        malla_rayo->ponPosicion(PresenciaTablero::regionRejilla.posicion());
+
+        IndicesEstampas indcs_rayo;
+        calculaEstampasElemento(actor_tablero->sitios_rayo, indcs_rayo);
+
+        PuntosHexagonos puntos_textr_rayo{};
+        punteaTexturaMuros(puntos_textr_rayo);
+        PuntosHexagonos puntos_rejll_rayo{};
+
+        punteaRejillaMuros(actor_tablero->sitios_rayo, puntos_rejll_rayo);
+        estableceMallaRayo(puntos_rejll_rayo, indcs_rayo, puntos_textr_rayo);
+
+        std::thread ejecutaRayo(animaElemento, malla_rayo, indcs_rayo, puntos_rejll_rayo, puntos_textr_rayo); // Animacion de la ficha
+        ejecutaRayo.detach();
     }
     
  
@@ -289,6 +311,8 @@ namespace tapete {
         delete textura_veneno;
 		delete malla_tierra;
 		delete textura_tierra;
+        delete malla_rayo;
+        delete textura_rayo;
         //
         malla_muros   = nullptr;
         textura_muros = nullptr;
@@ -298,6 +322,8 @@ namespace tapete {
         textura_veneno = nullptr;
 		malla_tierra = nullptr;
 		textura_tierra = nullptr;
+        malla_rayo = nullptr;
+        textura_rayo = nullptr;
     }
 
 
@@ -571,6 +597,26 @@ namespace tapete {
                     trngl_malla.ponTexel(indc_vertc, puntos_textura[indc_estmp][indc_trngl][indc_vertc]);
                 }
                 this->malla_tierra->asigna(indc_celda * 6 + indc_trngl, trngl_malla);
+            }
+
+        }
+    }
+
+    void PresenciaTablero::estableceMallaRayo(
+        const PuntosHexagonos& puntos_rejilla,
+        const IndicesEstampas& indices_estampas,
+        const PuntosHexagonos& puntos_textura) {
+        this->malla_rayo->define((int)puntos_rejilla.size() * 6);
+        for (int indc_celda = 0; indc_celda < puntos_rejilla.size(); ++indc_celda) {
+
+            for (int indc_trngl = 0; indc_trngl < 6; ++indc_trngl) {
+                unir2d::TrianguloMalla trngl_malla{};
+                for (int indc_vertc = 0; indc_vertc < 3; ++indc_vertc) {
+                    trngl_malla.ponPunto(indc_vertc, puntos_rejilla[indc_celda][indc_trngl][indc_vertc]);
+                    int indc_estmp = indices_estampas[indc_celda][indc_trngl];
+                    trngl_malla.ponTexel(indc_vertc, puntos_textura[indc_estmp][indc_trngl][indc_vertc]);
+                }
+                this->malla_rayo->asigna(indc_celda * 6 + indc_trngl, trngl_malla);
             }
 
         }
