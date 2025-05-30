@@ -138,6 +138,15 @@ namespace juego4 {
 		revolverVeloz = new Habilidad{
 				L"Revolver veloz",
 				EnfoqueHabilidad::personaje, AccesoHabilidad::directo, Antagonista::oponente, Elemento::Piedra };
+		ataquePunal = new Habilidad{
+				L"Ataque cuerpo a cuerpo con puñal",
+				EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::nulo };
+		ataqueGarraRelampago = new Habilidad{
+				L"Ataque cuerpo a cuerpo con garra relampago",
+				EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Rayo };
+		ataqueMordiscoTormenta = new Habilidad{
+			L"Ataque cuerpo a cuerpo con mordisco tormenta",
+			EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Hielo };
 
         //
         ataqueEspadaNormal->ponDescripcion(
@@ -156,6 +165,12 @@ namespace juego4 {
             L"El personaje canaliza poder divino para sanar a todos los personajes en un �rea.");
 		revolverVeloz->ponDescripcion(
 			L"El personaje dispara r�pidamente con su revolver a un enemigo que se encuentra en una casilla pr�xima.");
+		ataquePunal->ponDescripcion(
+			L"El personaje usa su puñal para atacar a un enemigo que se encuentra en una casilla pr�xima.");
+		ataqueGarraRelampago->ponDescripcion(
+			L"El personaje utiliza sus afiladas garras imbuidas en rayo para atacar.");
+		ataqueMordiscoTormenta->ponDescripcion(
+			L"El personaje utiliza su poderoso mordisco de tormenta para atacar a un enemigo que se encuentra en una casilla pr�xima.");
 
         //
         ataqueEspadaNormal->ponArchivosImagenes(
@@ -174,16 +189,25 @@ namespace juego4 {
             carpeta_habilids_juego + "vela_triple.png", carpeta_habilids_juego + "fondo_5.png");
 		revolverVeloz->ponArchivosImagenes(
 			carpeta_habilids_juego + "revolver.png", carpeta_habilids_juego + "fondo_tierra.png");
+		ataquePunal->ponArchivosImagenes(
+			carpeta_habilids_juego + "puñal.png", carpeta_habilids_juego + "fondo_5.png");
+		ataqueGarraRelampago->ponArchivosImagenes(
+			carpeta_habilids_juego + "garra_relampago.png", carpeta_habilids_juego + "fondo_rayo.png");
+		ataqueMordiscoTormenta->ponArchivosImagenes(
+			carpeta_habilids_juego + "mordisco_tormenta.png", carpeta_habilids_juego + "fondo_hielo.png");
 
         //
-        ataqueEspadaNormal->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
-        ataqueArco->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
-        ataqueEspadaPoderoso->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+        ataqueEspadaNormal->ponArchivoSonido(carpeta_sonidos_juego + "sword.wav");
+        ataqueArco->ponArchivoSonido(carpeta_sonidos_juego + "arrow.wav");
+        ataqueEspadaPoderoso->ponArchivoSonido(carpeta_sonidos_juego + "sword.wav");
         llamarada->ponArchivoSonido(carpeta_sonidos_juego + "arrowFire.wav");
         defensaFerrea->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionSimple->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
         curacionGrupo->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
 		revolverVeloz->ponArchivoSonido(carpeta_sonidos_juego + "shoot.wav");
+		ataquePunal->ponArchivoSonido(carpeta_sonidos_juego + "sword.wav");
+		ataqueGarraRelampago->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
+		ataqueMordiscoTormenta->ponArchivoSonido(carpeta_sonidos_juego + "Magic Missiles.wav");
 
         //
         agregaHabilidad(ataqueEspadaNormal);
@@ -194,6 +218,9 @@ namespace juego4 {
         agregaHabilidad(curacionSimple);
         agregaHabilidad(curacionGrupo);
 		agregaHabilidad(revolverVeloz);
+		agregaHabilidad(ataquePunal);
+		agregaHabilidad(ataqueGarraRelampago);
+		agregaHabilidad(ataqueMordiscoTormenta);
 
 
     }
@@ -236,25 +263,18 @@ namespace juego4 {
         Rosa->agregaHabilidad(ataqueEspadaPoderoso);
         Rosa->agregaHabilidad(defensaFerrea);
 
-        Clint->agregaHabilidad(ataqueEspadaNormal);
-        Clint->agregaHabilidad(ataqueArco);
-        Clint->agregaHabilidad(ataqueEspadaPoderoso);
+        Clint->agregaHabilidad(ataquePunal);
         Clint->agregaHabilidad(defensaFerrea);
         Clint->agregaHabilidad(revolverVeloz);
 
 
         //
-        CoyoteTormenta->agregaHabilidad(ataqueEspadaNormal);
-        CoyoteTormenta->agregaHabilidad(ataqueArco);
-        CoyoteTormenta->agregaHabilidad(ataqueEspadaPoderoso);
-        CoyoteTormenta->agregaHabilidad(defensaFerrea);
+		CoyoteTormenta->agregaHabilidad(ataqueGarraRelampago);
+		CoyoteTormenta->agregaHabilidad(ataqueMordiscoTormenta);
 
-
-        CoyoteTormenta2->agregaHabilidad(ataqueEspadaNormal);
-        CoyoteTormenta2->agregaHabilidad(ataqueArco);
-        CoyoteTormenta2->agregaHabilidad(ataqueEspadaPoderoso);
-        CoyoteTormenta2->agregaHabilidad(defensaFerrea);
-
+        CoyoteTormenta2->agregaHabilidad(ataqueGarraRelampago);
+		CoyoteTormenta2->agregaHabilidad(ataqueMordiscoTormenta);
+        
     }
 
 
@@ -304,6 +324,24 @@ namespace juego4 {
 		revolverVeloz->asignaDefensa(defensaADistancia);
         revolverVeloz->asignaDano(danoFisico, 30);
         //
+		ataquePunal->ponCoste(3);
+		ataquePunal->ponAlcance(1);
+		ataquePunal->asignaAtaque(ataqueCuerpoACuerpo);
+		ataquePunal->asignaDefensa(defensaCuerpoACuerpo);
+		ataquePunal->asignaDano(danoFisico, 18);
+		//
+		ataqueGarraRelampago->ponCoste(5);
+		ataqueGarraRelampago->ponAlcance(1);
+		ataqueGarraRelampago->asignaAtaque(ataqueCuerpoACuerpo);
+		ataqueGarraRelampago->asignaDefensa(defensaCuerpoACuerpo);
+		ataqueGarraRelampago->asignaDano(danoFisico, 25);
+		//
+		ataqueMordiscoTormenta->ponCoste(10);
+		ataqueMordiscoTormenta->ponAlcance(1);
+		ataqueMordiscoTormenta->asignaAtaque(ataqueCuerpoACuerpo);
+		ataqueMordiscoTormenta->asignaDefensa(defensaCuerpoACuerpo);
+		ataqueMordiscoTormenta->asignaDano(danoFisico, 35);
+		//
 
     }
 
@@ -341,14 +379,14 @@ namespace juego4 {
         //                       
         CoyoteTormenta->agregaAtaque(ataqueCuerpoACuerpo, 70);
         CoyoteTormenta->agregaAtaque(ataqueADistancia, 50);
-        CoyoteTormenta->agregaDefensa(defensaCuerpoACuerpo, 70);
-        CoyoteTormenta->agregaDefensa(defensaADistancia, 70);
+        CoyoteTormenta->agregaDefensa(defensaCuerpoACuerpo, 55);
+        CoyoteTormenta->agregaDefensa(defensaADistancia, 30);
         CoyoteTormenta->agregaReduceDano(danoFisico, 10);
 
         CoyoteTormenta2->agregaAtaque(ataqueCuerpoACuerpo, 70);
         CoyoteTormenta2->agregaAtaque(ataqueADistancia, 50);
-        CoyoteTormenta2->agregaDefensa(defensaCuerpoACuerpo, 70);
-        CoyoteTormenta2->agregaDefensa(defensaADistancia, 70);
+        CoyoteTormenta2->agregaDefensa(defensaCuerpoACuerpo, 55);
+        CoyoteTormenta2->agregaDefensa(defensaADistancia, 30);
         CoyoteTormenta2->agregaReduceDano(danoFisico, 10);
         //                       
 
@@ -394,7 +432,7 @@ namespace juego4 {
         //
         tablero()->asignaSonidoEstablece(carpeta_sonidos_juego + "Metal Click.wav", 100);
         tablero()->asignaSonidoDesplaza(carpeta_sonidos_juego + "SnowWalk.ogg", 100);
-        musica()->asignaMusica(carpeta_sonidos_juego + "track_desierto.ogg", 100);
+        musica()->asignaMusica(carpeta_sonidos_juego + "track_desierto.ogg", 50);
         //
         agregaNombreAlumno(L"Maksym Chernykh");
         agregaNombreAlumno(L"Aike Fern�ndez Roza");
