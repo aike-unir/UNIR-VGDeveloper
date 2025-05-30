@@ -1,6 +1,6 @@
 // proyecto: Grupal/Juego
 // arhivo:   JuegoMesa.cpp
-// versión:  1.1  (9-Ene-2023)
+// versiï¿½n:  1.1  (9-Ene-2023)
 
 
 #include "juego.h"
@@ -33,14 +33,14 @@ namespace juego3 {
         "   -     -     -     -     O     -     -     -   ",
         "-     -     -     -     -     O     -     -     -",
         "   -     -     -     -     -     O     -     -   ",
-        "-     -     -     F     -     -     O     -     -",
+        "-     -     -     L     -     -     O     -     -",
         "   -     -     -     -     -     -     O     -   ",
-        "-     -     -     -     F     -     O     -     -",
+        "-     -     -     -     L     -     O     -     -",
         "   -     -     -     -     -     O     -     -   ",
         "-     -     -     -     -     O     O     -     -",
         "   -     -     -     -     -     O     -     -   ",
         "-     -     -     -     -     -     -     -     -",
-        "   -     -     -     -     F     -     -     -   ",
+        "   -     -     -     -     L     -     -     -   ",
         "-     -     -     -     -     -     -     -     -" };
 
 
@@ -49,8 +49,10 @@ namespace juego3 {
         agregaTablero(new ActorTablero(this));
 
         tablero()->ponArchivoMuro(carpeta_activos_juego + "muro_piedra.png");
-        tablero()->ponArchivoBaldosas(carpeta_activos_juego + "estampas_fondo.png");
-        tablero()->ponArchivoFondo(carpeta_activos_juego + "fondo_volcanes.png");
+        tablero()->ponArchivoBaldosas(carpeta_activos_juego + "tablero.png");
+        
+       
+        tablero()->ponArchivoFondo(carpeta_activos_juego + "fondo_estrellas.png");
 
         tablero()->equipa(LadoTablero::Izquierda, L"Devils", carpeta_activos_juego + "escudo_devils.png");
         tablero()->equipa(LadoTablero::Derecha, L"Tusk", carpeta_activos_juego + "escudo_tusk.png");
@@ -68,29 +70,29 @@ namespace juego3 {
         Clint = new ActorPersonaje{ this, LadoTablero::Izquierda, 3, L"Clint", Elemento::Piedra };
         Panoramix = new ActorPersonaje{ this, LadoTablero::Izquierda, 4, L"Panoramix", Elemento::Veneno };
 
-        Enemigo1 = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Enemigo1", Elemento::nulo };
+        Enemigo1 = new ActorPersonaje{ this, LadoTablero::Derecha,   0, L"Enemigo1", Elemento::Rayo };
         Enemigo2 = new ActorPersonaje{ this, LadoTablero::Derecha,   1, L"Enemigo2", Elemento::nulo };
 
 
         //
         Guillermo->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Wuuf->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
-        Rosa->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
+        Rosa->ponArchivoRetrato(carpeta_retratos_juego + "RosaPortreit.png");
         Clint->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
         Panoramix->ponArchivoRetrato(carpeta_retratos_juego + "male1_75.png");
 
-        Enemigo1->ponArchivoRetrato(carpeta_retratos_juego + "aristocrat_75.png");
+        Enemigo1->ponArchivoRetrato(carpeta_retratos_juego + "ElectromentalPortreit.png");
         Enemigo2->ponArchivoRetrato(carpeta_retratos_juego + "aristocrat_75.png");
 
         //
         Guillermo->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Wuuf->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
-        Rosa->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
+        Rosa->ponArchivoFicha(carpeta_retratos_juego + "RosaChar.png");
         Clint->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
         Panoramix->ponArchivoFicha(carpeta_retratos_juego + "sprite1.png");
 
         Enemigo1->ponArchivoFicha(carpeta_retratos_juego + "sprite2.png");
-        Enemigo2->ponArchivoFicha(carpeta_retratos_juego + "sprite2.png");
+        Enemigo2->ponArchivoFicha(carpeta_retratos_juego + "Electromental4Frame.png");
 
         //
         Guillermo->ponIniciativa(20);
@@ -127,28 +129,28 @@ namespace juego3 {
                 L"Ataque poderoso",
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::oponente, Elemento::Fuego };
         defensaFerrea = new Habilidad{
-                L"Defensa férrea",
+                L"Defensa fï¿½rrea",
                 EnfoqueHabilidad::si_mismo,  AccesoHabilidad::ninguno,   Antagonista::si_mismo, Elemento::nulo };
         curacionSimple = new Habilidad{
-                L"Curación",
+                L"Curaciï¿½n",
                 EnfoqueHabilidad::personaje, AccesoHabilidad::directo,   Antagonista::aliado, Elemento::nulo };
         curacionGrupo = new Habilidad{
-                L"Curación en grupo",
+                L"Curaciï¿½n en grupo",
                 EnfoqueHabilidad::area,      AccesoHabilidad::directo,   Antagonista::aliado, Elemento::nulo };
 
         //
         ataqueEspadaNormal->ponDescripcion(
-            L"El personaje usa su espada para atacar a un enemigo que se encuentra en una casilla próxima.");
+            L"El personaje usa su espada para atacar a un enemigo que se encuentra en una casilla prï¿½xima.");
         ataqueArco->ponDescripcion(
-            L"El personaje usa su arco para atacar a un enemigo que se encuentra en una casilla próxima.");
+            L"El personaje usa su arco para atacar a un enemigo que se encuentra en una casilla prï¿½xima.");
         ataqueEspadaPoderoso->ponDescripcion(
-            L"El personaje blande su espada con fuerza para atacar a un enemigo que se encuentra en una casilla próxima.");
+            L"El personaje blande su espada con fuerza para atacar a un enemigo que se encuentra en una casilla prï¿½xima.");
         defensaFerrea->ponDescripcion(
-            L"El personaje aumenta su defensa hasta su próximo ronda.");
+            L"El personaje aumenta su defensa hasta su prï¿½ximo ronda.");
         curacionSimple->ponDescripcion(
             L"El personaje canaliza poder divino para sanar a un aliado.");
         curacionGrupo->ponDescripcion(
-            L"El personaje canaliza poder divino para sanar a todos los personajes en un área.");
+            L"El personaje canaliza poder divino para sanar a todos los personajes en un ï¿½rea.");
 
         //
         ataqueEspadaNormal->ponArchivosImagenes(
@@ -191,7 +193,7 @@ namespace juego3 {
         ataqueADistancia = new TipoAtaque{ L"Ataque a distancia" };
         defensaCuerpoACuerpo = new TipoDefensa{ L"Defensa cuerpo a cuerpo" };
         defensaADistancia = new TipoDefensa{ L"Defensa a distancia" };
-        danoFisico = new TipoDano{ L"Daño físico" };
+        danoFisico = new TipoDano{ L"Daï¿½o fï¿½sico" };
         //
         agregaAtaque(ataqueCuerpoACuerpo);
         agregaAtaque(ataqueADistancia);
@@ -342,7 +344,7 @@ namespace juego3 {
         GradoEfectividad* fallo = new GradoEfectividad{ L"Fallo" };
         GradoEfectividad* roce = new GradoEfectividad{ L"Roce" };
         GradoEfectividad* impacto = new GradoEfectividad{ L"Impacto" };
-        GradoEfectividad* critico = new GradoEfectividad{ L"Impacto crítico" };
+        GradoEfectividad* critico = new GradoEfectividad{ L"Impacto crï¿½tico" };
         //
         fallo->estableceRango(INT_MIN, 9, 0);
         roce->estableceRango(10, 49, 50);
@@ -377,10 +379,10 @@ namespace juego3 {
         musica()->asignaMusica(carpeta_sonidos_juego + "Track_1.ogg", 100);
         //
         agregaNombreAlumno(L"Maksym Chernykh");
-        agregaNombreAlumno(L"Aike Fernández Roza");
-        agregaNombreAlumno(L"Julián Guérrez Losada");
+        agregaNombreAlumno(L"Aike Fernï¿½ndez Roza");
+        agregaNombreAlumno(L"Juliï¿½n Guï¿½rrez Losada");
         agregaNombreAlumno(L"Carlos Pablos Rivero");
-        agregaNombreAlumno(L"Vidal Rodrigo Mínguez");
+        agregaNombreAlumno(L"Vidal Rodrigo Mï¿½nguez");
         indicaCursoAcademico(L"2024 - 2025");
 
     }
