@@ -169,17 +169,6 @@ namespace tapete {
         imgLogo->ponPosicion(Vector{ 0 , 850 });
 
         actor_tablero->agregaDibujo(imgLogo);
-
-
-        unir2d::Textura* texturaTitulo = new unir2d::Textura();
-        texturaTitulo->carga(JuegoMesaBase::carpetaActivos() + "fondo_niveles.png");
-
-        unir2d::Imagen* imgTitulo = new unir2d::Imagen();
-        imgTitulo->asigna(texturaTitulo);
-        imgTitulo->ponIndiceZ(2);
-        imgTitulo->ponPosicion(Vector{ 0 , 10 });
-
-        actor_tablero->agregaDibujo(imgTitulo);
         
 
     }
