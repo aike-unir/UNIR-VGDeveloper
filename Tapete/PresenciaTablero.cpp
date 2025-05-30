@@ -189,7 +189,7 @@ namespace tapete {
     void PresenciaTablero::preparaMuros () {
         textura_muros  = new unir2d::Textura {};
      // textura_muros->carga (JuegoMesaBase::carpetaActivos () + "muro_piedra.png");
-        textura_muros->carga (JuegoMesaBase::carpetaActivos () + "muro_piedra2.png");
+        textura_muros->carga (actor_tablero->archivoMuro());
         malla_muros = new unir2d::Malla {};
         malla_muros->asigna (textura_muros);
         malla_muros->ponPosicion (PresenciaTablero::regionRejilla.posicion ());
@@ -697,13 +697,13 @@ namespace tapete {
         textura_marco_display->carga (JuegoMesaBase::carpetaActivos () + "marco_display.png");
         //
         imagen_marco_display = new unir2d::Imagen {};
-        imagen_marco_display->asigna (textura_marco_display);
+       // imagen_marco_display->asigna (textura_marco_display);
         imagen_marco_display->ponPosicion (PresenciaTablero::regionDisplay.posicion () + Vector {6, 34});
-        imagen_marco_display->ponVisible (true);
-        actor_tablero->agregaDibujo (imagen_marco_display);
+      //  imagen_marco_display->ponVisible (true);
+      //  actor_tablero->agregaDibujo (imagen_marco_display);
         //
         textura_digitos_display = new unir2d::Textura {};
-        textura_digitos_display->carga (JuegoMesaBase::carpetaActivos () + "digitos_display.png");
+        textura_digitos_display->carga (JuegoMesaBase::carpetaActivos () + "digitos_display3.png");
         //
         Vector poscn = imagen_marco_display->posicion () + Vector {6, 2};
         for (int indc = 0; indc < cuentaDigitosDisplay; ++ indc) {

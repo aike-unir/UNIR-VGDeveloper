@@ -25,6 +25,9 @@ namespace tapete {
         const string & archivoBaldosas ();
         void ponArchivoBaldosas (const string & archivo);
 
+        const string& archivoMuro();
+        void ponArchivoMuro(const string& archivo);
+
         const string& archivoFondo();
         void ponArchivoFondo(const string& archivo);
 
@@ -86,6 +89,7 @@ namespace tapete {
         JuegoMesaBase * juego {}; 
 
         string archivo_baldosas;
+        string archivo_muro;
         string archivo_fondo;
 
         wstring nombre_equipo_izqrd {}; 

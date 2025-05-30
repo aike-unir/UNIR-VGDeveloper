@@ -21,10 +21,18 @@ namespace tapete {
     const string & ActorTablero::archivoBaldosas () {
         return archivo_baldosas;
     }
+
+    const string& ActorTablero::archivoMuro() {
+        return archivo_muro;
+    }
         
         
     void ActorTablero::ponArchivoBaldosas (const string & archivo) {
         archivo_baldosas = archivo;
+    }
+
+    void ActorTablero::ponArchivoMuro(const string& archivo) {
+        archivo_muro = archivo;
     }
 
     const string& ActorTablero::archivoFondo() {
@@ -403,23 +411,16 @@ namespace tapete {
         bool dclic = unir2d::Raton::dobleClic();
         bool sclic = unir2d::Raton::pulsando(unir2d::BotonRaton::izquierda);
 
-        unir2d::Region* nivel1 = new Region(Vector{ 142, 100 }, Vector{ 285, 285 });
-        unir2d::Region* nivel2 = new Region(Vector{ 712, 100 }, Vector{ 285, 285 });
-        unir2d::Region* nivel3 = new Region(Vector{ 1282, 100 }, Vector{ 285, 285 });
-        unir2d::Region* nivel4 = new Region(Vector{ 427, 470 }, Vector{ 285, 285 });
-        unir2d::Region* nivel5 = new Region(Vector{ 997, 470 }, Vector{ 285, 285 });
+        unir2d::Region* nivel1 = new Region(Vector{ 142, 255 }, Vector{ 285, 285 });
+        unir2d::Region* nivel2 = new Region(Vector{ 712, 250 }, Vector{ 285, 285 });
+        unir2d::Region* nivel3 = new Region(Vector{ 1282, 250 }, Vector{ 285, 285 });
+        unir2d::Region* nivel4 = new Region(Vector{ 427, 550 }, Vector{ 285, 285 });
+        unir2d::Region* nivel5 = new Region(Vector{ 997, 550 }, Vector{ 285, 285 });
        // unir2d::Region* nivelBoos = new Region(Vector{ 142, 100 }, Vector{ 285, 285 });
 
 
 
         if (sclic) {
-            /*
-            printf("CLICK");
-           // juego->sucesos()->nivelElegido(1);
-            juego->ponEjecucion(unir2d::EjecucionJuego::nivel1);
-            throw std::logic_error("auch");
-            printf("DETECTADO");
-            */
             
             if (nivel1->contiene(unir2d::Raton::posicion())) {
                 throw std::logic_error("LEVEL1");

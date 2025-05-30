@@ -40,7 +40,7 @@ namespace tapete {
 
        // actor_tablero->agregaDibujo(rectangl_n1);
 
-        rectangl_n1->ponPosicion(Vector{ 142 , 100 });
+        rectangl_n1->ponPosicion(Vector{ 142 , 250 });
         rectangl_n1->ponBase(285);
         rectangl_n1->ponAltura(285);
         rectangl_n1->ponColor(colorNivel);
@@ -52,7 +52,7 @@ namespace tapete {
         imgNivel1 = new unir2d::Imagen();
         imgNivel1->asigna(texturaNivel1);
         imgNivel1->ponIndiceZ(2);
-        imgNivel1->ponPosicion(Vector{ 142 , 100 });
+        imgNivel1->ponPosicion(Vector{ 142 , 250 });
 
         actor_tablero->agregaDibujo(imgNivel1);
 
@@ -63,7 +63,7 @@ namespace tapete {
 
        // actor_tablero->agregaDibujo(rectangl_n2);
 
-        rectangl_n2->ponPosicion(Vector{ 712 , 100 });
+        rectangl_n2->ponPosicion(Vector{ 712 , 250 });
         rectangl_n2->ponBase(285);
         rectangl_n2->ponAltura(285);
         rectangl_n2->ponColor(colorNivel);
@@ -75,7 +75,7 @@ namespace tapete {
         imgNivel2 = new unir2d::Imagen();
         imgNivel2->asigna(texturaNivel2);
         imgNivel2->ponIndiceZ(2);
-        imgNivel2->ponPosicion(Vector{ 712 , 100 });
+        imgNivel2->ponPosicion(Vector{ 712 , 250 });
 
         actor_tablero->agregaDibujo(imgNivel2);
 
@@ -86,7 +86,7 @@ namespace tapete {
 
       // actor_tablero->agregaDibujo(rectangl_n3);
 
-        rectangl_n3->ponPosicion(Vector{ 1282 , 100 });
+        rectangl_n3->ponPosicion(Vector{ 1282 , 250 });
         rectangl_n3->ponBase(285);
         rectangl_n3->ponAltura(285);
         rectangl_n3->ponColor(colorNivel);
@@ -98,7 +98,7 @@ namespace tapete {
         imgNivel3 = new unir2d::Imagen();
         imgNivel3->asigna(texturaNivel3);
         imgNivel3->ponIndiceZ(2);
-        imgNivel3->ponPosicion(Vector{ 1282 , 100 });
+        imgNivel3->ponPosicion(Vector{ 1282 , 250 });
 
         actor_tablero->agregaDibujo(imgNivel3);
 
@@ -109,7 +109,7 @@ namespace tapete {
 
       //  actor_tablero->agregaDibujo(rectangl_n4);
 
-        rectangl_n4->ponPosicion(Vector{ 427 , 470 });
+        rectangl_n4->ponPosicion(Vector{ 427 , 550 });
         rectangl_n4->ponBase(285);
         rectangl_n4->ponAltura(285);
         rectangl_n4->ponColor(colorNivel);
@@ -121,7 +121,7 @@ namespace tapete {
         imgNivel4 = new unir2d::Imagen();
         imgNivel4->asigna(texturaNivel4);
         imgNivel4->ponIndiceZ(2);
-        imgNivel4->ponPosicion(Vector{ 427 , 470 });
+        imgNivel4->ponPosicion(Vector{ 427 , 550 });
 
         actor_tablero->agregaDibujo(imgNivel4);
 
@@ -132,7 +132,7 @@ namespace tapete {
 
       //  actor_tablero->agregaDibujo(rectangl_n5);
 
-        rectangl_n5->ponPosicion(Vector{ 997 , 470 });
+        rectangl_n5->ponPosicion(Vector{ 997 , 550 });
         rectangl_n5->ponBase(285);
         rectangl_n5->ponAltura(285);
         rectangl_n5->ponColor(colorNivel);
@@ -144,9 +144,31 @@ namespace tapete {
         imgNivel5 = new unir2d::Imagen();
         imgNivel5->asigna(texturaNivel5);
         imgNivel5->ponIndiceZ(2);
-        imgNivel5->ponPosicion(Vector{ 997 , 470 });
+        imgNivel5->ponPosicion(Vector{ 997 , 550 });
 
         actor_tablero->agregaDibujo(imgNivel5);
+
+
+        unir2d::Textura *texturaJerarquia = new unir2d::Textura();
+        texturaJerarquia->carga(JuegoMesaBase::carpetaActivos() + "jerarquia.png");
+
+        unir2d::Imagen *imgJerarquia = new unir2d::Imagen();
+        imgJerarquia->asigna(texturaJerarquia);
+        imgJerarquia->ponIndiceZ(2);
+        imgJerarquia->ponPosicion(Vector{ 1500 , 780 });
+
+        actor_tablero->agregaDibujo(imgJerarquia);
+
+
+        unir2d::Textura* texturaLogo = new unir2d::Textura();
+        texturaLogo->carga(JuegoMesaBase::carpetaActivos() + "logo.png");
+
+        unir2d::Imagen* imgLogo = new unir2d::Imagen();
+        imgLogo->asigna(texturaLogo);
+        imgLogo->ponIndiceZ(2);
+        imgLogo->ponPosicion(Vector{ 0 , 850 });
+
+        actor_tablero->agregaDibujo(imgLogo);
         
 
     }
